@@ -1,3 +1,5 @@
+"use client";
+
 import { DividerLove, LineBorderDown } from "@/assets/Icon";
 import {
   Fade,
@@ -12,6 +14,7 @@ import { RsvpForm } from "@/features";
 // import { neon } from "@neondatabase/serverless";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
+import { useParams, useSearchParams } from "next/navigation";
 import "react-photo-view/dist/react-photo-view.css";
 
 // async function getData() {
@@ -20,8 +23,24 @@ import "react-photo-view/dist/react-photo-view.css";
 //   return response;
 // }
 
+const data = [
+  {
+    date: "Sabtu, 26 Oktober 2024",
+    why: "Rumah Mempelai Pria",
+    address:
+      "Gang Masjid Dusun Krajan Tengah, Desa Curah Dringu, Tongas, Probolinggo.",
+  },
+  {
+    date: "Minggu, 20 Oktober 2024",
+    why: "Rumah Mempelai Wanita",
+    address: "Dusun Krajan Kidul, Desa Curah Dringu, Tongas, Probolinggo.",
+  },
+];
+
 export default async function Home() {
   // const data = await getData();
+  const searchParams = useSearchParams();
+  const params = searchParams.get("p");
 
   return (
     <main className="flex w-full min-h-screen bg-primary flex-col items-center justify-between">
@@ -66,12 +85,12 @@ export default async function Home() {
                 <TextBlurIn
                   as="span"
                   className="font-semibold text-xl"
-                  word="26.10.2024"
+                  word={params === "husband" ? "26.10.2024" : "20.10.2024"}
                 />
               </div>
             </div>
           </div>
-          <TimerCountdown />
+          <TimerCountdown params={params} />
           <Marquee
             pauseOnHover
             className="[--gap:0.5rem] [--duration:15s] mt-16"
@@ -297,16 +316,29 @@ export default async function Home() {
           <div className="absolute top-0 h-full grid place-items-center bg-gradient-to-t from-accent/80 to-accent/20 rounded-lg">
             <div className="flex flex-col items-center text-primary">
               <h2 className="font-bold text-xl drop-shadow-lg">Resepsi</h2>
-              <p className="drop-shadow-lg">Sabtu, 26 Oktober 2024</p>
-              <p className="drop-shadow-lg">Jam Bebas</p>
-              <p className="drop-shadow-lg">Rumah Mempelai Pria</p>
-              <p className="drop-shadow-lg">
-                Gang Masjid Dusun Krajan Tengah, Desa Curah Dringu, Tongas,
-                Probolinggo.
-              </p>
+              {params === "husband" ? (
+                <>
+                  <p className="drop-shadow-lg">{data[0].date}</p>
+                  <p className="drop-shadow-lg">Jam Bebas</p>
+                  <p className="drop-shadow-lg">{data[0].why}</p>
+                  <p className="drop-shadow-lg">{data[0].address}</p>
+                </>
+              ) : (
+                <>
+                  <p className="drop-shadow-lg">{data[1].date}</p>
+                  <p className="drop-shadow-lg">Jam Bebas</p>
+                  <p className="drop-shadow-lg">{data[1].why}</p>
+                  <p className="drop-shadow-lg">{data[1].address}</p>
+                </>
+              )}
+
               <a
                 className="w-fit flex items-center gap-x-2 bg-primary text-accent rounded-md px-4 py-2 mt-2"
-                href={"https://maps.app.goo.gl/wUQKqMHFw9kJJYzg7"}
+                href={
+                  params === "husband"
+                    ? "https://maps.app.goo.gl/wUQKqMHFw9kJJYzg7"
+                    : "https://maps.app.goo.gl/LU5SamoYy5MXiUXZ6"
+                }
                 target="_blank"
               >
                 <MapPin /> Lihat Peta

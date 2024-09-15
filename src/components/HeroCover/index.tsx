@@ -19,6 +19,7 @@ const HeroCover = () => {
 
   const searchParams = useSearchParams();
   const guest = searchParams.get("guest");
+  const params = searchParams.get("p");
 
   const handleClose = () => {
     setIsClose(true);
@@ -64,7 +65,7 @@ const HeroCover = () => {
                 </div>
                 <TextBlurIn
                   as="span"
-                  word="26.10.2024"
+                  word={params === "husband" ? "26.10.2024" : "20.10.2024"}
                   className="font-semibold text-xl drop-shadow-xl"
                 />
               </div>

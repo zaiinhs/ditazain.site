@@ -2,14 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { NumberBox } from "./NumberBox";
 
-const TimerCountdown = () => {
+const TimerCountdown = ({ params }: { params: string | null }) => {
   let time = 7;
   let [days, setDays] = useState<number | string>(0);
   let [hours, setHours] = useState<number | string>(0);
   let [minutes, setMinutes] = useState<number | string>(0);
   let [seconds, setSeconds] = useState<number | string>(0);
 
-  let countDownDate = new Date("2024-10-26").getTime();
+  let countDownDate =
+    params === "husband"
+      ? new Date("2024-10-26").getTime()
+      : new Date("2024-10-20").getTime();
 
   useEffect(() => {
     var updateTime = setInterval(() => {
