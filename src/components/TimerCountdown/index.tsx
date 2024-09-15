@@ -43,7 +43,7 @@ const TimerCountdown = () => {
     return () => {
       clearInterval(updateTime);
     };
-  }, [time]);
+  }, [time, countDownDate]);
 
   let daysFlip = false;
   let hoursFlip = false;
