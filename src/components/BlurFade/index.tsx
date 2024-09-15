@@ -14,7 +14,6 @@ type BlurFadeProps = {
   delay?: number;
   yOffset?: number;
   inView?: boolean;
-  inViewMargin?: string;
   blur?: string;
 };
 
@@ -26,13 +25,12 @@ export default function BlurFade({
   delay = 0,
   yOffset = 6,
   inView = false,
-  inViewMargin = "-50px",
   blur = "6px",
 }: BlurFadeProps) {
   const ref = useRef(null);
   const inViewResult = useInView(ref, {
     once: true,
-    margin: inViewMargin,
+    margin: "-50px",
   });
 
   const isInView = !inView || inViewResult;
