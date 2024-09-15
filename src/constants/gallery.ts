@@ -23,7 +23,7 @@ export const photoGallery = [
   },
   {
     id: 6,
-    photo: `${URL}/tln07e8v3bgdkjmwwuu0`,
+    photo: `${URL}/rxfbmeqydkplgazkvxf9`,
   },
   {
     id: 7,

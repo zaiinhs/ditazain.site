@@ -17,7 +17,8 @@ const dancingScript = Dancing_Script({
 
 export const metadata: Metadata = {
   title: "Zainal & Dita",
-  description: "Wedding invitation of Zainal & Dita",
+  description:
+    "Zainal & Dita's wedding invitation. This wedding reception will be held in 2 places, namely at the bride's house which will be held on October 20 2024 and at the groom's house which will be held on October 26 2024",
 };
 
 export default function RootLayout({
