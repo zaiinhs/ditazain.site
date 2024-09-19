@@ -8,7 +8,7 @@ import { create } from "./action";
 
 const RsvpForm = () => {
   const searchParams = useSearchParams();
-  const guest = searchParams.get("kpd") ?? "Guest";
+  const guest = searchParams.get("guest") ?? "Guest";
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -38,7 +38,10 @@ const RsvpForm = () => {
       </div>
       <form className="space-y-4" action={createAction} ref={formRef}>
         <div>
-          <label htmlFor="name" className="block text-base font-medium leading-6 text-accent">
+          <label
+            htmlFor="name"
+            className="block text-base font-medium leading-6 text-accent"
+          >
             Nama
           </label>
           <div className="mt-2">
@@ -53,7 +56,10 @@ const RsvpForm = () => {
           </div>
         </div>
         <div>
-          <label htmlFor="messages" className="block text-base font-medium leading-6 text-accent">
+          <label
+            htmlFor="messages"
+            className="block text-base font-medium leading-6 text-accent"
+          >
             Pesan Singkat
           </label>
           <div className="mt-2">
@@ -67,17 +73,38 @@ const RsvpForm = () => {
           </div>
         </div>
         <div>
-          <span className="block text-base font-medium leading-6 text-accent">Kehadiran</span>
+          <span className="block text-base font-medium leading-6 text-accent">
+            Kehadiran
+          </span>
           <div className="flex items-center gap-x-6 mt-2">
             <div className="flex items-center gap-x-1">
-              <input id="hadir" name="presence" type="radio" className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value={"true"} defaultChecked />
-              <label htmlFor="hadir" className="block text-s font-medium leading-6 text-accent">
+              <input
+                id="hadir"
+                name="presence"
+                type="radio"
+                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                value={"true"}
+                defaultChecked
+              />
+              <label
+                htmlFor="hadir"
+                className="block text-s font-medium leading-6 text-accent"
+              >
                 Hadir
               </label>
             </div>
             <div className="flex items-center gap-x-1">
-              <input id="tidak-hadir" name="presence" type="radio" className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value={"false"} />
-              <label htmlFor="tidak-hadir" className="block text-s font-medium leading-6 text-accent">
+              <input
+                id="tidak-hadir"
+                name="presence"
+                type="radio"
+                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                value={"false"}
+              />
+              <label
+                htmlFor="tidak-hadir"
+                className="block text-s font-medium leading-6 text-accent"
+              >
                 Tidak Hadir
               </label>
             </div>

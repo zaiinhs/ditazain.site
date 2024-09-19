@@ -4,24 +4,18 @@ import { DividerLove, LineBorderDown } from "@/assets/Icon";
 import {
   Fade,
   Marquee,
-  // Note,
+  Note,
   PhotoGallery,
   TextBlurIn,
   TimerCountdown,
 } from "@/components";
+import BankInfoComponent from "@/components/BankInfo";
 import { photoGallery } from "@/constants/gallery";
 import { RsvpForm } from "@/features";
-// import { neon } from "@neondatabase/serverless";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import "react-photo-view/dist/react-photo-view.css";
-
-// async function getData() {
-//   const sql = neon(process.env.DATABASE_URL as string);
-//   const response = await sql`SELECT id, name, messages, presence FROM love_notes`;
-//   return response;
-// }
 
 const data = [
   {
@@ -34,6 +28,21 @@ const data = [
     date: "Minggu, 20 Oktober 2024",
     why: "Rumah Mempelai Wanita",
     address: "Dusun Krajan Kidul, Desa Curah Dringu, Tongas, Probolinggo.",
+  },
+];
+
+const loveNotes = [
+  {
+    id: 1,
+    name: "Zainal Abidin",
+    messages: "Assalamualaikum Warahmatullahi Wabarakaatuh",
+    presence: "hadir",
+  },
+  {
+    id: 2,
+    name: "Dita Tia Mukarromah",
+    messages: "Waalaikumsalam Warahmatullahi Wabarakaatuh",
+    presence: "hadir",
   },
 ];
 
@@ -348,8 +357,10 @@ export default async function Home() {
         </div>
       </section>
       <PhotoGallery />
-      {/* <RsvpForm /> */}
-      {/* <section className="bg-accent w-full flex flex-col items-center space-y-8 px-6 py-12">
+
+      <BankInfoComponent />
+      <RsvpForm />
+      <section className="bg-accent w-full flex flex-col items-center space-y-8 px-6 py-12">
         <div className="flex flex-col items-center gap-1">
           <Fade
             as="h1"
@@ -364,11 +375,11 @@ export default async function Home() {
           <LineBorderDown className="text-primary w-40" />
         </div>
         <div className="bg-primary w-full h-[420px] overflow-y-auto flex flex-col gap-y-4 rounded-lg shadow-xl p-3">
-          {data.map((item) => (
+          {loveNotes.map((item) => (
             <Note key={item.id} data={item} />
           ))}
         </div>
-      </section> */}
+      </section>
 
       <footer className="bg-gradient-to-b from-primary to-secondary w-full min-h-48 pt-12 flex justify-center">
         <span className="text-accent">
