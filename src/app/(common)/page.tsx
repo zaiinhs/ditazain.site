@@ -358,7 +358,7 @@ export default async function Home() {
       </section>
       <PhotoGallery />
 
-      <BankInfoComponent />
+      <BankInfoComponent type={params ?? ""} />
       <RsvpForm />
       <section className="bg-accent w-full flex flex-col items-center space-y-8 px-6 py-12">
         <div className="flex flex-col items-center gap-1">
@@ -383,7 +383,7 @@ export default async function Home() {
 
       <footer className="bg-gradient-to-b from-primary to-secondary w-full min-h-48 pt-12 flex justify-center">
         <span className="text-accent">
-          made with ❤️
+          made with ❤️{" "}
           <a
             className="font-semibold"
             href="http://instagram.com/zaiinhs"

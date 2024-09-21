@@ -44,7 +44,9 @@ const BankAccount: React.FC<BankAccountProps> = ({
   );
 };
 
-export default function BankInfoComponent() {
+export default function BankInfoComponent({ type }: { type: string }) {
+  console.log(type);
+
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="text-center mb-6">
@@ -55,18 +57,29 @@ export default function BankInfoComponent() {
         mengirimkan kado nikah, silahkan kirim dengan cara dibawah ini.
         Sebelumnya kami mengucapkan banyak terima kasih.
       </p>
-      <BankAccount
-        logo="/images/bca.png"
-        bankName="Bank Central Asia"
-        accountName="Nama Bank"
-        accountNumber="0391636167"
-      />
-      <BankAccount
-        logo="/images/shopeepay.png"
-        bankName="ShopeePay"
-        accountName="Nama Bank"
-        accountNumber="082332477256"
-      />
+      {type === "husband" ? (
+        <>
+          <BankAccount
+            logo="/images/bca.png"
+            bankName="Bank Central Asia"
+            accountName="Nama Bank"
+            accountNumber="0391636167"
+          />
+          <BankAccount
+            logo="/images/shopeepay.png"
+            bankName="ShopeePay"
+            accountName="Nama Bank"
+            accountNumber="082332477256"
+          />
+        </>
+      ) : (
+        <BankAccount
+          logo="/images/mandiri.png"
+          bankName="Bank Mandiri"
+          accountName="Nama Bank"
+          accountNumber="1430018337582"
+        />
+      )}
     </div>
   );
 }

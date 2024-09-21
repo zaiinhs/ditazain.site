@@ -39,7 +39,6 @@ const HeroCover = () => {
             className="h-screen object-cover"
             alt=""
           />
-          ;
           <span className="absolute inset-0 bg-gradient-to-t from-neutral-600/90 to-neutral-600/20" />
         </div>
         <div className="absolute bottom-0 h-screen w-full flex flex-col items-center justify-around">
