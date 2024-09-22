@@ -53,8 +53,6 @@ export default function Home() {
     fetchLoveNotes();
   }, [result]);
 
-  console.log({ loveNotes });
-
   return (
     <main className="flex w-full min-h-screen bg-primary flex-col items-center justify-between">
       <section className="relative min-h-screen w-full" id="main">
