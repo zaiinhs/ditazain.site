@@ -45,8 +45,6 @@ const BankAccount: React.FC<BankAccountProps> = ({
 };
 
 export default function BankInfoComponent({ type }: { type: string }) {
-  console.log(type);
-
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="text-center mb-6">
@@ -61,8 +59,8 @@ export default function BankInfoComponent({ type }: { type: string }) {
         <>
           <BankAccount
             logo="/images/bca.png"
-            bankName="Bank Central Asia"
-            accountName="Nama Bank"
+            bankName="Bank Central Asia | Zainal Abidin"
+            accountName="Nama Bank | Atas Nama"
             accountNumber="0391636167"
           />
           <BankAccount
@@ -75,8 +73,8 @@ export default function BankInfoComponent({ type }: { type: string }) {
       ) : (
         <BankAccount
           logo="/images/mandiri.png"
-          bankName="Bank Mandiri"
-          accountName="Nama Bank"
+          bankName="Bank Mandiri | Dita Tia Mukarromah"
+          accountName="Nama Bank | Atas Nama"
           accountNumber="1430018337582"
         />
       )}

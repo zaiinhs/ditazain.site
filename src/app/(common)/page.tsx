@@ -16,6 +16,8 @@ import { MapPin } from "lucide-react";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import "react-photo-view/dist/react-photo-view.css";
+import { useState, useEffect } from "react";
+import { neon } from "@neondatabase/serverless";
 
 const data = [
   {
@@ -31,25 +33,27 @@ const data = [
   },
 ];
 
-const loveNotes = [
-  {
-    id: 1,
-    name: "Zainal Abidin",
-    messages: "Assalamualaikum Warahmatullahi Wabarakaatuh",
-    presence: "hadir",
-  },
-  {
-    id: 2,
-    name: "Dita Tia Mukarromah",
-    messages: "Waalaikumsalam Warahmatullahi Wabarakaatuh",
-    presence: "hadir",
-  },
-];
-
-export default async function Home() {
-  // const data = await getData();
+export default function Home() {
   const searchParams = useSearchParams();
   const params = searchParams.get("p");
+  const [result, setResult] = useState<any[]>([]);
+  const [loveNotes, setLoveNotes] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchLoveNotes = async () => {
+      try {
+        const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL!);
+        const result = await sql`SELECT * FROM lovenotes ORDER BY id DESC`;
+        setLoveNotes(result as any);
+      } catch (error) {
+        console.error("Error fetching love notes:", error);
+      }
+    };
+
+    fetchLoveNotes();
+  }, [result]);
+
+  console.log({ loveNotes });
 
   return (
     <main className="flex w-full min-h-screen bg-primary flex-col items-center justify-between">
@@ -359,7 +363,7 @@ export default async function Home() {
       <PhotoGallery />
 
       <BankInfoComponent type={params ?? ""} />
-      <RsvpForm />
+      <RsvpForm setResult={setResult} />
       <section className="bg-accent w-full flex flex-col items-center space-y-8 px-6 py-12">
         <div className="flex flex-col items-center gap-1">
           <Fade
