@@ -7,6 +7,16 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 const Homelayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Suspense>
+      <LayoutPage>{children}</LayoutPage>
+    </Suspense>
+  );
+};
+
+export default Homelayout;
+
+const LayoutPage = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams();
 
   return (
@@ -14,38 +24,32 @@ const Homelayout = ({ children }: { children: React.ReactNode }) => {
       {searchParams?.size > 0 ? (
         <AudioProvider>
           <div className="relative max-w-[480px] mx-auto">
-            <Suspense>
-              <HeroCover />
-              {children}
-              <BottomNav />
-            </Suspense>
+            <HeroCover />
+            {children}
+            <BottomNav />
           </div>
         </AudioProvider>
       ) : (
         <div className="relative max-w-[480px] mx-auto">
-          <Suspense>
-            <div className="flex flex-col items-center justify-center h-screen px-4">
-              <h1 className="text-2xl font-bold text-center text-primary">
-                Pilih Undangan Pernikahan untuk Suami atau Istri
-              </h1>
-              <div className="flex gap-4">
-                <Link href="?p=husband">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Suami
-                  </button>
-                </Link>
-                <Link href="?p=wife">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Istri
-                  </button>
-                </Link>
-              </div>
+          <div className="flex flex-col items-center justify-center h-screen px-4">
+            <h1 className="text-2xl font-bold text-center text-primary">
+              Pilih Undangan Pernikahan untuk Suami atau Istri
+            </h1>
+            <div className="flex gap-4">
+              <Link href="?p=husband">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                  Suami
+                </button>
+              </Link>
+              <Link href="?p=wife">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                  Istri
+                </button>
+              </Link>
             </div>
-          </Suspense>
+          </div>
         </div>
       )}
     </>
   );
 };
-
-export default Homelayout;
