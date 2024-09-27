@@ -14,7 +14,7 @@ import { photoGallery } from "@/constants/gallery";
 import { RsvpForm } from "@/features";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import "react-photo-view/dist/react-photo-view.css";
 import { useState, useEffect } from "react";
 import { neon } from "@neondatabase/serverless";
@@ -32,6 +32,19 @@ const data = [
     address: "Dusun Krajan Kidul, Desa Curah Dringu, Tongas, Probolinggo.",
   },
 ];
+
+const generateGoogleCalendarUrl = (event: {
+  title: string;
+  description: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+}) => {
+  const encodedEvent = encodeURIComponent(`${event.title}`);
+  return `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodedEvent}&dates=${
+    event.startDate
+  }/${event.endDate}&location=${encodeURIComponent(event.location)}`;
+};
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -343,17 +356,40 @@ export default function Home() {
                 </>
               )}
 
-              <a
-                className="w-fit flex items-center gap-x-2 bg-primary text-accent rounded-md px-4 py-2 mt-2"
-                href={
-                  params === "husband"
-                    ? "https://maps.app.goo.gl/wUQKqMHFw9kJJYzg7"
-                    : "https://maps.app.goo.gl/LU5SamoYy5MXiUXZ6"
-                }
-                target="_blank"
-              >
-                <MapPin /> Lihat Peta
-              </a>
+              <div className="flex flex-col gap-y-2 items-center	">
+                <a
+                  className="w-fit flex items-center gap-x-2 bg-primary text-accent rounded-md px-4 py-2 mt-2"
+                  href={
+                    params === "husband"
+                      ? "https://maps.app.goo.gl/wUQKqMHFw9kJJYzg7"
+                      : "https://maps.app.goo.gl/LU5SamoYy5MXiUXZ6"
+                  }
+                  target="_blank"
+                >
+                  <MapPin /> Lihat Peta
+                </a>
+                <a
+                  className="flex items-center justify-center gap-x-2 bg-primary text-accent rounded-md px-4 py-2"
+                  href={generateGoogleCalendarUrl({
+                    title: "Resepsi Pernikahan Zainal & Dita",
+                    description:
+                      "Resepsi Pernikahan Zainal Abidin & Dita Tia Mukarromah",
+                    location:
+                      params === "husband" ? data[0].address : data[1].address,
+                    startDate:
+                      params === "husband"
+                        ? "20241026T000000"
+                        : "20241020T000000",
+                    endDate:
+                      params === "husband"
+                        ? "20241026T235959"
+                        : "20241020T235959",
+                  })}
+                  target="_blank"
+                >
+                  Add to Google Calendar
+                </a>
+              </div>
             </div>
           </div>
         </div>
