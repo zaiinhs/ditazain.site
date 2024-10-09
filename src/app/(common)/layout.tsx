@@ -35,7 +35,7 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
           </div>
         </AudioProvider>
       ) : (
-        <div className="relative h-screen">
+        <div className="relative h-screen max-w-[480px] mx-auto">
           <Image
             src={randomImage.photo}
             alt="Background"
@@ -44,18 +44,19 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
             quality={100}
           />
           <div className="relative h-full flex items-center justify-center">
-            <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg">
-              <h1 className="text-2xl font-bold text-center mb-6">
-                Pilih Undangan Pernikahan untuk Suami atau Istri
+            <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg mx-10">
+              <h1 className="text-xl font-bold text-center mb-6">
+                Pilih Informasi Undangan Digital Pernikahan di Rumah Suami atau
+                Istri
               </h1>
               <div className="flex justify-center gap-4">
                 <Link href="?p=husband">
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md transition duration-300">
+                  <button className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md transition duration-300">
                     Suami
                   </button>
                 </Link>
                 <Link href="?p=wife">
-                  <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-md transition duration-300">
+                  <button className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md transition duration-300">
                     Istri
                   </button>
                 </Link>
