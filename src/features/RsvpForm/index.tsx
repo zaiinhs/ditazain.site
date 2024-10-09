@@ -78,6 +78,7 @@ const RsvpForm = ({ setResult }: { setResult: (result: any) => void }) => {
               id="name"
               name="name"
               type="name"
+              placeholder="Masukkan nama"
               defaultValue={guest.charAt(0).toUpperCase() + guest.slice(1)}
               autoComplete="name"
               className="block w-full rounded-md border-0 p-2 text-accent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -98,6 +99,7 @@ const RsvpForm = ({ setResult }: { setResult: (result: any) => void }) => {
               id="messages"
               name="messages"
               rows={3}
+              placeholder="Masukkan pesan singkat"
               className="block w-full rounded-md border-0 p-2 text-accent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               defaultValue={""}
               value={messages}
@@ -147,7 +149,7 @@ const RsvpForm = ({ setResult }: { setResult: (result: any) => void }) => {
             </div>
           </div>
         </div>
-        <SubmitBtn />
+        <SubmitBtn name={name} message={messages} />
       </form>
     </section>
   );

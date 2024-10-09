@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 const Note = ({ data }: { data: Record<string, any> }) => {
   const color = data.presence ? "bg-green-600" : "bg-red-600";
   const text = data.presence ? "Hadir" : "Tidak Hadir";
@@ -12,7 +14,16 @@ const Note = ({ data }: { data: Record<string, any> }) => {
           {text}
         </span>
       </div>
-      <p className="text-accent text-sm">{data.messages}</p>
+      <ReactMarkdown
+        className="text-accent text-sm"
+        components={{
+          p: ({ node, ...props }) => (
+            <p style={{ whiteSpace: "pre-line" }} {...props} />
+          ),
+        }}
+      >
+        {data.messages}
+      </ReactMarkdown>
     </div>
   );
 };
