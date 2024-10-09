@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { ClipboardCopy } from "lucide-react";
+import { ClipboardCopy, MapPin } from "lucide-react";
 
 interface BankAccountProps {
   logo: string;
@@ -44,7 +44,41 @@ const BankAccount: React.FC<BankAccountProps> = ({
   );
 };
 
+interface AddressCardProps {
+  address: string;
+}
+
+const AddressCard: React.FC<AddressCardProps> = ({ address }) => {
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(address);
+    alert("Alamat telah disalin ke clipboard!");
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+      <div className="flex items-center mb-2">
+        <MapPin className="w-5 h-5 mr-2 text-orange-500" />
+        <h2 className="text-lg font-semibold">Alamat</h2>
+      </div>
+      <p className="text-sm text-gray-600 mb-4">{address}</p>
+      <button
+        onClick={copyToClipboard}
+        className="hover:bg-gray-100 w-full bg-white text-gray-500 border border-gray-200 py-2 px-4 rounded-lg flex items-center justify-center"
+      >
+        <ClipboardCopy className="w-4 h-4 mr-2" />
+        Salin
+      </button>
+    </div>
+  );
+};
+
 export default function BankInfoComponent({ type }: { type: string }) {
+  const addressHusband =
+    "Rumah Cat Cream Selatan Masjid Nurul Islam, Dusun Krajan Tengah RT. 009 / RW. 004, Desa Curah Dringu, Tongas, Probolinggo. Kode Pos 67252";
+
+  const addressWife =
+    "Rumah Ibu Tiyayah, Kepala Desa Curah Dringu, Tongas, Probolinggo (Utara Tempat Pemakaman Umum) . Kode Pos 67252";
+
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="text-center mb-6">
@@ -52,9 +86,14 @@ export default function BankInfoComponent({ type }: { type: string }) {
       </div>
       <p className="text-sm text-gray-600 text-center mb-6">
         Terima kasih atas doa dan restu yang telah anda berikan, jika anda ingin
-        mengirimkan kado nikah, silahkan kirim dengan cara dibawah ini.
-        Sebelumnya kami mengucapkan banyak terima kasih.
+        mengirimkan amplop digital, kado nikah, silahkan kirim dengan cara
+        dibawah ini. Sebelumnya kami mengucapkan banyak terima kasih.
       </p>
+
+      <AddressCard
+        address={type === "husband" ? addressHusband : addressWife}
+      />
+
       {type === "husband" ? (
         <>
           <BankAccount

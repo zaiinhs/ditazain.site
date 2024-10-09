@@ -319,13 +319,6 @@ export default function Home() {
               <p className="drop-shadow-lg">
                 Dusun Krajan Kidul, Desa Curah Dringu, Tongas, Probolinggo.
               </p>
-              <a
-                className="flex items-center gap-x-2 bg-primary text-accent rounded-md px-4 py-2 mt-2"
-                href={"https://maps.app.goo.gl/LU5SamoYy5MXiUXZ6"}
-                target="_blank"
-              >
-                <MapPin /> Lihat Peta
-              </a>
             </div>
           </div>
         </div>
