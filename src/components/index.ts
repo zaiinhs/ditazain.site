@@ -1,10 +1,1 @@
-export { default as BottomNav } from "./BottomNav";
-export { default as HeroCover } from "./HeroCover";
-export { default as TimerCountdown } from "./TimerCountdown";
-export { default as Note } from "./Note";
-export { default as Marquee } from "./Marquee";
-export { default as BlurFade } from "./BlurFade";
-export { default as PhotoGallery } from "./PhotoGallery";
-export { default as SubmitBtn } from "./SubmitBtn";
-export { default as TextBlurIn } from "./TextBlurIn";
-export { default as Fade } from "./Fade";
+export { default as CardComponent } from "./Card";
