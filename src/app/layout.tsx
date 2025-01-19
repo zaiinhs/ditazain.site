@@ -16,7 +16,7 @@ import "./globals.css";
 // });
 
 export const metadata: Metadata = {
-  title: "Personal Website @zainal",
+  title: "Zainal.io",
   description: "Personal Website Zainal Abidin",
 };
 
@@ -26,8 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        {children}
+      </body>
     </html>
   );
 }
