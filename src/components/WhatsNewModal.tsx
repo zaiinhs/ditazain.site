@@ -23,7 +23,10 @@ const updates = [
   },
   {
     date: "2025-01-20",
-    items: ["Add Photo Gallery and Improve View Photo"],
+    items: [
+      "Add Photo Gallery and Improve View Photo",
+      "Bugfix display and failed build",
+    ],
   },
 ];
 
@@ -47,7 +50,7 @@ export default function WhatsNewModal({ isOpen, onClose }: WhatsNewModalProps) {
       <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-md mx-4 relative">
         <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
           <h2 className="text-xl font-semibold text-black dark:text-white">
-            What's New?
+            What&apos;s New?
           </h2>
           <button
             onClick={onClose}

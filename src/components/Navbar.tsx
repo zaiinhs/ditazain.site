@@ -20,8 +20,8 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md rounded-full max-w-screen-md w-full">
       <ul className="flex space-x-4">
-        {menuItems.map((item) => (
-          <li key={item}>
+        {menuItems.map((item, index) => (
+          <li key={index}>
             <a
               href={`/${item.toLowerCase()}`}
               className="text-black text-sm dark:text-white hover:text-gray-600 dark:hover:text-gray-300 relative py-1 cursor-pointer transition-colors duration-200 group"
@@ -37,7 +37,7 @@ export default function Navbar() {
           onClick={() => setIsWhatsNewOpen(true)}
           className="text-black text-sm dark:text-white hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer relative py-1 group"
         >
-          What's New?
+          What&apos;s New?
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-200 group-hover:w-full"></span>
         </button>
         <DarkModeToggle />

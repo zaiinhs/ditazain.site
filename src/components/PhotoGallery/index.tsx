@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function PhotoGallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedImage) {
+      setLoading(true);
+    }
+  }, [selectedImage]);
 
   const openImage = (src: string) => {
     setSelectedImage(src);
@@ -13,9 +21,13 @@ export default function PhotoGallery() {
     setSelectedImage(null);
   };
 
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <>
-      <div className="mt-20 flex space-x-12 overflow-hidden">
+      <div className="mt-20 flex space-x-12 h-60">
         {[
           "/images/photo-1.png",
           "/images/photo-2.JPG",
@@ -23,21 +35,27 @@ export default function PhotoGallery() {
           "/images/photo-4.jpeg",
           "/images/photo-5.jpeg",
         ].map((src, index) => {
-          const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-            16
-          )}`;
+          // const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
+          //   16
+          // )}`;
           const rotation = index % 2 === 0 ? "rotate(-5deg)" : "rotate(5deg)";
           return (
-            <img
+            <Image
               key={index}
               src={src}
               alt={`Description ${index + 1}`}
               style={{
-                backgroundColor: randomColor,
+                // backgroundColor: randomColor,
                 transform: rotation,
                 objectFit: "cover",
+                border: "2px solid white",
+                transition: "transform 0.3s ease-in-out",
+                marginTop: "10px",
+                marginBottom: "10px",
               }}
-              className="w-60 h-60 rounded-lg moving-image"
+              width={250}
+              height={250}
+              className="rounded-lg"
               onClick={() => openImage(src)}
             />
           );
@@ -49,10 +67,15 @@ export default function PhotoGallery() {
           className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center"
           onClick={closeImage}
         >
-          <img
+          {loading && <div className="loader">Loading...</div>}
+          <Image
             src={selectedImage}
             alt="Full screen"
             className="max-w-full max-h-[90vh]"
+            layout="intrinsic"
+            width={800}
+            height={600}
+            onLoad={handleImageLoad}
           />
         </div>
       )}
