@@ -38,7 +38,7 @@ export default function PhotoGallery() {
           // const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
           //   16
           // )}`;
-          const rotation = index % 2 === 0 ? "rotate(-5deg)" : "rotate(5deg)";
+          const rotation = index % 2 === 0 ? "rotate(-3deg)" : "rotate(3deg)";
           return (
             <Image
               key={index}
@@ -52,6 +52,7 @@ export default function PhotoGallery() {
                 transition: "transform 0.3s ease-in-out",
                 marginTop: "10px",
                 marginBottom: "10px",
+                cursor: "pointer",
               }}
               width={250}
               height={250}

@@ -1,4 +1,4 @@
-import { XIcon, LinkedinIcon, GithubIcon, InstagramIcon } from "lucide-react";
+import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from "lucide-react";
 
 const socialMedia = [
   {
@@ -31,9 +31,12 @@ export default function Socmed() {
           key={index}
           href={social.url}
           target="_blank"
-          className="text-2xl hover:opacity-80"
+          className="relative group p-2 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
         >
-          <span className="dark:text-white text-black">{social.icon}</span>
+          <span className="dark:text-white text-black transition-transform duration-300 group-hover:scale-110 inline-block">
+            {social.icon}
+          </span>
+          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-black dark:bg-white rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"></span>
         </a>
       ))}
     </div>
