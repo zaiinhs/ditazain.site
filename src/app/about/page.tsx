@@ -32,9 +32,10 @@ export default function AboutPage() {
               Background
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              I'm a frontend developer with a passion for creating beautiful and
-              functional web applications. I specialize in React, TypeScript,
-              and Next.js, and I love working with modern web technologies.
+              I&apos;m a frontend developer with a passion for creating
+              beautiful and functional web applications. I specialize in React,
+              TypeScript, and Next.js, and I love working with modern web
+              technologies.
             </p>
           </section>
 
