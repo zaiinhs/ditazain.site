@@ -28,6 +28,10 @@ const updates = [
       "Bugfix display and failed build",
     ],
   },
+  {
+    date: "2025-01-22",
+    items: ["Create About Page", "Add Display About Page", "Improve navbar"],
+  },
 ];
 
 export default function WhatsNewModal({ isOpen, onClose }: WhatsNewModalProps) {
