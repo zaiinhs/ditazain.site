@@ -32,6 +32,10 @@ const updates = [
     date: "2025-01-22",
     items: ["Create About Page", "Add Display About Page", "Improve navbar"],
   },
+  {
+    date: "2025-01-24",
+    items: ["Create Articles Page", "Add Display Articles Page"],
+  },
 ];
 
 export default function WhatsNewModal({ isOpen, onClose }: WhatsNewModalProps) {
