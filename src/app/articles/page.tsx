@@ -109,8 +109,11 @@ export default function ArticlesPage() {
           </p>
         </div>
         {/* Articles Grid */}
-        {articles.map((article) => (
-          <article className="group hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-6 transition-all duration-200">
+        {articles.map((article, index) => (
+          <article
+            key={index}
+            className="group hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-6 transition-all duration-200"
+          >
             <div className="flex justify-between items-start">
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
