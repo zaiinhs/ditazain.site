@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-const menuItems = ["About", "Projects", "ReadList", "Uses", "Keybinds"];
+const menuItems = ["About", "Projects", "ReadList", "Uses"];
 
 export default function Footer() {
   return (
     <footer className="w-full max-w-screen-md mx-auto mt-auto py-8">
-      <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 px-4">
+      <div className="flex flex-col items-center space-y-4 md:space-y-0 md:flex-row md:justify-between px-4">
         <nav>
-          <ul className="flex flex-wrap items-center space-x-6">
+          <ul className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6">
             {menuItems.map((item) => (
               <li key={item}>
                 <Link

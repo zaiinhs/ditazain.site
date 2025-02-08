@@ -27,25 +27,24 @@ export default function PhotoGallery() {
 
   return (
     <>
-      <div className="mt-20 flex space-x-12 h-60">
+      <div className="mt-20 hidden md:flex space-x-12 h-60">
         {[
           "/images/photo-1.png",
           "/images/photo-2.JPG",
           "/images/photo-3.JPG",
           "/images/photo-4.jpeg",
           "/images/photo-5.jpeg",
-        ].map((src, index) => {
-          // const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-          //   16
-          // )}`;
-          const rotation = index % 2 === 0 ? "rotate(-3deg)" : "rotate(3deg)";
+        ].map((src) => {
+          const rotation =
+            src.includes("photo-2") || src.includes("photo-4")
+              ? "rotate(3deg)"
+              : "rotate(-3deg)";
           return (
             <Image
-              key={index}
+              key={src}
               src={src}
-              alt={`Description ${index + 1}`}
+              alt={`Photo ${src.split("/").pop()?.split(".")[0]}`}
               style={{
-                // backgroundColor: randomColor,
                 transform: rotation,
                 objectFit: "cover",
                 border: "2px solid white",

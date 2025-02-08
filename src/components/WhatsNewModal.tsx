@@ -10,31 +10,78 @@ interface WhatsNewModalProps {
 
 const updates = [
   {
-    date: "2025-01-01",
-    items: ["Start Development"],
-  },
-  {
-    date: "2025-01-04",
-    items: ["Create Route Homepage"],
-  },
-  {
-    date: "2025-01-19",
-    items: ["Improve UI, Navbar, and add dark mode"],
-  },
-  {
-    date: "2025-01-20",
+    date: "2024-02-09",
     items: [
-      "Add Photo Gallery and Improve View Photo",
-      "Bugfix display and failed build",
+      "Enhanced mobile responsiveness across the website",
+      "Added hamburger menu for mobile navigation",
+      "Improved footer layout for mobile devices",
+      "Optimized PhotoGallery visibility for different screen sizes",
+      "Added smooth transitions for mobile menu interactions",
+      "Improved touch targets for better mobile usability",
     ],
   },
   {
-    date: "2025-01-22",
-    items: ["Create About Page", "Add Display About Page", "Improve navbar"],
+    date: "2024-02-08",
+    items: [
+      "Added Projects page with showcase of development work",
+      "Added Reading List page with book recommendations",
+      "Added Uses page showing development setup",
+      "Improved dark mode persistence across page navigation",
+      "Fixed key prop warnings in component mappings",
+      "Added What's New modal with update history",
+      "Enhanced navigation menu with active state",
+      "Improved footer navigation links",
+    ],
   },
   {
-    date: "2025-01-24",
-    items: ["Create Articles Page", "Add Display Articles Page"],
+    date: "2024-01-24",
+    items: [
+      "Created Articles page with rich content display",
+      "Added article cards with tags and read time",
+      "Implemented responsive article layout",
+    ],
+  },
+  {
+    date: "2024-01-22",
+    items: [
+      "Created About page with personal information",
+      "Added professional background section",
+      "Enhanced navigation with active state indicators",
+    ],
+  },
+  {
+    date: "2024-01-20",
+    items: [
+      "Added Photo Gallery with interactive viewer",
+      "Implemented image rotation effects",
+      "Added loading states for image viewing",
+      "Fixed display issues and build errors",
+    ],
+  },
+  {
+    date: "2024-01-19",
+    items: [
+      "Improved UI with consistent styling",
+      "Added Navbar with smooth transitions",
+      "Implemented dark mode toggle",
+      "Added social media links with hover effects",
+    ],
+  },
+  {
+    date: "2024-01-04",
+    items: [
+      "Created Homepage with modern design",
+      "Added responsive layout support",
+      "Implemented base routing structure",
+    ],
+  },
+  {
+    date: "2024-01-01",
+    items: [
+      "Initial project setup with Next.js",
+      "Added TypeScript configuration",
+      "Set up Tailwind CSS for styling",
+    ],
   },
 ];
 
@@ -75,8 +122,11 @@ export default function WhatsNewModal({ isOpen, onClose }: WhatsNewModalProps) {
               </h3>
               <ul className="space-y-2">
                 {update.items.map((item, index) => (
-                  <li key={index} className="text-black dark:text-white">
-                    {item}
+                  <li
+                    key={`${update.date}-${index}`}
+                    className="text-black dark:text-white"
+                  >
+                    • {item}
                   </li>
                 ))}
               </ul>

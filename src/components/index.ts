@@ -1,8 +1,11 @@
-export { default as CardComponent } from "./Card";
+export { default as Articles } from "./Articles";
+export { default as Card } from "./Card";
 export { default as DarkModeToggle } from "./DarkModeToggle";
-export { default as Socmed } from "./Socmed";
-export { default as WhatsNewModal } from "./WhatsNewModal";
+export { default as Footer } from "./Footer";
 export { default as Navbar } from "./Navbar";
 export { default as PhotoGallery } from "./PhotoGallery";
-export { default as Footer } from "./Footer";
-export { default as Articles } from "./Articles";
+export { default as Projects } from "./Projects";
+export { default as Readlist } from "./Readlist";
+export { default as Socmed } from "./Socmed";
+export { default as Uses } from "./Uses";
+export { default as WhatsNewModal } from "./WhatsNewModal";

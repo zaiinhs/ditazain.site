@@ -109,20 +109,20 @@ export default function ArticlesPage() {
           </p>
         </div>
         {/* Articles Grid */}
-        {articles.map((article, index) => (
+        {articles.map((article) => (
           <article
-            key={index}
+            key={article.slug}
             className="group hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-6 transition-all duration-200"
           >
             <div className="flex justify-between items-start">
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    Jan 20, 2024
+                    {article.date}
                   </span>
                   <span className="text-gray-300">•</span>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    5 min read
+                    {article.readTime}
                   </span>
                 </div>
                 <h2 className="text-xl font-semibold text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
@@ -134,7 +134,7 @@ export default function ArticlesPage() {
                 <div className="flex items-center space-x-2">
                   {article.tags.map((tag) => (
                     <span
-                      key={tag}
+                      key={`${article.slug}-${tag}`}
                       className="text-sm px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full"
                     >
                       {tag}

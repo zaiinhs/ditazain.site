@@ -26,9 +26,9 @@ const socialMedia = [
 export default function Socmed() {
   return (
     <div className="flex space-x-6">
-      {socialMedia.map((social, index) => (
+      {socialMedia.map((social) => (
         <a
-          key={index}
+          key={social.name}
           href={social.url}
           target="_blank"
           className="relative group p-2 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
