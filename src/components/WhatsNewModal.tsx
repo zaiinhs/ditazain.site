@@ -12,6 +12,7 @@ const updates = [
   {
     date: "2024-02-09",
     items: [
+      "Added Development Notice modal",
       "Enhanced mobile responsiveness across the website",
       "Added hamburger menu for mobile navigation",
       "Improved footer layout for mobile devices",

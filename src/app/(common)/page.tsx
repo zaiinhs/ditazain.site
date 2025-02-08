@@ -4,8 +4,21 @@ import { Articles, Footer, Navbar, PhotoGallery, Socmed } from "@/components";
 import { DESCRIPTION, TITLE } from "@/constants/content";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import DevelopmentModal from "@/components/DevelopmentModal";
 
 export default function HomePage() {
+  const [isDevModalOpen, setIsDevModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Show modal after a short delay when component mounts
+    const timer = setTimeout(() => {
+      setIsDevModalOpen(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="text-black min-h-screen flex flex-col items-center mt-5">
       <Navbar />
@@ -42,6 +55,11 @@ export default function HomePage() {
       <PhotoGallery />
       <Articles />
       <Footer />
+
+      <DevelopmentModal
+        isOpen={isDevModalOpen}
+        onClose={() => setIsDevModalOpen(false)}
+      />
     </div>
   );
 }
