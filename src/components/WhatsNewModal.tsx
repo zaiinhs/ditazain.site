@@ -10,8 +10,19 @@ interface WhatsNewModalProps {
 
 const updates = [
   {
+    date: "2024-02-14",
+    items: [
+      "Added summary of recent changes and updates",
+      "Enhanced website content organization",
+      "Improved user experience with clearer update history",
+    ],
+  },
+  {
     date: "2024-02-09",
     items: [
+      "Added section on Server Components best practices in Next.js article",
+      "Updated code examples for Next.js 14",
+      "Added performance optimization tips",
       "Added Development Notice modal",
       "Enhanced mobile responsiveness across the website",
       "Added hamburger menu for mobile navigation",
@@ -24,6 +35,9 @@ const updates = [
   {
     date: "2024-02-08",
     items: [
+      "Added real-world case studies to Microservices article",
+      "Updated deployment strategies",
+      "Added new section on service mesh",
       "Added Projects page with showcase of development work",
       "Added Reading List page with book recommendations",
       "Added Uses page showing development setup",
@@ -32,6 +46,41 @@ const updates = [
       "Added What's New modal with update history",
       "Enhanced navigation menu with active state",
       "Improved footer navigation links",
+    ],
+  },
+  {
+    date: "2024-02-05",
+    items: [
+      "Added Docker Compose examples to Docker article",
+      "Updated Docker best practices",
+      "Added new section on multi-stage builds",
+    ],
+  },
+  {
+    date: "2024-02-03",
+    items: [
+      "Added new patterns for TypeScript 5.0 in Design Patterns article",
+      "Updated code examples",
+      "Added performance optimization techniques",
+    ],
+  },
+  {
+    date: "2024-02-01",
+    items: [
+      "Added section on TypeScript integration in Clean Code article",
+      "Updated code examples",
+      "Added new best practices for 2024",
+      "Added matrix build examples in GitHub Actions article",
+      "Added new deployment strategies",
+      "Added security best practices",
+    ],
+  },
+  {
+    date: "2024-01-25",
+    items: [
+      "Added Zustand examples to State Management article",
+      "Updated Redux Toolkit section",
+      "Added new performance comparisons",
     ],
   },
   {
@@ -53,6 +102,9 @@ const updates = [
   {
     date: "2024-01-20",
     items: [
+      "Added OAuth 2.0 implementation guide to API Security article",
+      "Added new section on rate limiting",
+      "Updated security headers",
       "Added Photo Gallery with interactive viewer",
       "Implemented image rotation effects",
       "Added loading states for image viewing",
@@ -66,6 +118,22 @@ const updates = [
       "Added Navbar with smooth transitions",
       "Implemented dark mode toggle",
       "Added social media links with hover effects",
+    ],
+  },
+  {
+    date: "2024-01-15",
+    items: [
+      "Added Core Web Vitals optimization to Performance article",
+      "Added new section on image optimization",
+      "Updated performance metrics",
+    ],
+  },
+  {
+    date: "2024-01-10",
+    items: [
+      "Added distributed caching examples to System Design article",
+      "Added new section on load balancing",
+      "Updated architecture diagrams",
     ],
   },
   {
