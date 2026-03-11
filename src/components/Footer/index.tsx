@@ -22,7 +22,7 @@ export default function Footer() {
           </ul>
         </nav>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          © {new Date().getFullYear()} Zainal.io. All rights reserved.
+          © {new Date().getFullYear()} @zaiinhs. All rights reserved.
         </p>
       </div>
     </footer>

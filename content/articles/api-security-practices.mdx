@@ -1,0 +1,88 @@
+---
+title: "API Security Best Practices"
+description: "Essential security practices and techniques to protect your APIs from common vulnerabilities and attacks."
+date: "2024-01-03"
+readTime: "7 min read"
+tags: ["Security", "API", "Backend"]
+slug: "api-security-practices"
+---
+
+# API Security Best Practices
+
+Security should be a top priority for any API. Let's cover essential practices to protect your endpoints.
+
+## Authentication
+
+### JWT Best Practices
+
+```typescript
+// Sign token with expiration
+const token = jwt.sign(
+  { userId: user.id },
+  process.env.JWT_SECRET!,
+  { expiresIn: '1h' }
+);
+
+// Verify with expiration check
+const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+```
+
+### OAuth 2.0
+
+For third-party integrations, implement OAuth 2.0.
+
+## Authorization
+
+### Role-Based Access Control (RBAC)
+
+```typescript
+function authorize(roles: string[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+    next();
+  };
+}
+
+// Usage
+router.delete('/users/:id', authorize(['admin']), deleteUser);
+```
+
+## Input Validation
+
+Always validate and sanitize input:
+
+```typescript
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8)
+});
+
+function validateInput(data: unknown) {
+  return schema.parse(data);
+}
+```
+
+## Rate Limiting
+
+Prevent abuse with rate limiting:
+
+```typescript
+app.use('/api', rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+}));
+```
+
+## Security Headers
+
+Use helmet.js:
+
+```typescript
+app.use(helmet());
+```
+
+## Conclusion
+
+Security is an ongoing process. Stay updated with latest vulnerabilities and patches.

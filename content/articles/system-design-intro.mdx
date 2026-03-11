@@ -1,0 +1,74 @@
+---
+title: "Introduction to System Design"
+description: "Learn fundamental concepts and approaches to design large-scale distributed systems."
+date: "2023-12-28"
+readTime: "12 min read"
+tags: ["System Design", "Architecture", "Backend"]
+slug: "system-design-intro"
+---
+
+# Introduction to System Design
+
+System design is crucial for building scalable applications. Let's cover fundamental concepts.
+
+## Key Concepts
+
+### Scalability
+
+**Vertical Scaling**: Add more resources to existing machine
+**Horizontal Scaling**: Add more machines
+
+### Load Balancing
+
+Distribute traffic across multiple servers:
+
+```
+User → Load Balancer → Server 1
+                 → Server 2
+                 → Server 3
+```
+
+### Caching
+
+Store frequently accessed data:
+
+- **CDN**: Static assets
+- **Redis/Memcached**: Application data
+- **Browser Cache**: Client-side data
+
+### Database
+
+Choose based on needs:
+
+| Use Case | Database |
+|----------|----------|
+| Relational data | PostgreSQL |
+| Flexible schema | MongoDB |
+| Caching | Redis |
+| Search | Elasticsearch |
+| Analytics | ClickHouse |
+
+## Design Patterns
+
+### Microservices
+
+Break down into independent services.
+
+### Event-Driven Architecture
+
+Use message queues for async communication.
+
+### CQRS
+
+Separate read and write operations.
+
+## Common Interview Questions
+
+1. Design URL shortener
+2. Design Twitter feed
+3. Design Uber backend
+4. Design chat system
+
+## Conclusion
+
+Practice designing systems. Start with requirements, then scale up.

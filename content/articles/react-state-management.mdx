@@ -1,0 +1,75 @@
+---
+title: "State Management in React: A Complete Guide"
+description: "Compare different state management solutions in React and learn when to use each approach."
+date: "2024-01-05"
+readTime: "9 min read"
+tags: ["React", "State Management", "Frontend"]
+slug: "react-state-management"
+---
+
+# State Management in React: A Complete Guide
+
+Choosing the right state management solution is crucial for React applications. Let's explore the options.
+
+## Local State
+
+For simple state, use `useState`:
+
+```typescript
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```
+
+## Server State
+
+For data from APIs, use React Query or SWR:
+
+```typescript
+function UserProfile({ userId }) {
+  const { data, isLoading } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => fetchUser(userId)
+  });
+
+  if (isLoading) return <Spinner />;
+  return <div>{data.name}</div>;
+}
+```
+
+## Global State
+
+For cross-component state, consider:
+
+### Zustand
+
+```typescript
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((s) => ({ count: s.count + 1 }))
+}));
+
+// Usage
+function Counter() {
+  const { count, increment } = useStore();
+  return <button onClick={increment}>{count}</button>;
+}
+```
+
+### Context API
+
+For simple global state without external libraries.
+
+## When to Use What
+
+| Scenario | Solution |
+|----------|----------|
+| Component-specific | useState |
+| Server data | React Query/SWR |
+| Simple global | Context |
+| Complex global | Zustand/Redux |
+
+## Conclusion
+
+Start simple. Add complexity only when needed.

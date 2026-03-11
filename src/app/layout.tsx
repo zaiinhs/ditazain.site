@@ -16,8 +16,25 @@ import "./globals.css";
 // });
 
 export const metadata: Metadata = {
-  title: "Zainal.io",
-  description: "Personal Website Zainal Abidin",
+  title: "Zainal | @zaiinhs",
+  description: "Personal website of Zainal Abidin - Developer, writer, and creator. Explore my projects, articles, and thoughts on technology.",
+  keywords: ["Zainal Abidin", "zaiinhs", "developer", "portfolio", "personal website", "tech blog"],
+  authors: [{ name: "Zainal Abidin" }],
+  openGraph: {
+    title: "Zainal | @zaiinhs",
+    description: "Personal website of Zainal Abidin - Developer, writer, and creator.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zainal | @zaiinhs",
+    description: "Personal website of Zainal Abidin - Developer, writer, and creator.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

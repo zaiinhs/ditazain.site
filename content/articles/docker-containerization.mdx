@@ -1,0 +1,67 @@
+---
+title: "Getting Started with Docker and Containerization"
+description: "A beginner's guide to Docker containers, images, and basic containerization concepts for modern development."
+date: "2024-01-12"
+readTime: "7 min read"
+tags: ["Docker", "DevOps", "Containers"]
+slug: "docker-containerization"
+---
+
+# Getting Started with Docker and Containerization
+
+Docker has revolutionized software deployment. This guide will walk you through the fundamentals of containerization.
+
+## What is Docker?
+
+Docker is a platform for developing, shipping, and running applications in containers.
+
+## Key Concepts
+
+### Images
+
+Images are read-only templates for creating containers.
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+### Containers
+
+Containers are running instances of images.
+
+### Dockerfiles
+
+Dockerfiles define how to build your image.
+
+## Basic Commands
+
+```bash
+# Build an image
+docker build -t my-app .
+
+# Run a container
+docker run -p 3000:3000 my-app
+
+# List running containers
+docker ps
+
+# Stop a container
+docker stop <container-id>
+```
+
+## Benefits
+
+- **Consistency**: Same environment from dev to production
+- **Isolation**: Dependencies don't conflict
+- **Efficiency**: Lightweight compared to VMs
+- **Portability**: Run anywhere Docker is installed
+
+## Conclusion
+
+Docker is essential for modern development. Start small and gradually adopt more advanced patterns.
