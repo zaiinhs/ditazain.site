@@ -1,0 +1,330 @@
+---
+title: "Data Analyst, Data Engineer, dan Data Science: Siapa Mereka?"
+description: "Panduan lengkap untuk memahami perbedaan antara Data Analyst, Data Engineer, dan Data Science dengan bahasa yang mudah dipahami."
+date: "2026-03-15"
+readTime: "8 min read"
+tags: ["Data", "Data Analyst", "Data Engineer", "Data Science", "Career"]
+slug: "data-roles-explained"
+---
+
+# Data Analyst, Data Engineer, dan Data Science: Siapa Mereka?
+
+Di dunia data, ada tiga peran utama yang sering terdengar: Data Analyst, Data Engineer, dan Data Scientist. Tapi apa bedanya? Siapa yang melakukan apa? Tenang, artikel ini akan menjelaskan dengan bahasa semudah mungkin!
+
+## Bayangkan Seperti Dapur Restauran
+
+Sebelum masuk ke details, bayangkan dunia data seperti dapur sebuah restoran:
+
+```mermaid
+flowchart TB
+    subgraph "Dapur Data"
+        subgraph "Kitchen"
+            DE[Data Engineer<br/>Koki Utama]
+            DS[Data Scientist<br/>Ahli Rasa]
+            DA[Data Analyst<br/>Pelayan]
+        end
+        
+        subgraph "Pantry"
+            Raw[Data Mentah<br/>Bahan Baku]
+        end
+        
+        subgraph "Restaurant"
+            User[Pengguna<br/>Tamu Restauran]
+        end
+        
+        Raw --> DE
+        DE --> DS
+        DS --> DA
+        DA --> User
+    end
+    
+    style DE fill:#ff6b6b,color:#fff
+    style DS fill:#4ecdc4,color:#fff
+    style DA fill:#ffe66d,color:#333
+    style Raw fill:#95e1d3
+    style User fill:#f38181
+```
+
+- **Data Engineer** = Koki yang mempersiapkan bahan
+- **Data Scientist** = Ahli rasa yang menciptakan resep
+- **Data Analyst** = Pelayan yang menyajikan makanan ke tamu
+
+---
+
+## Apa Itu Data Analyst?
+
+Data Analyst adalah orang yang tugasnya "menceritakan cerita" dari data. Mereka mengambil data yang sudah ada dan mengubahnya menjadi informasi yang bisa dipahami orang lain.
+
+### Contoh Kerja Sehari-Hari
+
+Bayangkan kamu punya tokopedia online. Sebagai Data Analyst, kamu mungkin akan:
+
+- "Berapa banyak yang terjual hari ini?"
+- "Produk mana yang paling banyak dibeli?"
+- "Dari mana saja pelanggan kita?"
+
+```mermaid
+flowchart LR
+    subgraph "Workflow Data Analyst"
+        A[Data] --> B[Analisa]
+        B --> C[Visualisasi]
+        C --> D[Laporan]
+        D --> E[Keputusan]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#ffebee
+```
+
+### Alat Yang Digunakan
+
+| Alat | Fungsi |
+|------|--------|
+| **Excel** | Analisa sederhana |
+| **SQL** | Mengambil data dari database |
+| **Tableau** | Membuat grafik interaktif |
+| **Power BI** | Dashboard bisnis |
+| **Python/R** | Analisa lanjutan |
+
+### Keterampilan Yang Dibutuhkan
+
+- **Matematika dasar** - Tidak perlu jago calculus, cukup paham persentase dan rata-rata
+- **SQL** - Untuk mengambil data
+- **Visualisasi** - Membuat grafik yang menarik
+- **Komunikasi** - Menceritakan findings ke orang lain
+
+---
+
+## Apa Itu Data Engineer?
+
+Data Engineer adalah orang yang membangun "infrastruktur data". Mereka memastikan data bisa mengalir dengan顺畅 dari satu tempat ke tempat lain.
+
+### Bayangkan Seperti...
+
+```mermaid
+flowchart TB
+    subgraph "Data Pipeline"
+        Source1[Website] -->|Click Stream| ETL1[Extract Transform Load]
+        Source2[Database] -->|User Data| ETL1
+        Source3[API] -->|Product Data| ETL1
+        
+        ETL1 -->|Clean Data| Warehouse[Data Warehouse]
+        Warehouse -->|Ready to Use| Analyst[Data Analyst]
+        
+        ETL1 -->|Raw Data| Lake[Data Lake]
+        Lake -->|ML Ready| ML[Machine Learning]
+    end
+    
+    style Source1 fill:#e3f2fd
+    style Source2 fill:#e3f2fd
+    style Source3 fill:#e3f2fd
+    style ETL1 fill:#ff9800,color:#fff
+    style Warehouse fill:#4caf50,color:#fff
+    style Lake fill:#2196f3,color:#fff
+    style Analyst fill:#9c27b0,color:#fff
+    style ML fill:#e91e63,color:#fff
+```
+
+Data Engineer membangun jalan tol untuk data. Tanpa mereka, data Analyst tidak bisa bekerja dengan baik!
+
+### Contoh Kerja Sehari-Hari
+
+- "Buat pipeline agar data dari website masuk ke database"
+- "Pastikan data dari semua sources bisa digabungkan"
+- "Optimasi kecepatan query agar analyst bisa kerja cepat"
+
+### Alat Yang Digunakan
+
+| Alat | Fungsi |
+|------|--------|
+| **Python** | Bahasa pemrograman utama |
+| **Apache Spark** | Memproses data besar |
+| **Airflow** | Mengatur workflow data |
+| **Snowflake/BigQuery** | Data warehouse cloud |
+| **Docker/Kubernetes** | Containerisasi |
+
+### Keterampilan Yang Dibutuhkan
+
+- **Pemrograman** - Python, Scala, Java
+- **SQL** - Untuk manipulasi data
+- **Cloud** - AWS, GCP, Azure
+- **System design** - Membangun sistem yang scalable
+
+---
+
+## Apa Itu Data Scientist?
+
+Data Scientist adalah orang yang "menemukan pola" dalam data dan membuat predictions. Mereka menggabungkan statistik, pemrograman, dan pengetahuan bisnis.
+
+### Apa Bedanya dengan Data Analyst?
+
+```mermaid
+flowchart TB
+    subgraph "Data Analyst vs Data Scientist"
+        subgraph "Data Analyst"
+            DA1[Apa yang<br/>terjadi?]
+            DA2[Menggunakan<br/>data masa lalu]
+            DA3[Reporting<br/>& Dashboard]
+        end
+        
+        subgraph "Data Scientist"
+            DS1[Apa yang<br/>akan terjadi?]
+            DS2[Memprediksi<br/>masa depan]
+            DS3[Machine Learning<br/>& Model]
+        end
+    end
+    
+    style DA1 fill:#ffe66d
+    style DA2 fill:#ffe66d
+    style DA3 fill:#ffe66d
+    style DS1 fill:#4ecdc4,color:#fff
+    style DS2 fill:#4ecdc4,color:#fff
+    style DS3 fill:#4ecdc4,color:#fff
+```
+
+### Contoh Kerja Sehari-Hari
+
+- "Buat model untuk memprediksi customer churn"
+- "Rekomendasikan produk yang cocok untuk user"
+- "Segmentasi customer berdasarkan perilaku"
+
+```mermaid
+flowchart LR
+    subgraph "ML Workflow"
+        Data[Data] -->|Clean| Clean[Data Cleaning]
+        Clean -->|Split| Train[Training]
+        Train -->|Evaluate| Model[Model]
+        Model -->|Deploy| Prod[Production]
+    end
+    
+    style Data fill:#e1f5fe
+    style Clean fill:#fff3e0
+    style Train fill:#f3e5f5
+    style Model fill:#e8f5e9
+    style Prod fill:#ffebee
+```
+
+### Alat Yang Digunakan
+
+| Alat | Fungsi |
+|------|--------|
+| **Python** | Bahasa utama data science |
+| **TensorFlow/PyTorch** | Deep learning |
+| **Scikit-learn** | Machine learning klasik |
+| **Jupyter Notebook** | Eksperimen & prototyping |
+| **Statistics** | Ilmu di balik model |
+
+### Keterampilan Yang Dibutuhkan
+
+- **Statistik** - Pahami distribusi, hypothesis testing
+- **Pemrograman** - Python, R
+- **Machine Learning** - Regression, classification, dll
+- **Domain knowledge** - Pahami bisnis yang dihadapi
+
+---
+
+## Perbandingan Langsung
+
+| Aspek | Data Analyst | Data Engineer | Data Scientist |
+|-------|--------------|---------------|-----------------|
+| **Tujuan** | Insight dari data | Infrastruktur data | Prediksi dari data |
+| **Output** | Laporan, Dashboard | Pipeline, ETL | Model ML |
+| **Alat utama** | SQL, Tableau | Python, Spark | Python, TensorFlow |
+| **Required Skills** | Komunikasi, Viz | Engineering, Cloud | Stats, ML |
+| **Difficulty** | Beginner-friendly | Intermediate | Advanced |
+
+---
+
+## flowchart Peran-Peran Data Dalam Perusahaan
+
+```mermaid
+flowchart TB
+    subgraph "Data Team"
+        User1[Business<br/>User] -->|Butuh Insight| Manager[Data Manager]
+        Manager -->|Assign Task| DA[Data Analyst]
+        Manager -->|Needs Pipeline| DE[Data Engineer]
+        DA -->|Needs ML Model| DS[Data Scientist]
+        
+        subgraph "Infrastructure"
+            DE -->|Build Pipeline| DW[Data Warehouse]
+            DE -->|Build Pipeline| DL[Data Lake]
+        end
+        
+        subgraph "Analysis & ML"
+            DW --> DA
+            DL --> DS
+            DS -->|Deploy Model| DE
+        end
+    end
+    
+    style User1 fill:#f38181
+    style Manager fill:#aa96da
+    style DA fill:#ffe66d
+    style DE fill:#ff6b6b
+    style DS fill:#4ecdc4
+    style DW fill:#2196f3,color:#fff
+    style DL fill:#9c27b0,color:#fff
+```
+
+---
+
+## Siapa Yang Harus Dipilih?
+
+### Pilih Data Analyst jika:
+- Kamu suka melihat grafik dan membuat laporan
+- Kamu enjoy menjelaskan temuan ke orang lain
+- Kamu baru belajar dunia data (starting point!)
+
+### Pilih Data Engineer jika:
+- Kamu suka building systems
+- Kamu interess dengan cloud dan infrastructure
+- Kamu sukaoptimasi dan performance
+
+### Pilih Data Scientist jika:
+- Kamu suka matematika dan statistik
+- Kamu ingin membuat predictions
+- Kamu siap belajar machine learning
+
+---
+
+## Mulai Dari Mana?
+
+```mermaid
+flowchart LR
+    A[Belajar<br/>SQL] --> B[Belajar<br/>Python]
+    B --> C{Pilih<br/>Jurusan}
+    C -->|Suka Visual| D[Data Analyst<br/>Path]
+    C -->|Suka Sistem| E[Data Engineer<br/>Path]
+    C -->|Suka ML| F[Data Scientist<br/>Path]
+    
+    D --> G1[Tableau/Looker]
+    D --> G2[Statistics]
+    
+    E --> H1[Spark/Airflow]
+    E --> H2[Cloud AWS/GCP]
+    
+    F --> I1[Scikit-learn]
+    F --> I2[Deep Learning]
+    
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#ffe66d
+    style E fill:#ff6b6b
+    style F fill:#4ecdc4
+```
+
+## Kesimpulan
+
+Ketiga peran ini saling melengkapi dalam tim data:
+
+- **Data Engineer** membangun fondasi
+- **Data Scientist** menciptakan magic
+- **Data Analyst** menyampaikan cerita
+
+Tidak ada yang lebih baik dari yang lain! Semua penting dan semua punya tempat masing-masing.
+
+Yang paling penting adalah memilih sesuai dengan passion danminat kamu. Mau mulai dari mana? Semua bisa dimulai dengan belajar SQL dan Python dasar!

@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import { Mermaid } from "@/components/Mermaid";
+import remarkGfm from "remark-gfm";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -53,7 +55,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           Back to Articles
         </Link>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none prose-headings:dark:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-pre:bg-gray-800 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+        <article className="prose prose-lg dark:prose-invert max-w-none prose-headings:dark:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-pre:bg-gray-800 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-table:my-6 prose-thead:bg-gray-50 dark:prose-thead:bg-gray-800 prose-tr:border prose-tr:border-gray-200 dark:prose-tr:border-gray-700">
           <div className="mb-8">
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -83,7 +85,82 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           </div>
 
           <div className="markdown-content">
-            <MDXRemote source={article.content} />
+            <MDXRemote
+              source={article.content}
+              options={
+                {
+                  mdxOptions: {
+                    remarkPlugins: [remarkGfm],
+                  },
+                } as any
+              }
+              components={{
+                code: ({ className, children, ...props }) => {
+                  const match = /language-(\w+)/.exec(className || "");
+                  const isMermaid = match && match[1] === "mermaid";
+
+                  if (isMermaid) {
+                    const chart = String(children).replace(/\n$/, "");
+                    return <Mermaid chart={chart} />;
+                  }
+
+                  return (
+                    <code className={`${className} bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm`} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+                table: ({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => {
+                  return (
+                    <div className="overflow-x-auto my-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" {...props}>
+                        {children}
+                      </table>
+                    </div>
+                  );
+                },
+                thead: ({ children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => {
+                  return (
+                    <thead className="bg-gray-50 dark:bg-gray-800" {...props}>
+                      {children}
+                    </thead>
+                  );
+                },
+                tbody: ({ children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => {
+                  return (
+                    <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700" {...props}>
+                      {children}
+                    </tbody>
+                  );
+                },
+                tr: ({ children, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => {
+                  return (
+                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" {...props}>
+                      {children}
+                    </tr>
+                  );
+                },
+                th: ({ children, ...props }: React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => {
+                  return (
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800" {...props}>
+                      {children}
+                    </th>
+                  );
+                },
+                td: ({ children, ...props }: React.TdHTMLAttributes<HTMLTableDataCellElement>) => {
+                  return (
+                    <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300" {...props}>
+                      {children}
+                    </td>
+                  );
+                },
+                p: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => {
+                  return (
+                    <p className="mb-4 leading-relaxed">{children}</p>
+                  );
+                },
+              }}
+            />
           </div>
         </article>
       </main>
