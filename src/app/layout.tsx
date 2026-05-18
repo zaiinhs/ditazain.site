@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 // import { Dancing_Script, Josefin_Sans } from "next/font/google";
+import AIChatWidget from "@/components/AIChatWidget";
 import "./globals.css";
 
 // const josefinSans = Josefin_Sans({
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 md:px-0">
         {children}
+        <AIChatWidget />
       </body>
     </html>
   );
