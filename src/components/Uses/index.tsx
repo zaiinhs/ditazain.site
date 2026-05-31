@@ -1,13 +1,4 @@
-import {
-  Cpu,
-  Headphones,
-  Keyboard,
-  Laptop,
-  Monitor,
-  Mouse,
-  Speaker,
-} from "lucide-react";
-import Image from "next/image";
+import { Laptop, Monitor, Mouse, Speaker } from "lucide-react";
 
 const setupCategories = [
   {
@@ -115,20 +106,15 @@ export default function Uses() {
                   rel="noopener noreferrer"
                   className="group"
                 >
-                  <article className="h-full bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
-                    <div className="aspect-video relative">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-2">
+                  <article className="flex h-full items-center gap-4 rounded-xl border border-gray-100 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300">
+                      {category.icon}
+                    </span>
+                    <div>
+                      <h3 className="mb-1 font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                         {item.name}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {item.description}
                       </p>
                     </div>

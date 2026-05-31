@@ -1,13 +1,13 @@
 export const STATIC_CHAT_SUGGESTIONS = [
   "Zainal itu siapa?",
+  "Apa fokus Data Engineering Zainal?",
   "Pengalaman kerja Zainal apa saja?",
   "Skill utama Zainal apa?",
-  "Project yang pernah dibuat?",
   "Bagaimana cara menghubungi Zainal?",
 ];
 
 const fallbackReply =
-  "Aku adalah chat AI statis untuk menjawab hal-hal tentang Zainal Abidin. Saat ini aku belum terhubung ke model AI/API, jadi coba tanyakan tentang profil, pengalaman kerja, skill, project, CV, komunitas, artikel, atau kontak Zainal.";
+  "Aku adalah chat AI statis untuk menjawab hal-hal tentang Zainal Abidin. Saat ini aku belum terhubung ke model AI/API, jadi coba tanyakan tentang profil, fokus Data Engineering, pengalaman kerja, skill, project, CV, komunitas, artikel, atau kontak Zainal.";
 
 const normalize = (value: string) => value.toLowerCase().trim();
 
@@ -18,7 +18,7 @@ export function getStaticAIReply(question: string) {
   const input = normalize(question);
 
   if (!input) {
-    return "Silakan tulis pertanyaan tentang Zainal Abidin. Contoh: pengalaman kerja, skill utama, project, atau kontak.";
+    return "Silakan tulis pertanyaan tentang Zainal Abidin. Contoh: fokus Data Engineering, pengalaman kerja, skill utama, project, atau kontak.";
   }
 
   if (
@@ -33,7 +33,27 @@ export function getStaticAIReply(question: string) {
       "malam",
     ])
   ) {
-    return "Halo! Aku bisa bantu menjawab pertanyaan tentang Zainal Abidin, Software Engineer Frontend dari Indonesia. Kamu bisa tanya tentang pengalaman kerja, skill, project, CV, komunitas, atau kontaknya.";
+    return "Halo! Aku bisa bantu menjawab pertanyaan tentang Zainal Abidin, Software Engineer & Data Engineer dari Indonesia. Kamu bisa tanya tentang fokus Data Engineering, pengalaman kerja, skill, project, CV, komunitas, atau kontaknya.";
+  }
+
+  // Data Engineering focus — diletakkan sebelum 'skill' agar lebih spesifik
+  if (
+    hasAnyKeyword(input, [
+      "data engineer",
+      "data engineering",
+      "etl",
+      "elt",
+      "pipeline",
+      "sql",
+      "python",
+      "transform",
+      "data warehouse",
+      "dbt",
+      "airflow",
+      "bigquery",
+    ])
+  ) {
+    return "Fokus utama Zainal saat ini adalah Data Engineering. Ia membangun data pipeline (ingestion, transformation, delivery) menggunakan SQL dan Python, melakukan data modeling, serta menjaga kualitas dan keandalan data. Tools yang biasa dipakai: SQL, Python, dbt, Airflow, PostgreSQL, dan BigQuery. Lihat halaman 'Data' di website ini untuk contoh query SQL, snippet ETL Python, dan diagram pipeline-nya.";
   }
 
   if (
@@ -48,7 +68,7 @@ export function getStaticAIReply(question: string) {
       "zainal itu",
     ])
   ) {
-    return "Zainal Abidin adalah Software Engineer yang fokus di Frontend Development, berbasis di Indonesia. Ia tertarik membangun produk web yang rapi, fungsional, mobile-friendly, dan berdampak. Tech stack utamanya meliputi React, TypeScript, Next.js, dan Tailwind CSS.";
+    return "Zainal Abidin adalah Software Engineer & Data Engineer berbasis di Indonesia. Saat ini ia bekerja sebagai Technical Product Specialist di Indivara Group. Ia berawal dari Frontend Engineering (React, TypeScript, Next.js) dan kini fokus ke Data Engineering: SQL, Python, dan transformasi data untuk membangun dataset yang bersih dan andal.";
   }
 
   if (
@@ -61,6 +81,7 @@ export function getStaticAIReply(question: string) {
       "career",
       "company",
       "perusahaan",
+      "indivara",
       "delman",
       "ninja",
       "freelance",
@@ -68,7 +89,7 @@ export function getStaticAIReply(question: string) {
       "goto",
     ])
   ) {
-    return "Pengalaman Zainal berfokus pada Frontend Engineering. Ia pernah/masih berkontribusi di delman.io sebagai Frontend Engineer, PT. Lumbung Mandiri Bersama sebagai Frontend Developer Freelancer, gatherloop.co sebagai volunteer/community lead, Ninja Van sebagai Frontend Engineer Intern, dan program Generasi GIGIH 2.0 dari YABB / GoTo Impact Foundation. Pekerjaannya banyak terkait React, Next.js, TypeScript, UI/UX, integrasi API, optimasi performa, dan komunikasi dengan stakeholder.";
+    return "Saat ini (sejak Jan 2026) Zainal adalah Technical Product Specialist di Indivara Group. Sebelumnya ia Frontend Engineer di Delman (PT. Delman Data Teknologi) hingga Desember 2025, Frontend Developer freelance di PT. Lumbung Mandiri Bersama, community lead di gatherloop.co, Frontend Engineer Intern di Ninja Van, dan alumni program Generasi GIGIH 2.0 (YABB / GoTo Impact Foundation). Pengalamannya mencakup React/Next.js/TypeScript, integrasi API, optimasi performa, hingga data pipeline dengan SQL & Python.";
   }
 
   if (
@@ -85,7 +106,7 @@ export function getStaticAIReply(question: string) {
       "frontend",
     ])
   ) {
-    return "Skill utama Zainal adalah Frontend Development: React, TypeScript, Next.js, JavaScript, Tailwind CSS, UI/UX implementation, responsive design, integrasi API, Git, dan basic backend integration. Ia juga terbiasa bekerja dengan React Query, Zustand/Redux, Firebase, Chakra UI, Ant Design, Docker, Jira/Bitbucket/GitLab, dan workflow kolaborasi produk.";
+    return "Skill Zainal mencakup dua sisi. Data Engineering: SQL, Python, ETL/ELT, dbt, Airflow, data modeling, PostgreSQL, BigQuery. Software Engineering: TypeScript, JavaScript, React, Next.js, Node.js, Tailwind CSS, integrasi API, dan Git/Docker. Ia terbiasa bekerja lintas peran — membangun fitur produk sekaligus infrastruktur data di belakangnya.";
   }
 
   if (
@@ -102,7 +123,7 @@ export function getStaticAIReply(question: string) {
       "website",
     ])
   ) {
-    return "Beberapa project yang ditampilkan/tercatat: Personal Website berbasis Next.js, React, TypeScript, dan Tailwind CSS; clone aplikasi Spotify API dari program Generasi GIGIH; E-commerce Dashboard; Task Management App; dan Weather Application. Fokus project-nya banyak di web app, dashboard, UI yang responsif, dan pengalaman pengguna.";
+    return "Beberapa project Zainal: Personal Website (Next.js, React, TypeScript, Tailwind), data pipeline & transformasi data dengan SQL/Python, clone aplikasi Spotify API dari program Generasi GIGIH, serta berbagai web app dan dashboard. Buka menu Projects dan Data di website ini untuk detailnya.";
   }
 
   if (
@@ -115,7 +136,7 @@ export function getStaticAIReply(question: string) {
       "gatherloop",
     ])
   ) {
-    return "Zainal aktif di komunitas teknologi. Di gatherloop.co, ia terlibat sebagai lead untuk membangun Probolinggo Frontend community dengan sekitar 145 anggota dan kegiatan rutin seperti tech talk bulanan untuk sharing knowledge dan motivasi anggota.";
+    return "Zainal aktif di komunitas teknologi. Di gatherloop.co ia menjadi lead untuk membangun Probolinggo Frontend community dengan 145+ anggota, dengan kegiatan rutin seperti tech talk bulanan untuk berbagi ilmu dan memotivasi anggota.";
   }
 
   if (
@@ -127,7 +148,7 @@ export function getStaticAIReply(question: string) {
       "download",
     ])
   ) {
-    return "CV/Resume Zainal bisa dilihat dari tombol 'View Resume' di halaman utama website ini. Dari sana pengunjung dapat melihat ringkasan pengalaman, skill, dan perjalanan profesional Zainal.";
+    return "CV/Resume Zainal bisa dilihat dari tombol 'View Resume' di halaman utama website ini, lengkap dengan opsi download. Dari sana pengunjung dapat melihat ringkasan pengalaman, skill, dan perjalanan profesionalnya.";
   }
 
   if (
@@ -145,20 +166,13 @@ export function getStaticAIReply(question: string) {
       "social",
     ])
   ) {
-    return "Kamu bisa menghubungi atau melihat aktivitas Zainal lewat social link di website: X/Twitter @zaiinhs, Instagram @zaiinhs, LinkedIn linkedin.com/in/zaiinhs, dan GitHub github.com/zaiinhs.";
+    return "Kamu bisa menghubungi Zainal lewat: LinkedIn linkedin.com/in/zaiinhs, GitHub github.com/zaiinhs, X/Twitter @zaiinhs, Instagram @zaiinhs, atau email lewat tombol kontak di website.";
   }
 
   if (
-    hasAnyKeyword(input, [
-      "artikel",
-      "article",
-      "blog",
-      "tulisan",
-      "read",
-      "menulis",
-    ])
+    hasAnyKeyword(input, ["artikel", "article", "blog", "tulisan", "read", "menulis"])
   ) {
-    return "Zainal juga menampilkan artikel/tulisan di website ini. Kamu bisa membuka menu Articles untuk membaca tulisan terbaru tentang teknologi, proses belajar, dan hal-hal yang sedang ia eksplorasi.";
+    return "Zainal menulis artikel di website ini. Buka menu Articles untuk membaca tulisannya, termasuk pembahasan tentang peran Data Analyst/Engineer/Scientist, web development, dan topik teknologi lain.";
   }
 
   if (
@@ -167,13 +181,13 @@ export function getStaticAIReply(question: string) {
       "hire",
       "rekrut",
       "recruit",
-      "frontend engineer",
+      "data engineer",
       "developer",
       "kerjasama",
       "kolaborasi",
     ])
   ) {
-    return "Zainal cocok untuk kebutuhan Frontend Engineer, terutama untuk produk berbasis React/Next.js/TypeScript yang butuh UI responsif, integrasi API, perhatian ke UX, dan komunikasi aktif dengan tim/stakeholder. Untuk diskusi peluang kerja atau kolaborasi, gunakan link LinkedIn/GitHub/social yang tersedia di website.";
+    return "Zainal cocok untuk peran Data Engineer maupun Software Engineer — terutama yang membutuhkan SQL, Python, transformasi data, dan pembangunan produk berbasis React/Next.js/TypeScript. Untuk diskusi peluang kerja atau kolaborasi, hubungi lewat LinkedIn/GitHub/email yang tersedia di website.";
   }
 
   return fallbackReply;

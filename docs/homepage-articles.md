@@ -67,13 +67,18 @@ Komponen dipisahkan karena:
 3. Pass array `articles` ke client component `ArticlesList`
 4. `ArticlesList` render list dengan Link ke `/articles/{slug}`
 
-## SEO Consideration
+## SEO Consideration & Static Export
 
-Halaman home tetap static karena `Articles` di-load dengan dynamic import `ssr: false` di `src/app/(common)/page.tsx`:
+Homepage (`src/app/(common)/page.tsx`) sekarang adalah **server component**. Ia
+me-render `<Articles />` (juga server component) yang memanggil `getAllArticles()`
+saat build, sehingga "Latest Articles" ikut ter-prerender ke HTML statis — aman
+untuk `output: "export"`.
 
-```typescript
-const Articles = dynamic(() => import("@/components/Articles"), { ssr: false });
-```
+> **Riwayat bug:** sempat ada versi yang mengambil data via `fetch("/api/articles")`
+> di client. Dengan `output: "export"`, API route tidak tersedia di production
+> sehingga section ini kosong. Solusinya: hapus API route, kembali ke pola
+> server component → `ArticlesList`. Interaksi (modal CV) dipindah ke komponen
+> client kecil (`ResumeButton`) agar homepage tetap server component.
 
 ## Link Terkait
 

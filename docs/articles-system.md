@@ -88,8 +88,7 @@ getArticleBySlug(slug: string): Article | null
 - Mengambil semua artikel melalui `getAllArticles()`
 - Render sebagai server component
 - Setiap artikel link ke `/articles/{slug}`
-- Menggunakan pagination (5 artikel per halaman)
-- Query parameter `?page=n` untuk navigasi halaman
+- Saat ini menampilkan **semua** artikel dalam satu halaman (belum ada pagination)
 
 ### 4. Halaman Detail (`/articles/[slug]`)
 
@@ -116,42 +115,9 @@ export async function generateMetadata({ params }) {
 
 ## Pagination
 
-Halaman daftar artikel menggunakan pagination dengan konfigurasi:
-
-| Setting | Value |
-|---------|-------|
-| Artikel per halaman | 5 |
-| URL format | `/articles?page={number}` |
-
-### Contoh URL
-
-- Page 1: `/articles` atau `/articles?page=1`
-- Page 2: `/articles?page=2`
-- Page 3: `/articles?page=3`
-
-### UI Pagination
-
-Tampilan pagination dengan:
-- Tombol "Previous" dan "Next"
-- Info "Page X of Y"
-- Disabled state untuk tombol di batas pagination
-
-### Metadata SEO untuk Pagination
-
-Setiap halaman pagination menghasilkan metadata dinamis:
-
-```typescript
-export async function generateMetadata({ searchParams }) {
-  const { page } = await searchParams;
-  if (page > 1) {
-    return {
-      title: `Articles - Page ${page} | Zainal | @zaiinhs`,
-      description: `Page ${page} of articles about software development...`,
-    };
-  }
-  // ...
-}
-```
+> **Status:** belum diimplementasikan. Halaman `/articles` saat ini menampilkan
+> semua artikel sekaligus. Pagination (mis. 5 artikel per halaman dengan query
+> `?page=n`) masih berupa rencana — lihat bagian "Pengembangan Masa Depan".
 
 ## Menambah Artikel Baru
 
@@ -195,7 +161,7 @@ export async function generateMetadata({ searchParams }) {
 
 ## Pengembangan Masa Depan
 
-- [x] Pagination (5 artikel per halaman)
+- [ ] Pagination (5 artikel per halaman)
 - [ ] Tambahkan komponen MDX (callouts, code blocks)
 - [ ] Implementasi perhitungan waktu baca otomatis
 - [ ] Tambahkan table of contents

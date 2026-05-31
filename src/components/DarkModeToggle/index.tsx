@@ -1,47 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Moon, Sun } from "lucide-react";
 
 export default function DarkModeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Check localStorage on component mount
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
   const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-
-    // Update localStorage and DOM
-    if (newDarkMode) {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
   };
 
   return (
     <button
       onClick={toggleDarkMode}
-      className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+      className="flex h-9 w-9 items-center justify-center rounded-xl border border-gray-200 text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-700"
+      aria-label="Toggle dark mode"
     >
-      {isDarkMode ? (
-        <span className="text-xl">🌙</span>
-      ) : (
-        <span className="text-xl">☀️</span>
-      )}
+      {/* Both icons render identically on server & client; CSS (the .dark class
+          set before paint) decides which is visible — avoids hydration mismatch. */}
+      <Sun className="block h-4 w-4 dark:hidden" />
+      <Moon className="hidden h-4 w-4 dark:block" />
     </button>
   );
 }

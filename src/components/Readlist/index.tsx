@@ -1,6 +1,5 @@
 import { ArrowUpRight, BookOpen, Clock, Star } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 const readingList = [
   {
@@ -103,17 +102,12 @@ export default function Readlist() {
             className="group"
           >
             <article className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
-              <div className="p-6">
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-32 h-48 relative rounded-lg overflow-hidden">
-                    <Image
-                      src={book.coverImage}
-                      alt={book.title}
-                      fill
-                      className="object-cover"
-                    />
+              <div className="p-4 sm:p-6">
+                <div className="flex gap-4 sm:gap-6">
+                  <div className="flex h-32 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md sm:h-44 sm:w-28">
+                    <BookOpen className="h-8 w-8 opacity-90 sm:h-10 sm:w-10" />
                   </div>
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between mb-2">
                       <div>
                         <h2 className="text-xl font-semibold text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-1">

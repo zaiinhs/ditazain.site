@@ -5,79 +5,75 @@ import DarkModeToggle from "./DarkModeToggle";
 import WhatsNewModal from "./WhatsNewModal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
+
+const MENU_ITEMS = [
+  "Home",
+  "About",
+  "Data",
+  "Projects",
+  "Articles",
+  "ReadList",
+  "Uses",
+] as const;
+
+const hrefFor = (item: string) =>
+  item === "Home" ? "/" : `/${item.toLowerCase()}`;
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [menuItems] = useState([
-    "Home",
-    "About",
-    "Articles",
-    "Projects",
-    "ReadList",
-    "Uses",
-  ]);
-
   const [isWhatsNewOpen, setIsWhatsNewOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isActive = (path: string) => {
-    if (path === "Home") {
-      return pathname === "/";
-    }
-    return pathname === `/${path.toLowerCase()}`;
-  };
+  const isActive = (item: string) => pathname === hrefFor(item);
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md rounded-full max-w-screen-md w-full relative">
-      {/* Mobile Menu Button */}
+    <nav className="sticky top-3 z-50 mt-3 flex items-center justify-between rounded-2xl border border-gray-200/70 bg-white/80 px-4 py-2.5 shadow-sm backdrop-blur-md dark:border-gray-700/70 dark:bg-gray-900/80">
+      {/* Mobile menu button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         className="md:hidden"
+        aria-label="Toggle menu"
+        aria-expanded={isMobileMenuOpen}
       >
         {isMobileMenuOpen ? (
-          <X className="w-6 h-6 text-black dark:text-white" />
+          <X className="h-6 w-6 text-gray-900 dark:text-white" />
         ) : (
-          <Menu className="w-6 h-6 text-black dark:text-white" />
+          <Menu className="h-6 w-6 text-gray-900 dark:text-white" />
         )}
       </button>
 
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex space-x-4">
-        {menuItems.map((item) => (
-          <li key={item.toLowerCase()}>
+      {/* Desktop menu */}
+      <ul className="hidden items-center gap-1 md:flex">
+        {MENU_ITEMS.map((item) => (
+          <li key={item}>
             <Link
-              href={`/${item === "Home" ? "" : item.toLowerCase()}`}
-              className={`text-sm relative py-1 cursor-pointer transition-colors duration-200 group ${
+              href={hrefFor(item)}
+              className={`rounded-lg px-2.5 py-1.5 text-sm transition-colors duration-200 ${
                 isActive(item)
-                  ? "text-black dark:text-white font-medium"
-                  : "text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                  ? "bg-gray-100 font-medium text-gray-900 dark:bg-gray-800 dark:text-white"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
               }`}
             >
               {item}
-              <span
-                className={`absolute bottom-0 left-0 h-0.5 bg-black dark:bg-white transition-all duration-200 ${
-                  isActive(item) ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              ></span>
             </Link>
           </li>
         ))}
       </ul>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 md:hidden">
-          {menuItems.map((item) => (
+        <div className="absolute left-0 right-0 top-full mt-2 rounded-2xl border border-gray-200 bg-white py-2 shadow-lg dark:border-gray-700 dark:bg-gray-900 md:hidden">
+          {MENU_ITEMS.map((item) => (
             <Link
-              key={item.toLowerCase()}
-              href={`/${item === "Home" ? "" : item.toLowerCase()}`}
-              className={`block px-4 py-2 text-sm ${
-                isActive(item)
-                  ? "text-black dark:text-white font-medium bg-gray-100 dark:bg-gray-700"
-                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-              }`}
+              key={item}
+              href={hrefFor(item)}
               onClick={() => setIsMobileMenuOpen(false)}
+              className={`block px-4 py-2.5 text-sm ${
+                isActive(item)
+                  ? "bg-gray-100 font-medium text-gray-900 dark:bg-gray-800 dark:text-white"
+                  : "text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800"
+              }`}
             >
               {item}
             </Link>
@@ -87,23 +83,25 @@ export default function Navbar() {
               setIsWhatsNewOpen(true);
               setIsMobileMenuOpen(false);
             }}
-            className="w-full text-left px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+            className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800"
           >
+            <Sparkles className="h-4 w-4" />
             What&apos;s New?
           </button>
         </div>
       )}
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-2">
         <button
           onClick={() => setIsWhatsNewOpen(true)}
-          className="hidden md:inline-flex text-black text-sm dark:text-white hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer relative py-1 group"
+          className="hidden items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white md:inline-flex"
         >
+          <Sparkles className="h-4 w-4" />
           What&apos;s New?
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-200 group-hover:w-full"></span>
         </button>
         <DarkModeToggle />
       </div>
+
       <WhatsNewModal
         isOpen={isWhatsNewOpen}
         onClose={() => setIsWhatsNewOpen(false)}

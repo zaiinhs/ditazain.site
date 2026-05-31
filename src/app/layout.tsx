@@ -17,20 +17,34 @@ import "./globals.css";
 // });
 
 export const metadata: Metadata = {
-  title: "Zainal | @zaiinhs",
-  description: "Personal website of Zainal Abidin - Developer, writer, and creator. Explore my projects, articles, and thoughts on technology.",
-  keywords: ["Zainal Abidin", "zaiinhs", "developer", "portfolio", "personal website", "tech blog"],
+  title: "Zainal Abidin | Software & Data Engineer",
+  description:
+    "Personal website of Zainal Abidin — Software Engineer & Data Engineer from Indonesia. SQL, Python, and data pipelines, plus web products with React & Next.js.",
+  keywords: [
+    "Zainal Abidin",
+    "zaiinhs",
+    "Data Engineer",
+    "Software Engineer",
+    "SQL",
+    "Python",
+    "ETL",
+    "data pipeline",
+    "Next.js",
+    "portfolio",
+  ],
   authors: [{ name: "Zainal Abidin" }],
   openGraph: {
-    title: "Zainal | @zaiinhs",
-    description: "Personal website of Zainal Abidin - Developer, writer, and creator.",
+    title: "Zainal Abidin | Software & Data Engineer",
+    description:
+      "Software Engineer & Data Engineer from Indonesia. SQL, Python, data pipelines, and modern web products.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zainal | @zaiinhs",
-    description: "Personal website of Zainal Abidin - Developer, writer, and creator.",
+    title: "Zainal Abidin | Software & Data Engineer",
+    description:
+      "Software Engineer & Data Engineer from Indonesia. SQL, Python, and data pipelines.",
   },
   robots: {
     index: true,
@@ -45,7 +59,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 md:px-0">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-950 dark:text-gray-100">
         {children}
         <AIChatWidget />
       </body>

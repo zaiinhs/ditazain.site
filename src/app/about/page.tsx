@@ -1,57 +1,105 @@
-"use client";
-
 import { Footer, Navbar } from "@/components";
+import {
+  Briefcase,
+  Code2,
+  Database,
+  MapPin,
+  Wrench,
+} from "lucide-react";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Zainal | @zaiinhs",
+  description:
+    "Zainal Abidin — Software Engineer & Data Engineer from Indonesia. Building products and data pipelines with SQL, Python, React, and Next.js.",
+};
+
+const skillGroups = [
+  {
+    label: "Data Engineering",
+    icon: <Database className="h-4 w-4" />,
+    skills: ["SQL", "Python", "ETL / ELT", "dbt", "Airflow", "Data Modeling"],
+  },
+  {
+    label: "Languages & Frameworks",
+    icon: <Code2 className="h-4 w-4" />,
+    skills: ["TypeScript", "JavaScript", "React", "Next.js", "Node.js"],
+  },
+  {
+    label: "Tools & Platforms",
+    icon: <Wrench className="h-4 w-4" />,
+    skills: [
+      "PostgreSQL",
+      "BigQuery",
+      "Docker",
+      "Git",
+      "Tailwind CSS",
+      "Cloudflare",
+    ],
+  },
+];
 
 const experiences = [
   {
+    title: "Technical Product Specialist",
+    company: "Indivara Group",
+    period: "Jan 2026 - Present",
+    location: "Indonesia",
+    description: null,
+    achievements: [
+      "Work across both roles — as a Software Engineer building product features and as a Data Engineer building the data infrastructure behind them.",
+      "Design and maintain data pipelines (ingestion, transformation, and delivery) using SQL and Python to power analytics and product features.",
+      "Translate business and product requirements into technical specifications and data solutions, bridging stakeholders and engineering teams.",
+      "Ensure data quality and reliability through validation, transformation logic, and clear documentation.",
+    ],
+  },
+  {
     title: "Frontend Engineer - Full Time",
-    company: "delman.io",
-    period: "Sept 2024 - Present",
+    company: "Delman (PT. Delman Data Teknologi)",
+    period: "Sept 2024 - Dec 2025",
     location: "Jakarta, Indonesia (Remote)",
     description: null,
     achievements: [
       "Collaborated on 2+ client projects by attending regular meetings to analyze business requirements, propose technical solutions, and ensure alignment between technical teams and stakeholders.",
-      "Developed and maintained company products, including web applications and internal platforms, with a focus on enhancing performance and user experience.",
+      "Developed and maintained company products, including web applications and internal data platforms, with a focus on enhancing performance and user experience.",
       "Spearheaded frontend development for 3+ large-scale applications using modern technologies such as React.js, Next.js, and JavaScript, achieving a 30% improvement in load time.",
-      "Managed responsibilities beyond frontend, including UI/UX design (streamlining client-provided designs for improved flow and visual appeal) and backend integration (optimizing 10+ API endpoints to boost system efficiency).",
-      "Contributed to codebase improvement by reducing production bugs by 25% through the implementation of best practices and conducting regular code reviews.",
+      "Worked closely with data products (data cleaning & visualization), which sparked my move deeper into Data Engineering.",
+      "Contributed to codebase improvement by reducing production bugs by 25% through best practices and regular code reviews.",
     ],
   },
   {
     title: "Frontend Engineer - Contract",
-    company: "delman.io",
-    period: "Mei 2024 - Aug 2024",
+    company: "Delman (PT. Delman Data Teknologi)",
+    period: "May 2024 - Aug 2024",
     location: "Jakarta, Indonesia (Remote)",
     description:
-      "Contributed to the development of 2 projects with clients and was trusted to be one of the frontends who started initializing the project architecture by building it using Next.js, Chakra-ui, React-query, ContextAPI, Docker (containerize docker) and Gitlab for the git repository and communication with team members. Also contribute to communication with clients to discuss the flow of the web app features being built, the objectives of the product or problem to be solved and a mobile-friendly UI display.",
+      "Contributed to 2 client projects and was trusted to initialize project architecture using Next.js, Chakra-UI, React-Query, Context API, and Docker, with GitLab for version control. Also communicated with clients to discuss feature flows, product objectives, and mobile-friendly UI.",
     achievements: [],
   },
   {
     title: "Frontend Engineer - Internship",
-    company: "delman.io",
+    company: "Delman (PT. Delman Data Teknologi)",
     period: "Oct 2023 - April 2024",
     location: "Jakarta, Indonesia (Remote)",
     description: null,
     achievements: [
-      "Maintain cloud.delman.io Data-Cleaning and Data Visualization as the company's Core Products build using the React Framework Next.js",
-      "Transform Designs into actual products by optimizing code for client-side performance",
-      "Research and implement the latest technologies based on front-end (such as libraries for signatures and other front-end libraries)",
+      "Maintained cloud.delman.io Data-Cleaning and Data Visualization as the company's core products, built with Next.js.",
+      "Transformed designs into actual products by optimizing code for client-side performance.",
+      "Researched and implemented the latest frontend technologies (signature libraries and other frontend tooling).",
     ],
   },
   {
     title: "Frontend Developer - Freelancer",
     company: "PT. Lumbung Mandiri Bersama",
-    period: "Aug 2024 – Des 2024",
+    period: "Aug 2024 – Dec 2024",
     location: "Jakarta, Indonesia (Remote)",
     description: null,
     achievements: [
-      "Collaborated on 5+ strategic projects by actively participating in meetings with key stakeholders, including the Founder and CEO, to understand business vision, design technical solutions, and ensure alignment between technical teams and company leadership.",
-      "Developed and maintained 3+ core company products, including web applications and internal platforms, utilizing modern technologies such as React.js, Next.js, and TypeScript, resulting in a 40% improvement in application performance.",
-      "Led frontend development for 2+ large-scale applications, optimizing load time by 35% and enhancing user satisfaction through improved UX.",
+      "Collaborated on 5+ strategic projects with key stakeholders including the Founder and CEO, designing technical solutions aligned with business vision.",
+      "Developed and maintained 3+ core products using React.js, Next.js, and TypeScript, improving application performance by 40%.",
       "Managed responsibilities beyond frontend, including UI/UX design and backend integration with Firebase.",
-      "Reduced production bugs by 30% through the implementation of best practices, regular code reviews, and the adoption of TypeScript.",
-      "Contributed to team productivity improvements by introducing new tools and workflows, reducing feature development time by 20%.",
+      "Reduced production bugs by 30% through best practices, code reviews, and adopting TypeScript.",
     ],
   },
   {
@@ -60,19 +108,19 @@ const experiences = [
     period: "Aug 2023 – Present",
     location: "Probolinggo, Indonesia",
     description:
-      "Studying the concept of problem-solving thinking paradigms. Apart from that, we also relearn the basics of JavaScript. And currently he is the lead for building the Probolinggo Frontend community with a total of 145 members and every month we hold tech talks to motivate members and a place to share knowledge.",
+      "Studying problem-solving paradigms and revisiting JavaScript fundamentals. Currently lead of the Probolinggo Frontend community (145+ members), running monthly tech talks to motivate members and share knowledge.",
     achievements: [],
   },
   {
     title: "Frontend Engineer - Internship",
     company: "Ninja Van",
-    period: "Mei 2022 – Aug 2022",
+    period: "May 2022 – Aug 2022",
     location: "Jakarta, Indonesia (Remote)",
     description:
-      "I got this internship opportunity from participating in the Generasi GIGIH 2.0 by GoTO program. Of the more than 300 people in the Frontend Engineer field, I am the one who is trusted to get an internship at Ninja Van. I got to work on several tasks such as from the display side using Ant Design, forming appropriate payloads on the backend side, and carrying out integration.",
+      "Selected for an internship at Ninja Van through the Generasi GIGIH 2.0 by GoTo program — chosen from 300+ Frontend Engineer participants. Worked on UI with Ant Design, payload shaping on the backend side, and integration.",
     achievements: [
-      "Build internal applications for QA team using NextJS Typescript, React Query, Zustand, Axios, Ant Design.",
-      "Good communication between team members and mentors using google chat, jira, bitbucket, GIT.",
+      "Built internal applications for the QA team using Next.js, TypeScript, React Query, Zustand, Axios, and Ant Design.",
+      "Maintained good communication with team members and mentors via Google Chat, Jira, Bitbucket, and Git.",
     ],
   },
   {
@@ -82,104 +130,121 @@ const experiences = [
     location: "Jakarta, Indonesia (Remote)",
     description: null,
     achievements: [
-      "Learn from basic to advanced to become a Frontend Engineer with instructors from Gojek and Tokopedia.",
-      "Build a clone application from the Spotify API, where we can login to a spotify account, create playlists using React Typescript, Chakra UI, React Redux, React Router, React testing library and hosted on vercel.",
+      "Learned from basic to advanced Frontend Engineering with instructors from Gojek and Tokopedia.",
+      "Built a Spotify API clone (login, playlist creation) using React, TypeScript, Chakra UI, React Redux, React Router, and React Testing Library, hosted on Vercel.",
     ],
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="text-black min-h-screen flex flex-col items-center mt-5">
-      <Navbar />
-      <main className="flex flex-col mt-20 max-w-screen-md w-full mx-auto px-4">
-        <div className="flex items-start space-x-6 mb-8">
+    <div className="flex min-h-screen flex-col items-center px-4">
+      <div className="w-full max-w-screen-md">
+        <Navbar />
+      </div>
+      <main className="mt-16 flex w-full max-w-screen-md flex-col">
+        {/* Header */}
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
           <Image
             src="/avatar.jpeg"
-            alt="Profile"
-            width={120}
-            height={120}
-            className="rounded-full"
+            alt="Zainal Abidin"
+            width={112}
+            height={112}
+            className="rounded-2xl shadow-lg ring-2 ring-white dark:ring-gray-800"
           />
           <div>
-            <h1 className="text-3xl font-bold mb-2 dark:text-white">
-              Zainal Abidin
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              Software Engineer (Frontend) based in Indonesia
+            <h1 className="text-3xl font-bold dark:text-white">Zainal Abidin</h1>
+            <p className="mt-1 text-gray-600 dark:text-gray-400">
+              Software Engineer &amp; Data Engineer
             </p>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+              <span className="inline-flex items-center gap-1.5">
+                <Briefcase className="h-4 w-4 text-blue-500" />
+                Technical Product Specialist @ Indivara Group
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="h-4 w-4 text-blue-500" />
+                Indonesia
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="prose dark:prose-invert max-w-none">
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-              Background
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              I&apos;m a frontend developer with a passion for creating
-              beautiful and functional web applications. I specialize in React,
-              TypeScript, and Next.js, and I love working with modern web
-              technologies.
-            </p>
-          </section>
+        {/* Background */}
+        <section className="mt-12">
+          <h2 className="mb-4 text-2xl font-semibold dark:text-white">
+            Background
+          </h2>
+          <p className="leading-relaxed text-gray-600 dark:text-gray-400">
+            I started as a frontend engineer building web products with React,
+            TypeScript, and Next.js. Working closely with data products at
+            Delman pulled me toward the data side of engineering — and today I
+            work as both a Software Engineer and a Data Engineer. My current
+            focus is Data Engineering: writing SQL, building pipelines in
+            Python, and transforming raw data into clean, reliable datasets that
+            power products and decisions.
+          </p>
+        </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-              Skills
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                "React",
-                "TypeScript",
-                "Next.js",
-                "Node.js",
-                "Tailwind CSS",
-                "Git",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-center text-gray-800 dark:text-gray-200"
-                >
-                  {skill}
+        {/* Skills */}
+        <section className="mt-12">
+          <h2 className="mb-6 text-2xl font-semibold dark:text-white">Skills</h2>
+          <div className="space-y-6">
+            {skillGroups.map((group) => (
+              <div key={group.label}>
+                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <span className="text-blue-500">{group.icon}</span>
+                  {group.label}
                 </div>
-              ))}
-            </div>
-          </section>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-              Experience
-            </h2>
-            <div className="space-y-6">
-              {experiences.map((experience, index) => (
-                <div key={index}>
-                  <h3 className="text-xl font-medium mb-2 dark:text-white">
-                    {experience.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2">
-                    {experience.company} • {experience.period} •{" "}
-                    {experience.location}
+        {/* Experience timeline */}
+        <section className="mt-12">
+          <h2 className="mb-6 text-2xl font-semibold dark:text-white">
+            Experience
+          </h2>
+          <div className="space-y-8 border-l border-gray-200 pl-6 dark:border-gray-700">
+            {experiences.map((experience, index) => (
+              <div key={index} className="relative">
+                <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-blue-500 dark:border-gray-950" />
+                <h3 className="text-lg font-semibold dark:text-white">
+                  {experience.title}
+                </h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  {experience.company} • {experience.period} •{" "}
+                  {experience.location}
+                </p>
+                {experience.description && (
+                  <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
+                    {experience.description}
                   </p>
-                  {experience.description && (
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      {experience.description}
-                    </p>
-                  )}
-                  {experience.achievements.length > 0 && (
-                    <ul className="list-disc list-inside text-gray-600 dark:text-gray-400">
-                      {experience.achievements.map(
-                        (achievement, achievementIndex) => (
-                          <li key={achievementIndex}>{achievement}</li>
-                        )
-                      )}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
+                )}
+                {experience.achievements.length > 0 && (
+                  <ul className="mt-3 list-disc space-y-1.5 pl-5 text-gray-600 dark:text-gray-400">
+                    {experience.achievements.map(
+                      (achievement, achievementIndex) => (
+                        <li key={achievementIndex}>{achievement}</li>
+                      )
+                    )}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

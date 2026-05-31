@@ -1,12 +1,18 @@
-"use client";
-
 import { Footer, Navbar, Readlist } from "@/components";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Reading List | Zainal | @zaiinhs",
+  description: "Books and resources that shaped how Zainal Abidin builds.",
+};
 
 export default function ReadlistPage() {
   return (
-    <div className="text-black min-h-screen flex flex-col items-center mt-5">
-      <Navbar />
-      <main className="flex flex-col mt-20 max-w-screen-md w-full mx-auto px-4">
+    <div className="flex min-h-screen flex-col items-center px-4">
+      <div className="w-full max-w-screen-md">
+        <Navbar />
+      </div>
+      <main className="mt-16 flex w-full max-w-screen-md flex-col">
         <Readlist />
       </main>
       <Footer />

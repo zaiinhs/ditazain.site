@@ -20,16 +20,11 @@ interface MermaidProps {
 export function Mermaid({ chart }: MermaidProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     const renderChart = async () => {
       try {
-        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+        const id = `mermaid-${Math.random().toString(36).substring(2, 11)}`;
         const isDark = document.documentElement.classList.contains("dark");
         
         mermaid.initialize({
@@ -49,12 +44,12 @@ export function Mermaid({ chart }: MermaidProps) {
       }
     };
 
-    if (chart && isMounted) {
+    if (chart) {
       renderChart();
     }
-  }, [chart, isMounted]);
+  }, [chart]);
 
-  if (!isMounted) {
+  if (!svg) {
     return (
       <div className="flex justify-center my-6">
         <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-48 w-full max-w-md rounded-lg"></div>

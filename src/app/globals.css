@@ -1,3 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode (Tailwind v4 defaults to prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #fefbf3;
+  --color-secondary: #f8f0df;
+  --color-accent: #9d9d9d;
+
+  --animate-flip: flip 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-marquee: marquee var(--duration, 30s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 30s) linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-aurora: aurora 14s ease-in-out infinite alternate;
+  --animate-fade-up: fadeUp 0.6s ease-out both;
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  @keyframes flip {
+    from {
+      transform: rotateX(0deg);
+      transform-origin: 50% bottom;
+    }
+    to {
+      transform: rotateX(180deg);
+      transform-origin: 50% bottom;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes aurora {
+    0% {
+      transform: translate(-10%, -10%) rotate(0deg) scale(1);
+    }
+    100% {
+      transform: translate(10%, 10%) rotate(25deg) scale(1.25);
+    }
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: color-mix(in oklab, #3b82f6 30%, transparent);
+}
+
+.loader {
+  color: white;
+  font-size: 0.875rem;
+}

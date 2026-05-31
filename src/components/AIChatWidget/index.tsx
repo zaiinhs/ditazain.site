@@ -23,7 +23,7 @@ const initialMessages: ChatMessage[] = [
     id: "welcome-message",
     role: "assistant",
     content:
-      "Halo! Aku Zainal AI versi statis. Tanyakan tentang profil, pengalaman kerja, skill, project, CV, komunitas, atau kontak Zainal.",
+      "Halo! Aku Zainal AI versi statis. Tanyakan tentang fokus Data Engineering, profil, pengalaman kerja, skill, project, CV, komunitas, atau kontak Zainal.",
   },
 ];
 

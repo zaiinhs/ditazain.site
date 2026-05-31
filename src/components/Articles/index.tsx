@@ -1,5 +1,7 @@
-import ArticlesClient from "./ArticlesClient";
+import { getAllArticles } from "@/utils/articles";
+import ArticlesList from "./ArticlesList";
 
 export default function Articles() {
-  return <ArticlesClient />;
+  const latestArticles = getAllArticles().slice(0, 3);
+  return <ArticlesList articles={latestArticles} />;
 }

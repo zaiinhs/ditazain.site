@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const menuItems = ["About", "Projects", "ReadList", "Uses"];
+const menuItems = ["About", "Data", "Projects", "Articles", "ReadList", "Uses"];
 
 export default function Footer() {
   return (

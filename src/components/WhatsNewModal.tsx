@@ -1,208 +1,137 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { X } from "lucide-react";
+import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { Sparkles, X } from "lucide-react";
 
 interface WhatsNewModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const updates = [
+type Update = {
+  date: string;
+  title: string;
+  tag?: string;
+  items: string[];
+};
+
+const updates: Update[] = [
   {
-    date: "2024-02-14",
+    date: "1 Jun 2026",
+    title: "Major overhaul — fokus Data Engineering",
+    tag: "Latest",
     items: [
-      "Added summary of recent changes and updates",
-      "Enhanced website content organization",
-      "Improved user experience with clearer update history",
+      "Reposisi seluruh situs sebagai Software Engineer & Data Engineer, dengan fokus utama ke Data Engineering (SQL, Python, transform data).",
+      "Halaman baru /data: showcase Data Engineering berisi contoh query SQL, snippet Python ETL, diagram pipeline (Mermaid), dan studi kasus transformasi data.",
+      "Update pengalaman kerja: Technical Product Specialist di Indivara Group (sejak Jan 2026); peran di Delman dikoreksi menjadi Sept 2024 – Des 2025.",
+      "Upgrade seluruh stack ke versi terbaru: Next.js 16, React 19, Tailwind CSS v4, dan ESLint 9.",
+      "Tampilan dirombak: navbar sticky modern, hero dengan badge peran, kartu yang lebih rapi, dan galeri foto yang ramah mobile.",
+      "Dark mode tanpa flash + perbaikan bug: section Latest Articles kini muncul di static export.",
+      "Tambah Playwright end-to-end test untuk semua halaman (desktop & mobile).",
     ],
   },
   {
-    date: "2024-02-09",
+    date: "Jan 2024",
+    title: "Website diluncurkan",
     items: [
-      "Added section on Server Components best practices in Next.js article",
-      "Updated code examples for Next.js 14",
-      "Added performance optimization tips",
-      "Added Development Notice modal",
-      "Enhanced mobile responsiveness across the website",
-      "Added hamburger menu for mobile navigation",
-      "Improved footer layout for mobile devices",
-      "Optimized PhotoGallery visibility for different screen sizes",
-      "Added smooth transitions for mobile menu interactions",
-      "Improved touch targets for better mobile usability",
-    ],
-  },
-  {
-    date: "2024-02-08",
-    items: [
-      "Added real-world case studies to Microservices article",
-      "Updated deployment strategies",
-      "Added new section on service mesh",
-      "Added Projects page with showcase of development work",
-      "Added Reading List page with book recommendations",
-      "Added Uses page showing development setup",
-      "Improved dark mode persistence across page navigation",
-      "Fixed key prop warnings in component mappings",
-      "Added What's New modal with update history",
-      "Enhanced navigation menu with active state",
-      "Improved footer navigation links",
-    ],
-  },
-  {
-    date: "2024-02-05",
-    items: [
-      "Added Docker Compose examples to Docker article",
-      "Updated Docker best practices",
-      "Added new section on multi-stage builds",
-    ],
-  },
-  {
-    date: "2024-02-03",
-    items: [
-      "Added new patterns for TypeScript 5.0 in Design Patterns article",
-      "Updated code examples",
-      "Added performance optimization techniques",
-    ],
-  },
-  {
-    date: "2024-02-01",
-    items: [
-      "Added section on TypeScript integration in Clean Code article",
-      "Updated code examples",
-      "Added new best practices for 2024",
-      "Added matrix build examples in GitHub Actions article",
-      "Added new deployment strategies",
-      "Added security best practices",
-    ],
-  },
-  {
-    date: "2024-01-25",
-    items: [
-      "Added Zustand examples to State Management article",
-      "Updated Redux Toolkit section",
-      "Added new performance comparisons",
-    ],
-  },
-  {
-    date: "2024-01-24",
-    items: [
-      "Created Articles page with rich content display",
-      "Added article cards with tags and read time",
-      "Implemented responsive article layout",
-    ],
-  },
-  {
-    date: "2024-01-22",
-    items: [
-      "Created About page with personal information",
-      "Added professional background section",
-      "Enhanced navigation with active state indicators",
-    ],
-  },
-  {
-    date: "2024-01-20",
-    items: [
-      "Added OAuth 2.0 implementation guide to API Security article",
-      "Added new section on rate limiting",
-      "Updated security headers",
-      "Added Photo Gallery with interactive viewer",
-      "Implemented image rotation effects",
-      "Added loading states for image viewing",
-      "Fixed display issues and build errors",
-    ],
-  },
-  {
-    date: "2024-01-19",
-    items: [
-      "Improved UI with consistent styling",
-      "Added Navbar with smooth transitions",
-      "Implemented dark mode toggle",
-      "Added social media links with hover effects",
-    ],
-  },
-  {
-    date: "2024-01-15",
-    items: [
-      "Added Core Web Vitals optimization to Performance article",
-      "Added new section on image optimization",
-      "Updated performance metrics",
-    ],
-  },
-  {
-    date: "2024-01-10",
-    items: [
-      "Added distributed caching examples to System Design article",
-      "Added new section on load balancing",
-      "Updated architecture diagrams",
-    ],
-  },
-  {
-    date: "2024-01-04",
-    items: [
-      "Created Homepage with modern design",
-      "Added responsive layout support",
-      "Implemented base routing structure",
-    ],
-  },
-  {
-    date: "2024-01-01",
-    items: [
-      "Initial project setup with Next.js",
-      "Added TypeScript configuration",
-      "Set up Tailwind CSS for styling",
+      "Rilis pertama personal website dengan Next.js, TypeScript, dan Tailwind CSS — homepage, About, Articles (MDX), Projects, Reading List, dan Uses.",
     ],
   },
 ];
 
 export default function WhatsNewModal({ isOpen, onClose }: WhatsNewModalProps) {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isOpen) return;
+
+    document.body.style.overflow = "hidden";
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKey);
 
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-md mx-4 relative">
-        <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
-          <h2 className="text-xl font-semibold text-black dark:text-white">
-            What&apos;s New?
-          </h2>
+  // Portal to <body> so the overlay isn't trapped by the navbar's
+  // backdrop-filter containing block (which would break `fixed` positioning).
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="whats-new-title"
+    >
+      <div
+        onClick={(event) => event.stopPropagation()}
+        className="flex max-h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-900"
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-5 text-white">
+          <div className="flex items-start gap-3">
+            <span className="rounded-xl bg-white/20 p-2 backdrop-blur">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 id="whats-new-title" className="text-lg font-semibold">
+                What&apos;s New?
+              </h2>
+              <p className="mt-0.5 text-sm text-blue-100">
+                Catatan rilis &amp; perubahan terbaru dari website ini.
+              </p>
+            </div>
+          </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            aria-label="Tutup"
+            className="rounded-full p-1.5 text-white/80 transition hover:bg-white/15 hover:text-white"
           >
-            <X size={20} />
+            <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="p-4 max-h-[70vh] overflow-y-auto">
-          {updates.map((update) => (
-            <div key={update.date} className="mb-6 last:mb-0">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-                {update.date}
-              </h3>
-              <ul className="space-y-2">
-                {update.items.map((item, index) => (
-                  <li
-                    key={`${update.date}-${index}`}
-                    className="text-black dark:text-white"
-                  >
-                    • {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+        {/* Timeline */}
+        <div className="overflow-y-auto p-5">
+          <ol className="relative space-y-7 border-l border-gray-200 pl-6 dark:border-gray-700">
+            {updates.map((update) => (
+              <li key={update.date} className="relative">
+                <span className="absolute -left-[31px] top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-blue-500 dark:border-gray-900" />
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    {update.title}
+                  </h3>
+                  {update.tag && (
+                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
+                      {update.tag}
+                    </span>
+                  )}
+                </div>
+                <p className="mb-3 text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                  {update.date}
+                </p>
+                <ul className="space-y-2">
+                  {update.items.map((item, index) => (
+                    <li
+                      key={`${update.date}-${index}`}
+                      className="flex gap-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300"
+                    >
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

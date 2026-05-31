@@ -44,9 +44,11 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="text-black min-h-screen flex flex-col items-center mt-5">
-      <Navbar />
-      <main className="flex flex-col mt-20 max-w-screen-md w-full mx-auto px-4">
+    <div className="flex min-h-screen flex-col items-center px-4">
+      <div className="w-full max-w-screen-md">
+        <Navbar />
+      </div>
+      <main className="mt-16 flex w-full max-w-screen-md flex-col">
         <Link
           href="/articles"
           className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2 mb-8"
@@ -55,7 +57,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           Back to Articles
         </Link>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none prose-headings:dark:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-pre:bg-gray-800 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-table:my-6 prose-thead:bg-gray-50 dark:prose-thead:bg-gray-800 prose-tr:border prose-tr:border-gray-200 dark:prose-tr:border-gray-700">
+        <article className="prose prose-sm sm:prose-lg dark:prose-invert max-w-none break-words prose-headings:dark:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-pre:bg-gray-800 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-table:my-6 prose-thead:bg-gray-50 dark:prose-thead:bg-gray-800 prose-tr:border prose-tr:border-gray-200 dark:prose-tr:border-gray-700">
           <div className="mb-8">
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -66,10 +68,10 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 {article.readTime}
               </span>
             </div>
-            <h1 className="text-4xl font-bold mb-4 dark:text-white">
+            <h1 className="text-3xl font-bold mb-4 sm:text-4xl dark:text-white">
               {article.title}
             </h1>
-            <div className="flex items-center space-x-2 mb-8">
+            <div className="flex flex-wrap items-center gap-2 mb-8">
               {article.tags.map((tag) => (
                 <span
                   key={tag}
@@ -87,13 +89,11 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           <div className="markdown-content">
             <MDXRemote
               source={article.content}
-              options={
-                {
-                  mdxOptions: {
-                    remarkPlugins: [remarkGfm],
-                  },
-                } as any
-              }
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                },
+              }}
               components={{
                 code: ({ className, children, ...props }) => {
                   const match = /language-(\w+)/.exec(className || "");
