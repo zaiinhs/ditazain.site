@@ -38,4 +38,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ditazain-site
           directory: out
-          branch: production 
+          branch: develop 
