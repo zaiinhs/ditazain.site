@@ -21,11 +21,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Zainal Abidin | Software & Data Engineer",
+    default: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
     template: "%s | Zainal Abidin",
   },
   description:
-    "Personal website of Zainal Abidin — Software Engineer & Data Engineer from Indonesia. SQL, Python, and data pipelines, plus web products with React & Next.js.",
+    "Zainal Abidin (zaiinhs) — Software & Data Engineer from Indonesia. I build web products with React & Next.js and data pipelines with SQL, Python, dbt & Airflow.",
   keywords: [
     "Zainal Abidin",
     "zaiinhs",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Zainal Abidin | Software & Data Engineer",
+    title: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
     description: DEFAULT_OG_DESCRIPTION,
     type: "website",
     url: SITE_URL,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zainal Abidin | Software & Data Engineer",
+    title: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
     description: DEFAULT_OG_DESCRIPTION,
     creator: "@zaiinhs",
   },

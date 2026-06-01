@@ -16,4 +16,4 @@ export const AUTHOR = {
 };
 
 export const DEFAULT_OG_DESCRIPTION =
-  "Software Engineer & Data Engineer from Indonesia. SQL, Python, data pipelines, and modern web products.";
+  "Zainal Abidin (zaiinhs) — Software & Data Engineer from Indonesia. Web products with React & Next.js and data pipelines with SQL, Python, dbt & Airflow.";
