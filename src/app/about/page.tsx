@@ -10,9 +10,17 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Zainal | @zaiinhs",
+  title: "About",
   description:
     "Zainal Abidin — Software Engineer & Data Engineer from Indonesia. Building products and data pipelines with SQL, Python, React, and Next.js.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About | Zainal Abidin",
+    description:
+      "Zainal Abidin — Software Engineer & Data Engineer from Indonesia.",
+    type: "profile",
+    url: "/about",
+  },
 };
 
 const skillGroups = [

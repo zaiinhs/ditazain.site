@@ -2,8 +2,15 @@ import { Footer, Navbar, Uses } from "@/components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Uses | Zainal | @zaiinhs",
+  title: "Uses",
   description: "The hardware and tools Zainal Abidin uses day to day.",
+  alternates: { canonical: "/uses" },
+  openGraph: {
+    title: "Uses | Zainal Abidin",
+    description: "The hardware and tools Zainal Abidin uses day to day.",
+    type: "website",
+    url: "/uses",
+  },
 };
 
 export default function UsesPage() {

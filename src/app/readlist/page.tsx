@@ -2,8 +2,15 @@ import { Footer, Navbar, Readlist } from "@/components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Reading List | Zainal | @zaiinhs",
+  title: "Reading List",
   description: "Books and resources that shaped how Zainal Abidin builds.",
+  alternates: { canonical: "/readlist" },
+  openGraph: {
+    title: "Reading List | Zainal Abidin",
+    description: "Books and resources that shaped how Zainal Abidin builds.",
+    type: "website",
+    url: "/readlist",
+  },
 };
 
 export default function ReadlistPage() {

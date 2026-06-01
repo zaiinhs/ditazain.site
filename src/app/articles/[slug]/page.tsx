@@ -6,6 +6,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Mermaid } from "@/components/Mermaid";
 import remarkGfm from "remark-gfm";
+import JsonLd from "@/components/JsonLd";
+import { AUTHOR, SITE_NAME, SITE_URL } from "@/constants/site";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,20 +21,42 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
-  
+
   if (!article) {
     return {
       title: "Article Not Found",
     };
   }
 
+  const url = `${SITE_URL}/articles/${slug}`;
+
   return {
-    title: `${article.title} | Zainal | @zaiinhs`,
+    title: article.title,
     description: article.description,
     keywords: article.tags,
+    authors: [{ name: AUTHOR.name, url: SITE_URL }],
+    alternates: {
+      canonical: `/articles/${slug}`,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      type: "article",
+      url,
+      siteName: SITE_NAME,
+      publishedTime: article.date || undefined,
+      authors: [AUTHOR.name],
+      tags: article.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      creator: "@zaiinhs",
+    },
   };
 }
 
@@ -43,8 +68,59 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     return notFound();
   }
 
+  const articleUrl = `${SITE_URL}/articles/${slug}`;
+
   return (
     <div className="flex min-h-screen flex-col items-center px-4">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: article.title,
+          description: article.description,
+          datePublished: article.date || undefined,
+          dateModified: article.date || undefined,
+          image: `${SITE_URL}/articles/${slug}/opengraph-image`,
+          keywords: article.tags?.join(", "),
+          mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+          author: {
+            "@type": "Person",
+            name: AUTHOR.name,
+            url: SITE_URL,
+          },
+          publisher: {
+            "@type": "Person",
+            name: AUTHOR.name,
+            url: SITE_URL,
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: SITE_URL,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Articles",
+              item: `${SITE_URL}/articles`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: article.title,
+              item: articleUrl,
+            },
+          ],
+        }}
+      />
       <div className="w-full max-w-screen-md">
         <Navbar />
       </div>

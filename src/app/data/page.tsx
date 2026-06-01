@@ -13,9 +13,17 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Data Engineering | Zainal | @zaiinhs",
+  title: "Data Engineering",
   description:
     "How I work as a Data Engineer — SQL, Python, ETL/ELT pipelines, and data transformation. Sample queries, a Python pipeline, and architecture diagrams.",
+  alternates: { canonical: "/data" },
+  openGraph: {
+    title: "Data Engineering | Zainal Abidin",
+    description:
+      "How I work as a Data Engineer — SQL, Python, ETL/ELT pipelines, and data transformation.",
+    type: "website",
+    url: "/data",
+  },
 };
 
 const capabilities = [

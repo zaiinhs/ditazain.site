@@ -5,8 +5,15 @@ import { getAllArticles } from "@/utils/articles";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Articles | Zainal | @zaiinhs",
+  title: "Articles",
   description: "Thoughts on software development, programming, and technology.",
+  alternates: { canonical: "/articles" },
+  openGraph: {
+    title: "Articles | Zainal Abidin",
+    description: "Thoughts on software development, programming, and technology.",
+    type: "website",
+    url: "/articles",
+  },
 };
 
 export default async function ArticlesPage() {

@@ -2,9 +2,17 @@ import { Footer, Navbar, Projects } from "@/components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects | Zainal | @zaiinhs",
+  title: "Projects",
   description:
     "Data engineering pipelines and software products built by Zainal Abidin.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    title: "Projects | Zainal Abidin",
+    description:
+      "Data engineering pipelines and software products built by Zainal Abidin.",
+    type: "website",
+    url: "/projects",
+  },
 };
 
 export default function ProjectsPage() {
