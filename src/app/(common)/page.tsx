@@ -65,6 +65,10 @@ export default function HomePage() {
             </div>
           </div>
 
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+            Zainal Abidin — {ROLES.join(" & ")}
+          </p>
+
           <h1 className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-4xl font-bold leading-tight text-transparent sm:text-5xl dark:from-white dark:via-gray-300 dark:to-white">
             {TITLE}
           </h1>

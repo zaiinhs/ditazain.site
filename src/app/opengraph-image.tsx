@@ -22,7 +22,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ fontSize: 34, color: "#93c5fd", marginBottom: 16 }}>
-          zainal-abidin.my.id
+          zainal-abidin.my.id · @zaiinhs
         </div>
         <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.1 }}>
           Zainal Abidin

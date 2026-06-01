@@ -5,11 +5,11 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 const photos = [
-  "/images/photo-1.png",
-  "/images/photo-2.JPG",
-  "/images/photo-3.JPG",
-  "/images/photo-4.jpeg",
-  "/images/photo-5.jpeg",
+  "/images/photo-1.webp",
+  "/images/photo-2.webp",
+  "/images/photo-3.webp",
+  "/images/photo-4.webp",
+  "/images/photo-5.webp",
 ];
 
 export default function PhotoGallery() {
