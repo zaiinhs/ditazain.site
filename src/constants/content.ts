@@ -1,8 +1,13 @@
-export const TITLE = "Turning Raw Data into Real Products";
-export const DESCRIPTION =
-  "I'm Zainal Abidin — a Software & Data Engineer from Indonesia. I ship clean web products and build reliable data pipelines with SQL, Python, and modern tooling. I care about turning messy data and rough ideas into things people actually use.";
+export const TITLE = "From product need to production.";
 
-export const ROLES = ["Software Engineer", "Data Engineer"];
+export const DESCRIPTION =
+  "I connect product, data and engineering teams to deliver enterprise software, analytics workflows and client implementations.";
+
+export const ROLES = [
+  "Technical Product Specialist",
+  "Software Engineer",
+  "Data Engineer",
+];
 
 export const CURRENT_ROLE = {
   title: "Technical Product Specialist",
@@ -10,4 +15,19 @@ export const CURRENT_ROLE = {
   since: "Jan 2026",
 };
 
-export const LOCATION = "Indonesia";
+export const LOCATION = "East Java, Indonesia";
+
+export const SELECTED_IMPACTS = [
+  {
+    value: "~30%",
+    label: "faster application load time at Delman",
+  },
+  {
+    value: "−25%",
+    label: "production bugs at Delman",
+  },
+  {
+    value: "10+",
+    label: "API endpoints optimized across data products",
+  },
+];

@@ -1,17 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import mermaid from "mermaid";
-
-mermaid.initialize({
-  startOnLoad: false,
-  theme: "default",
-  securityLevel: "loose",
-  flowchart: {
-    useMaxWidth: true,
-    htmlLabels: true,
-  },
-});
 
 interface MermaidProps {
   chart: string;
@@ -22,11 +11,17 @@ export function Mermaid({ chart }: MermaidProps) {
   const [svg, setSvg] = useState<string>("");
 
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !chart) return;
+
+    let cancelled = false;
     const renderChart = async () => {
       try {
+        const { default: mermaid } = await import("mermaid");
+        if (cancelled) return;
         const id = `mermaid-${Math.random().toString(36).substring(2, 11)}`;
         const isDark = document.documentElement.classList.contains("dark");
-        
+
         mermaid.initialize({
           startOnLoad: false,
           theme: isDark ? "dark" : "default",
@@ -36,32 +31,34 @@ export function Mermaid({ chart }: MermaidProps) {
             htmlLabels: true,
           },
         });
-        
         const { svg } = await mermaid.render(id, chart);
-        setSvg(svg);
+        if (!cancelled) setSvg(svg);
       } catch (error) {
-        console.error("Mermaid rendering error:", error);
+        if (!cancelled) console.error("Mermaid rendering error:", error);
       }
     };
 
-    if (chart) {
-      renderChart();
+    if (typeof IntersectionObserver === "undefined") {
+      void renderChart();
+      return () => { cancelled = true; };
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      void renderChart();
+    }, { rootMargin: "360px" });
+    observer.observe(container);
+    return () => { cancelled = true; observer.disconnect(); };
   }, [chart]);
 
-  if (!svg) {
-    return (
-      <div className="flex justify-center my-6">
-        <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-48 w-full max-w-md rounded-lg"></div>
-      </div>
-    );
-  }
-
   return (
-    <div
-      ref={containerRef}
-      className="flex justify-center my-6 overflow-x-auto"
-      dangerouslySetInnerHTML={{ __html: svg }}
-    />
+    <div ref={containerRef} data-mermaid className="my-6 flex justify-center overflow-x-auto">
+      {svg ? (
+        <div dangerouslySetInnerHTML={{ __html: svg }} />
+      ) : (
+        <div className="h-48 w-full max-w-md animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+      )}
+    </div>
   );
 }

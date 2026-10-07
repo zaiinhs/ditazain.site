@@ -1,6 +1,6 @@
 # ditazain.site — Personal Website of Zainal Abidin
 
-Personal website & portfolio for **Zainal Abidin** — Software Engineer & Data Engineer from Indonesia. It showcases projects, a dedicated Data Engineering page (SQL, Python, ETL), MDX articles, and a static AI assistant.
+Personal website & portfolio for **Zainal Abidin**, a Technical Product Specialist at Indivara Group. It presents his work across product delivery, data solutions, and client implementation, alongside selected projects, illustrative SQL/Python examples, MDX articles, and a static profile assistant.
 
 🔗 Live: deployed as a static export to **Cloudflare Pages**.
 
@@ -40,17 +40,24 @@ npm run dev        # start dev server at http://localhost:3000
 |-------|-------------|
 | `/` | Hero, social links, photo gallery, latest articles |
 | `/about` | Bio, grouped skills, experience timeline |
-| `/data` | **Data Engineering showcase** — SQL/Python samples, pipeline diagram, transform case study |
+| `/data` | **Data solutions** — illustrative SQL/Python samples, workflow diagram, and transformation case study |
 | `/projects` | Data & software projects |
 | `/articles` | MDX article list |
 | `/articles/[slug]` | Article detail (MDX + Mermaid) |
 | `/readlist` | Reading list |
 | `/uses` | Hardware & tools |
 
+## Languages
+
+The original routes are in English. The same pages and 12 articles are available at `/id/...` (Bahasa Indonesia) and `/jv/...` (ngoko sopan). Use the language selector in the navigation; it keeps you on the equivalent page or article. Names, code, and technical terms without a natural Javanese equivalent remain unchanged. The downloadable CV is the original English PDF.
+
+Article source files are in `content/articles/`; translations are in the `en/`, `id/`, and `jv/` subdirectories where the source language differs. Translated MDX files use `{{SOURCE_CODE_1}}`, `{{SOURCE_CODE_2}}`, etc. to reuse each original code/diagram block in order; the build rejects missing translations or examples. Route metadata and sitemap list all three language versions. `npm run build` also sets the language attribute in generated HTML for no-JavaScript visitors and crawlers.
+
 ## Documentation
 
-- [`docs/PRD.md`](./docs/PRD.md) — Product Requirements Document
-- [`docs/architecture.md`](./docs/architecture.md) — Repository structure & data models
+- [`docs/website-story/README.md`](./docs/website-story/README.md) — retrospective product brief, workflow, as-built design system, feature inventory, and LinkedIn content kit (Bahasa Indonesia)
+- [`docs/PRD.md`](./docs/PRD.md) — earlier PRD snapshot; some positioning and scope predate the current site
+- [`docs/architecture.md`](./docs/architecture.md) — earlier architecture snapshot; use the website-story package for the current narrative
 - [`docs/testing.md`](./docs/testing.md) — Testing guide
 - [`docs/articles-system.md`](./docs/articles-system.md) — How the MDX article system works
 - [`docs/homepage-articles.md`](./docs/homepage-articles.md) — Homepage "Latest Articles" section

@@ -1,0 +1,225 @@
+---
+title: "Ngerteni Deployment: Managed utawa Self-Hosted"
+description: "Pandhuan deployment software, saka platform managed nganti server sing dikelola dhewe."
+---
+
+# Ngerteni Deployment: Managed utawa Self-Hosted
+
+Deployment kuwi istilah sing kerep krungu ing pengembangan software. Apa tegese, ngapa perlu, lan cara endi sing cocog? Artikel iki ngrembug pilihan-pilihane kanthi gampang.
+
+## Apa kuwi Deployment?
+
+Yen aplikasi wis rampung digawe, aplikasi kuwi kudu dilebokake ing panggonan sing bisa diakses wong liya liwat internet. Proses mindhah aplikasi saka lingkungan pengembangan menyang produksi diarani deployment.
+
+- **Development**: Panggonan kanggo nulis lan nyoba kode.
+- **Production**: Panggonan aplikasi bisa digunakake wong liya.
+- **Deployment**: Proses mindhah aplikasi saka development menyang production.
+
+## Macem-Macem Cara Deployment
+
+Ana sawetara cara kanggo nindakake deployment.
+
+### 1. Manual Deployment
+
+Sawisé nulis kode, developer ngunggah file menyang server kanthi manual:
+
+{{SOURCE_CODE_1}}
+
+Cara iki cocok kanggo sinau utawa proyek cilik banget, nanging kurang efisien kanggo tim lan aplikasi sing kerep dianyari.
+
+### 2. Continuous Deployment (CD)
+
+Yen kode anyar di-push menyang repositori, sistem kanthi otomatis nggawe build lan deployment. Ora perlu login menyang server saben rilis:
+
+{{SOURCE_CODE_2}}
+
+### 3. Blue-Green Deployment
+
+Bayangna ana loro lingkungan, biru lan ijo. Versi lawas ana ing biru, versi anyar di-deploy ing ijo. Sawisé dites, arahake traffic menyang ijo. Yen ana masalah, balekna menyang biru:
+
+{{SOURCE_CODE_3}}
+
+### 4. Canary Deployment
+
+Versi anyar diwenehake marang sebagian cilik pangguna dhisik. Yen ora ana masalah, banjur dirilis kanggo kabeh pangguna:
+
+{{SOURCE_CODE_4}}
+
+### 5. Rolling Deployment
+
+Server dianyari siji-siji, dadi ora kabeh server kudu mati bebarengan.
+
+## Platform Managed utawa Self-Hosted
+
+Iki rong pilihan sing kerep digunakake. Ayo dibandhingake.
+
+### Platform Managed (Vercel, Netlify, lan Liyane)
+
+Platform managed nyedhiyakake infrastruktur sing wis siap dienggo. Kowe mung nyambungake repositori GitHub, banjur platform kuwi sing nangani akeh pekerjaan deployment.
+
+#### Apa Sing Disedhiyakake?
+
+1. **Server**: Ora perlu tuku utawa nyetel VPS dhewe.
+2. **Autoscaling**: Kapasitas bisa nambah yen traffic mundhak.
+3. **CDN Global**: File disedhiyakake saka pirang-pirang panggonan.
+4. **SSL/HTTPS**: Biasane wis kasedhiya.
+5. **CI/CD otomatis**: Perubahan kode bisa langsung micu build lan deployment.
+6. **Preview deployment**: Pull request bisa nduwe URL dhewe.
+7. **Environment variables**: Bisa diatur saka dashboard.
+
+#### Carane Nggunakake
+
+Push kode menyang GitHub, import repositorine, pilih framework, banjur deploy:
+
+{{SOURCE_CODE_5}}
+
+#### Kelebihan Platform Managed
+
+- **Gampang**: Ora perlu akeh pengalaman ngurus server.
+- **Cepet**: Aplikasi bisa online mung sajrone sawetara menit.
+- **Perawatan luwih entheng**: Penyedia nangani akeh update lan patch server.
+- **Fitur wis ana**: SSL, CDN, lan analytics kadhang wis kasedhiya.
+
+#### Kekurangan Platform Managed
+
+- **Vendor lock-in**: Pindhah menyang penyedia liya bisa mbutuhake pekerjaan tambahan.
+- **Biaya nalika skala gedhe**: Traffic gedhe bisa luwih larang tinimbang VPS.
+- **Kontrol winates**: Ora kabeh konfigurasi server bisa diatur.
+- **Cold starts**: Sawetara paket gratis mandhegake proses sing ora aktif.
+
+#### Kapan Cocog Milih Platform Managed?
+
+Pilihan iki cocok kanggo proyek cilik nganti menengah, tim tanpa DevOps khusus, MVP, startup, aplikasi frontend, lan static site sing perlu cepet dirilis.
+
+---
+
+### Self-Hosted (VPS utawa Server Dhewe)
+
+Self-hosted tegese kowe nyewa utawa nduweni server lan ngatur setup, keamanan, perawatan, lan scaling dhewe.
+
+#### Arsitektur Self-Hosted
+
+Deployment bisa nggunakake load balancer, sawetara application server, database, cache, lan object storage:
+
+{{SOURCE_CODE_6}}
+
+#### Piranti Sing Bisa Dibutuhake
+
+##### 1. Penyedia Server utawa VM
+
+| Penyedia | Katrangan |
+|---|---|
+| **DigitalOcean** | VPS populer kanthi rega cukup terjangkau |
+| **AWS EC2** | Layanan cloud skala gedhe |
+| **GCP** | Google Cloud Platform |
+| **Linode** | Pilihan penyedia VPS liyane |
+| **Hetzner** | Hosting murah ing Jerman |
+| **Upcloud** | Cloud kanthi performa dhuwur |
+
+##### 2. Container lan Orchestration
+
+| Piranti | Gunane |
+|---|---|
+| **Docker** | Ngemas aplikasi lan dependensine |
+| **Docker Compose** | Mbukak sawetara container bebarengan |
+| **Kubernetes** | Ngatur layanan ing skala gedhe |
+| **K3s** | Kubernetes entheng kanggo VPS |
+
+##### 3. Web Server lan Reverse Proxy
+
+| Piranti | Gunane |
+|---|---|
+| **Nginx** | Web server lan reverse proxy |
+| **Caddy** | HTTPS otomatis sing gampang disetel |
+| **Traefik** | Proxy kanthi service discovery |
+| **HAProxy** | Load balancer luwih lanjut |
+
+##### 4. CI/CD Pipeline
+
+| Piranti | Gunane |
+|---|---|
+| **GitHub Actions** | CI/CD liwat GitHub |
+| **GitLab CI** | CI/CD liwat GitLab |
+| **Jenkins** | Otomatisasi open source sing fleksibel |
+| **ArgoCD** | GitOps kanggo Kubernetes |
+
+##### 5. Database
+
+| Piranti | Jinise |
+|---|---|
+| **PostgreSQL** | Database relasional |
+| **MySQL/MariaDB** | Database relasional |
+| **Redis** | Cache ing memori |
+| **MongoDB** | Database NoSQL |
+| **MinIO** | Object storage sing kompatibel karo S3 |
+
+##### 6. Monitoring
+
+| Piranti | Gunane |
+|---|---|
+| **Prometheus** | Ngumpulake metrik |
+| **Grafana** | Nampilake dashboard |
+| **Uptime Kuma** | Ngawasi uptime |
+| **Loki** | Ngumpulake log |
+
+#### Langkah-Langkah Deployment Self-Hosted
+
+Cara prasaja: sewa VPS, pasang Docker, atur Compose lan Nginx, aktifake SSL, siapkan CI/CD, banjur deploy:
+
+{{SOURCE_CODE_7}}
+
+#### Kelebihan Self-Hosted
+
+- **Kontrol kebak**: Server bisa diatur miturut kabutuhan.
+- **Bisa luwih murah kanggo traffic gedhe**: VPS kadhang luwih hemat nalika skala gedhe.
+- **Fleksibel**: Bisa masang software sing dibutuhake.
+- **Privasi data**: Data ana ing infrastruktur sing kok kelola.
+- **Watesan platform luwih sithik**: Bandwidth lan proses build bisa kok atur dhewe.
+
+#### Kekurangan Self-Hosted
+
+- **Luwih ruwet**: Perlu kawruh operasional.
+- **Perawatan**: Update lan patch keamanan dadi tanggung jawabmu.
+- **Scaling manual**: Load balancing lan autoscaling kudu disiapake.
+- **Butuh pengalaman**: Ana sing kudu ngerti cara ngurus server.
+
+#### Kapan Cocog Milih Self-Hosted?
+
+Pikirake pilihan iki yen butuh kontrol infrastruktur, traffic gedhe, optimasi biaya jangka panjang, data sensitif kanthi pengamanan sing pas, utawa lingkungan khusus.
+
+---
+
+## Bandhingan Langsung
+
+| Bab | Platform Managed | Self-Hosted |
+|---|---|---|
+| **Setup awal** | Kira-kira 5 menit | Kira-kira 1–7 dina |
+| **Perawatan** | Sithik | Kira-kira 5–20 jam saben wulan |
+| **Biaya proyek cilik** | Gratis nganti $20/wulan | Kira-kira $5–20/wulan |
+| **Biaya traffic gedhe** | Bisa larang | Bisa luwih murah |
+| **Scaling** | Kerep otomatis | Perlu setup manual |
+| **Debugging** | Akses winates | Luwih gampang dideleng langsung |
+| **Kontrol** | Winates | Luwih jembar |
+| **Perlu sinau** | Luwih gampang | Luwih akeh |
+
+## Cara Hybrid
+
+Akeh tim nggunakake gabungan loro cara iki:
+
+{{SOURCE_CODE_8}}
+
+Tuladhane, gunakake Vercel utawa Netlify kanggo frontend lan preview, banjur gunakake VPS utawa cloud kanggo backend, database, lan layanan liyane.
+
+## Milih Sing Cocog
+
+Pitakon iki bisa mbantu:
+
+1. **Pira traffic sing dikira bakal teka?** Platform managed bisa cukup kanggo proyek cilik; nalika saya gedhe, bandhingake karo self-hosted.
+2. **Pira budget sing ana?** Paket gratis cocok kanggo beban cilik; VPS bisa luwih hemat ing traffic gedhe.
+3. **Pira kontrol sing dibutuhake?** Yen butuh konfigurasi jero, pilih self-hosted.
+4. **Sepira gedhene timmu?** Tim cilik tanpa DevOps bisa luwih penak nganggo platform managed.
+5. **Aplikasine jinis apa?** Static site lan frontend kerep cocok ing platform managed; backend sing ruwet bisa butuh fleksibilitas luwih.
+
+## Kesimpulan
+
+Deployment nggawe aplikasi bisa dienggo wong liya. Milih managed utawa self-hosted gumantung budget, skala, kemampuan tim, lan kabutuhan teknis. Miwitio saka cara paling prasaja sing bisa digunakake, banjur owahana yen kabutuhanmu saya gedhe.

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getAllArticles, getArticleBySlug } from "@/utils/articles";
+import { SITE_URL } from "@/constants/site";
 
 export const dynamic = "force-static";
 export const alt = "Article by Zainal Abidin";
@@ -19,6 +20,10 @@ export default async function ArticleOgImage({
   const article = getArticleBySlug(slug);
   const title = article?.title ?? "Article";
 
+  return renderArticleOgImage(title, "articles");
+}
+
+export function renderArticleOgImage(title: string, label: string) {
   return new ImageResponse(
     (
       <div
@@ -29,19 +34,19 @@ export default async function ArticleOgImage({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          background: "linear-gradient(135deg, #030712 0%, #1e3a8a 100%)",
+          background: "#111c2b",
           color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ fontSize: 30, color: "#93c5fd" }}>
-          zainal-abidin.my.id / articles
+           {`${new URL(SITE_URL).hostname} / ${label}`}
         </div>
         <div style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.15 }}>
           {title}
         </div>
         <div style={{ fontSize: 30, color: "#cbd5e1" }}>
-          Zainal Abidin — Software &amp; Data Engineer
+          Zainal Abidin — Technical Product Specialist
         </div>
       </div>
     ),

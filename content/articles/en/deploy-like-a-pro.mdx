@@ -1,0 +1,225 @@
+---
+title: "Deploy Like a Pro: Managed vs Self-Hosted Explained"
+description: "A practical guide to software deployment, from managed platforms to self-hosted servers."
+---
+
+# Deploy Like a Pro: Managed vs Self-Hosted Explained
+
+Deployment is a common term in software development. What does it actually mean, why does it matter, and which approach should you choose? This article walks through the options in plain language.
+
+## What Is Deployment?
+
+Once you have built an application, you need to put it somewhere others can access it. Moving an application from a development environment to a production environment is called deployment.
+
+- **Development** is where you write and test code.
+- **Production** is where people can use your application.
+- **Deployment** moves the application from development to production.
+
+## Types of Deployment
+
+There are several ways to deploy software.
+
+### 1. Manual Deployment
+
+After writing code, a developer manually uploads files to a server:
+
+{{SOURCE_CODE_1}}
+
+This works for learning or very small projects, but it is inefficient for teams and frequently updated applications.
+
+### 2. Continuous Deployment (CD)
+
+With Continuous Deployment, changes pushed to a repository trigger an automatic build and deployment. Nobody has to log in to the server for each release:
+
+{{SOURCE_CODE_2}}
+
+### 3. Blue-Green Deployment
+
+Imagine two environments, blue and green. The old application runs in blue, and you deploy the new version to green. Once you have tested green, switch traffic to it. If something goes wrong, route traffic back to blue:
+
+{{SOURCE_CODE_3}}
+
+### 4. Canary Deployment
+
+Release the new version to a small percentage of users first. If it behaves well, roll it out to everyone:
+
+{{SOURCE_CODE_4}}
+
+### 5. Rolling Deployment
+
+Update servers one at a time instead of taking them all offline at once.
+
+## Managed Platforms vs Self-Hosted
+
+These are two common ways to run an application. Let's compare them.
+
+### Managed Platforms (Vercel, Netlify, and Others)
+
+A managed platform provides ready-to-use infrastructure. You connect your GitHub repository, and the platform handles much of the deployment work.
+
+#### What Do They Provide?
+
+1. **Servers**: You do not need to buy or configure a VPS.
+2. **Autoscaling**: Capacity can grow when traffic increases.
+3. **Global CDN**: Files are served from multiple locations.
+4. **SSL/HTTPS**: Usually included.
+5. **Automated CI/CD**: Commits can trigger builds and deployments.
+6. **Preview deployments**: Pull requests can receive their own URLs.
+7. **Environment variables**: Configure values through a dashboard.
+
+#### How Do You Use One?
+
+Push your code to GitHub, import the repository, select your framework, and deploy:
+
+{{SOURCE_CODE_5}}
+
+#### Advantages of Managed Platforms
+
+- **Easy to use**: Little server administration is required.
+- **Fast to launch**: An application can go live in minutes.
+- **Low maintenance**: The provider handles many server updates and patches.
+- **Built-in features**: SSL, CDN, and analytics may be available.
+
+#### Drawbacks of Managed Platforms
+
+- **Vendor lock-in**: Moving to another provider can take work.
+- **Cost at scale**: High traffic may become more expensive than a VPS.
+- **Limited control**: Deep server configuration might not be available.
+- **Cold starts**: Some free plans pause inactive workloads.
+
+#### When Should You Choose a Managed Platform?
+
+It can be a good fit for small and medium projects, teams without dedicated DevOps staff, MVPs, startups, frontend applications, and static sites that need to launch quickly.
+
+---
+
+### Self-Hosted (Your Own VPS or Server)
+
+Self-hosting means renting or operating a server and managing setup, security, maintenance, and scaling yourself.
+
+#### Self-Hosted Architecture
+
+A deployment might use a load balancer, several application servers, a database, a cache, and object storage:
+
+{{SOURCE_CODE_6}}
+
+#### Tools You May Need
+
+##### 1. Server or VM Provider
+
+| Provider | Description |
+|---|---|
+| **DigitalOcean** | Popular, reasonably priced VPS |
+| **AWS EC2** | Large-scale cloud services |
+| **GCP** | Google Cloud Platform |
+| **Linode** | Alternative VPS provider |
+| **Hetzner** | Lower-cost hosting in Germany |
+| **Upcloud** | High-performance cloud hosting |
+
+##### 2. Containers and Orchestration
+
+| Tool | Purpose |
+|---|---|
+| **Docker** | Packages applications with dependencies |
+| **Docker Compose** | Runs multiple containers together |
+| **Kubernetes** | Orchestrates services at scale |
+| **K3s** | Lightweight Kubernetes for a VPS |
+
+##### 3. Web Servers and Reverse Proxies
+
+| Tool | Purpose |
+|---|---|
+| **Nginx** | Web server and reverse proxy |
+| **Caddy** | Simplified automatic HTTPS |
+| **Traefik** | Proxy with service discovery |
+| **HAProxy** | Advanced load balancing |
+
+##### 4. CI/CD Pipelines
+
+| Tool | Purpose |
+|---|---|
+| **GitHub Actions** | CI/CD through GitHub |
+| **GitLab CI** | CI/CD through GitLab |
+| **Jenkins** | Flexible open-source automation |
+| **ArgoCD** | GitOps for Kubernetes |
+
+##### 5. Databases
+
+| Tool | Type |
+|---|---|
+| **PostgreSQL** | Relational database |
+| **MySQL/MariaDB** | Relational database |
+| **Redis** | In-memory cache |
+| **MongoDB** | NoSQL database |
+| **MinIO** | S3-compatible object storage |
+
+##### 6. Monitoring
+
+| Tool | Purpose |
+|---|---|
+| **Prometheus** | Collecting metrics |
+| **Grafana** | Dashboard visualization |
+| **Uptime Kuma** | Uptime monitoring |
+| **Loki** | Log aggregation |
+
+#### Step-by-Step Self-Hosted Deployment
+
+A simple route is to rent a VPS, install Docker, configure Compose and Nginx, enable SSL, set up CI/CD, then deploy:
+
+{{SOURCE_CODE_7}}
+
+#### Advantages of Self-Hosting
+
+- **Full control**: Configure the server to your needs.
+- **Lower cost for heavy traffic**: A VPS can be more economical at scale.
+- **Flexibility**: Install the software you need.
+- **Data privacy**: Host data on infrastructure you manage.
+- **Fewer platform limits**: You control bandwidth and build processes.
+
+#### Drawbacks of Self-Hosting
+
+- **Complexity**: Requires more operational knowledge.
+- **Maintenance**: You manage updates and security patches.
+- **Manual scaling**: Load balancing and autoscaling need setup.
+- **Expertise**: Someone needs to understand server operations.
+
+#### When Should You Self-Host?
+
+Consider it when you need infrastructure control, serve large traffic volumes, want to optimize long-term costs, handle sensitive data with appropriate safeguards, or need a custom environment.
+
+---
+
+## Side-by-Side Comparison
+
+| Aspect | Managed Platform | Self-Hosted |
+|---|---|---|
+| **Initial setup** | About 5 minutes | About 1–7 days |
+| **Maintenance** | Minimal | About 5–20 hours per month |
+| **Small-project cost** | Free to $20/month | About $5–20/month |
+| **High-volume cost** | Can be expensive | May be cheaper |
+| **Scaling** | Often automatic | Manual setup required |
+| **Debugging** | Limited access | More direct visibility |
+| **Control** | Limited | Extensive |
+| **Learning curve** | Lower | Higher |
+
+## A Hybrid Approach
+
+Many teams combine the two models:
+
+{{SOURCE_CODE_8}}
+
+For example, use Vercel or Netlify for the frontend and preview builds, then use a VPS or cloud service for the backend, database, and other services.
+
+## Making the Choice
+
+Ask yourself:
+
+1. **How much traffic do you expect?** Managed platforms can be enough for small projects; evaluate self-hosting as usage grows.
+2. **What is your budget?** Managed free tiers suit small workloads, while a VPS may be cheaper at higher traffic.
+3. **How much control do you need?** Pick self-hosting when you require deeper configuration.
+4. **How big is the team?** A small team without DevOps support may prefer managed infrastructure.
+5. **What kind of application is this?** Static frontend sites often suit managed platforms; complex backends may need more flexibility.
+
+## Conclusion
+
+Deployment brings an application to the people who need it. The choice between managed and self-hosted depends on budget, scale, team capacity, and technical requirements. Start with the simplest approach that works, learn from experience, and change course when your needs grow.

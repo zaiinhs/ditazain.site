@@ -49,7 +49,7 @@ const socialMedia: { name: string; icon: ReactNode; url: string }[] = [
   {
     name: "Email",
     icon: <Mail className="h-5 w-5" />,
-    url: "mailto:zaiinhs@gmail.com",
+    url: "mailto:zainalabidinhsc@gmail.com",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function Socmed() {
           target={social.url.startsWith("http") ? "_blank" : undefined}
           rel="noopener noreferrer"
           aria-label={social.name}
-          className="group flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white/70 text-gray-700 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-400 hover:text-blue-600 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/70 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-300"
+          className="group flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 transition duration-200 hover:-translate-y-0.5 hover:border-blue-400 hover:text-blue-700 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-300"
         >
           <span className="transition-transform duration-300 group-hover:scale-110">
             {social.icon}

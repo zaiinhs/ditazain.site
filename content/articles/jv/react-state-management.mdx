@@ -1,0 +1,47 @@
+---
+title: "Ngatur State ing React: Pandhuan Lengkap"
+description: "Bandhingake cara ngatur state ing React lan sinau kapan nggunakake saben pendekatan."
+---
+
+# Ngatur State ing React: Pandhuan Lengkap
+
+Milih cara ngatur state sing pas kuwi penting kanggo aplikasi React. Ayo deleng pilihane.
+
+## State Lokal
+
+Kanggo state prasaja ing siji komponen, gunakake `useState`:
+
+{{SOURCE_CODE_1}}
+
+## State saka Server
+
+Kanggo data saka API, gunakake React Query utawa SWR:
+
+{{SOURCE_CODE_2}}
+
+## State Global
+
+Kanggo state sing dienggo bareng antarkomponen, coba pendekatan iki.
+
+### Zustand
+
+Zustand nyedhiyakake store cilik sing bisa dienggo bareng:
+
+{{SOURCE_CODE_3}}
+
+### Context API
+
+Context API cocok kanggo state global prasaja tanpa library tambahan.
+
+## Kapan Gunakake Sing Endi?
+
+| Kabutuhan | Solusi |
+|---|---|
+| Khusus siji komponen | useState |
+| Data saka server | React Query/SWR |
+| Global prasaja | Context |
+| Global sing luwih ruwet | Zustand/Redux |
+
+## Kesimpulan
+
+Miwitio saka cara sing prasaja. Tambah kerumitan mung yen pancen dibutuhake.

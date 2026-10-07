@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Di Balik Personal Website Zainal Abidin</title>
+<style>
+@page { size: A4; margin: 2.2cm; }
+* { box-sizing: border-box; }
+body {
+    font-family: 'Aptos', 'Arial', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: #1A1A2E;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+h1 { font-size: 17pt; color: #1F3864; border-bottom: 2px solid #1F3864; padding-bottom: 0.3em; margin-top: 2em; }
+h2 { font-size: 14pt; color: #1F3864; margin-top: 1.8em; }
+h3 { font-size: 11.5pt; color: #1F3864; margin-top: 1.5em; }
+p { margin: 0.8em 0; }
+ul, ol { margin: 0.8em 0; padding-left: 1.5em; }
+li { margin: 0.3em 0; }
+code { font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; background: #F5F5F5; padding: 0.15em 0.4em; border-radius: 3px; }
+pre { font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; background: #F5F5F5; padding: 1em; overflow-x: auto; border-radius: 4px; border: 1px solid #E5E7EB; }
+pre code { background: none; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 10.5pt; }
+th, td { border: 1px solid #D1D5DB; padding: 0.5em 0.75em; text-align: left; }
+th { background: #1F3864; color: #FFFFFF; font-weight: 600; }
+tr:nth-child(even) td { background: #F3F4F6; }
+blockquote { margin: 1em 0; padding: 0.5em 1em; border-left: 4px solid #2E74B5; background: #EFF6FF; color: #1A1A2E; }
+.callout { margin: 1em 0; padding: 0.75em 1em; border-left: 4px solid; border-radius: 0 4px 4px 0; }
+.callout-note { background: #EFF6FF; border-color: #3B82F6; }
+.callout-info { background: #F0FDF4; border-color: #22C55E; }
+.callout-warning { background: #FFFBEB; border-color: #F59E0B; }
+.callout-important { background: #FEF2F2; border-color: #EF4444; }
+.callout strong { text-transform: uppercase; font-size: 0.85em; }
+img { max-width: 100%; height: auto; display: block; margin: 1em auto; }
+figcaption { text-align: center; font-size: 0.9em; color: #6B7280; margin-top: -0.5em; margin-bottom: 1em; }
+a { color: #2E74B5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid #E5E7EB; margin: 2em 0; }
+.page-break { page-break-after: always; }
+@media print {
+    body { max-width: none; padding: 0; }
+    .no-print { display: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #6B7280; }
+}
+</style>
+</head>
+<body>
+<h1>Di Balik Personal Website Zainal Abidin</h1>
+<p style='font-size: 1.2em; color: #6B7280;'>Ide, proses, design system, dan implementasi</p>
+<table class='metadata'>
+<tr><th>Versi</th><td>1.0</td></tr>
+<tr><th>Status</th><td>Draft untuk ditinjau pemilik</td></tr>
+<tr><th>Tanggal</th><td>2026-10-07</td></tr>
+<tr><th>Penulis</th><td>Disusun untuk Zainal Abidin</td></tr>
+<tr><th>Audiens</th><td>Pembaca LinkedIn dan kolaborator</td></tr>
+</table>
+<hr>
+<h1>Ringkasan eksekutif</h1>
+<div class='callout callout-important'><strong>IMPORTANT</strong> 🔴 Ini rekonstruksi retrospektif dari website dan kode yang ada, bukan brief, riset, atau wireframe asli yang diklaim dibuat sebelum proyek dimulai.</div>
+<p>Bagaimana satu situs menjelaskan pekerjaan lintas produk, data, dan engineering tanpa menjadi CV panjang? Website ini memusatkan peran Technical Product Specialist di Indivara Group, kemudian membuka jalan menuju bukti pengalaman, contoh pendekatan, tulisan teknis, CV, dan kontak.</p>
+<blockquote>Dari kebutuhan produk ke produksi: identitas → bukti kontribusi → cara kerja → pendalaman → percakapan.</blockquote>
+<h1>1. Product brief</h1>
+<p>Hipotesis audiens dalam blueprint: recruiter yang ingin menilai peran dan CV; kolaborator yang ingin melihat kontribusi; pembaca teknis yang ingin membaca artikel; dan pemilik yang ingin memperbarui konten. Ini bukan hasil wawancara pengguna.</p>
+<ul>
+<li>Tujuan: positioning karier jelas, bukti yang aman dibagikan, konten mudah dipindai, kontak mudah ditemukan.</li>
+<li>Non-goals: login, CMS runtime, backend aplikasi, dataset klien, atau chatbot berbasis API model.</li>
+<li>Keberhasilan teknis diuji lewat lint, build static export, tes terjemahan, dan Playwright; traffic atau konversi pengunjung belum diukur.</li>
+</ul>
+<h1>2. Workflow yang direkonstruksi</h1>
+<table>
+<thead><tr><th>Tahap</th><th>Pertanyaan</th><th>Artefak ideal</th></tr></thead>
+<tbody>
+<tr><td>Framing</td><td>Siapa pembaca dan apa pesan utama?</td><td>Positioning dan hipotesis audiens</td></tr>
+<tr><td>Inventaris</td><td>Mana fakta, kontribusi, dan ilustrasi?</td><td>Matriks konten, CV, proyek, tulisan</td></tr>
+<tr><td>Struktur</td><td>Bagaimana bergerak dari identitas ke bukti?</td><td>Sitemap dan alur CTA</td></tr>
+<tr><td>Visual</td><td>Bagaimana teknis tetap personal?</td><td>Tipografi, warna, grid, state</td></tr>
+<tr><td>Build</td><td>Mana statis dan mana interaksi browser?</td><td>Halaman, MDX, locale, metadata</td></tr>
+<tr><td>Validasi</td><td>Apakah konten aman dan rute berfungsi?</td><td>Lint, build, E2E, screenshot produksi</td></tr>
+</tbody></table>
+<p>Tabel ini adalah blueprint penjelas keputusan. Commit kode membuktikan iterasi implementasi, bukan adanya sprint formal atau file Figma awal.</p>
+<h1>3. Fitur yang tersedia</h1>
+<table>
+<thead><tr><th>Lapisan</th><th>Implementasi</th></tr></thead>
+<tbody>
+<tr><td>Identitas</td><td>Home, About, Projects, Data, CV, dan kontak</td></tr>
+<tr><td>Pendalaman</td><td>12 artikel MDX, filter topik, progres baca, Mermaid dan kode</td></tr>
+<tr><td>Pengalaman</td><td>Light/dark, navigasi mobile, galeri, potret asli dengan WebGL opsional</td></tr>
+<tr><td>Bahasa dan SEO</td><td>English tanpa prefix, Indonesia /id, Jawa ngoko sopan /jv; URL dan metadata per bahasa</td></tr>
+<tr><td>Bantuan</td><td>Chat profil statis berbasis aturan; bukan AI generatif yang terhubung ke model</td></tr>
+</tbody></table>
+<p>SQL, Python, workflow, dan transformasi di halaman Data adalah contoh ilustratif, bukan sistem atau data klien.</p>
+<h1>4. Design system as-built</h1>
+<p>Bahasa visualnya editorial dan tenang: judul besar untuk posisi, paragraf berlebar terbatas, ruang kosong untuk ritme, border tipis untuk memisahkan konteks, angka monospace, dan aksen biru #2563eb. Foto menempatkan manusia di tengah lapisan teknis.</p>
+<table>
+<thead><tr><th>Elemen</th><th>Implementasi yang diamati</th></tr></thead>
+<tbody>
+<tr><td>Tipografi</td><td>Avenir Next, Segoe UI, Arial; hero berskala responsif; artikel memakai prose</td></tr>
+<tr><td>Layout</td><td>Kontainer max-w-6xl; artikel max-w-screen-md; grid mobile ke desktop</td></tr>
+<tr><td>Tema</td><td>Light/dark class-based, pilihan tersimpan di browser, fokus keyboard terlihat</td></tr>
+<tr><td>Motion</td><td>Efek pelengkap dengan fallback foto; Mermaid dimuat dekat viewport</td></tr>
+</tbody></table>
+<p>Dokumen design system disarikan setelah implementasi dari CSS dan komponen aktif; tidak mengklaim seluruh token terpusat atau rancangan Figma pra-proyek.</p>
+<h1>5. Trade-off dan bukti</h1>
+<ul>
+<li>Static export memudahkan hosting tetapi tidak menyediakan backend atau CMS runtime.</li>
+<li>Artikel MDX dibaca saat build; tiga bahasa membutuhkan pemeliharaan terjemahan yang konsisten.</li>
+<li>Chat profil tidak mengirim pertanyaan ke AI API, tetapi hanya menjawab topik yang didukung.</li>
+<li>WebGL tidak menggantikan foto; diagram baru dirender ketika mendekati viewport.</li>
+</ul>
+<p>Catatan pengujian lokal di docs/testing.md: build, lint, tes chat, dan verifikasi 12 artikel dalam tiga bahasa lulus; Playwright static export mencatat 95 passed, 3 skipped pada desktop/mobile. Angka ini bukan metrik sukses publik atau bukti deploy produksi.</p>
+<h1>6. Hal yang perlu dibereskan sebelum dibagikan</h1>
+<ul class='checklist'>
+<li>☐ Cek versi produksi pada domain dan semua bahasa sebelum memberi link.</li>
+<li>☐ Tinjau keamanan klaim klien serta nuansa terjemahan Jawa dengan pemilik.</li>
+<li>☐ Siapkan foto profesional jika sumber dan izin sudah tersedia; saat ini belum diganti.</li>
+<li>☐ Sebut CV unduhan tetap berbahasa Inggris.</li>
+<li>☐ Tambahkan motivasi awal pribadi hanya jika pemilik mengonfirmasi ceritanya.</li>
+</ul>
+<h1>7. Dokumen pendukung</h1>
+<p><a href='./01-product-brief.md' target='_blank' rel='noopener'>Product brief</a></p>
+<p><a href='./02-workflow-dan-roadmap.md' target='_blank' rel='noopener'>Workflow dan roadmap</a></p>
+<p><a href='./03-design-system.md' target='_blank' rel='noopener'>Design system</a></p>
+<p><a href='./04-fitur-dan-validasi.md' target='_blank' rel='noopener'>Fitur dan validasi</a></p>
+<p><a href='./05-linkedin-content-kit.md' target='_blank' rel='noopener'>Caption dan carousel LinkedIn</a></p>
+<p><a href='https://zainalabidin.my.id' target='_blank' rel='noopener'>Personal website (cek versi live)</a></p>
+
+</body>
+</html>

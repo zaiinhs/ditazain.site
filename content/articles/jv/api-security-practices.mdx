@@ -1,0 +1,50 @@
+---
+title: "Praktik Apik Keamanan API"
+description: "Cara penting kanggo nglindhungi API saka celah keamanan lan serangan sing umum."
+---
+
+# Praktik Apik Keamanan API
+
+Keamanan kudu dadi prioritas ing saben API. Iki sawetara cara penting kanggo nglindhungi endpoint.
+
+## Autentikasi
+
+### Praktik Apik JWT
+
+Tandhatangani token kanthi wektu kadaluwarsa lan priksa wektune nalika token dienggo:
+
+{{SOURCE_CODE_1}}
+
+### OAuth 2.0
+
+Kanggo integrasi karo pihak katelu, gunakake OAuth 2.0.
+
+## Otorisasi
+
+### Kontrol Akses Miturut Peran (RBAC)
+
+Watesi operasi miturut peran pangguna. Tuladha iki nolak panjaluk yen perane ora diidini:
+
+{{SOURCE_CODE_2}}
+
+## Validasi Input
+
+Tansah priksa lan resiki input:
+
+{{SOURCE_CODE_3}}
+
+## Watesan Panjaluk
+
+Kanggo nyegah penyalahgunaan, watesi jumlah panjaluk:
+
+{{SOURCE_CODE_4}}
+
+## Header Keamanan
+
+Gunakake helmet.js kanggo nambah header keamanan:
+
+{{SOURCE_CODE_5}}
+
+## Kesimpulan
+
+Keamanan kudu terus digatekake. Tansah ngerteni celah keamanan anyar lan pasang patch sing dibutuhake.

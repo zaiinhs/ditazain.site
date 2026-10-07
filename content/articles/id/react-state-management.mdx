@@ -1,0 +1,47 @@
+---
+title: "Mengelola State di React: Panduan Lengkap"
+description: "Bandingkan cara mengelola state di React dan pelajari kapan menggunakan masing-masing pendekatan."
+---
+
+# Mengelola State di React: Panduan Lengkap
+
+Memilih cara mengelola state yang sesuai penting bagi aplikasi React. Mari lihat pilihannya.
+
+## State Lokal
+
+Untuk state sederhana pada satu komponen, gunakan `useState`:
+
+{{SOURCE_CODE_1}}
+
+## State dari Server
+
+Untuk data yang berasal dari API, gunakan React Query atau SWR:
+
+{{SOURCE_CODE_2}}
+
+## State Global
+
+Untuk state yang dipakai lintas komponen, pertimbangkan pendekatan berikut.
+
+### Zustand
+
+Zustand menyediakan store kecil yang dapat dibagikan:
+
+{{SOURCE_CODE_3}}
+
+### Context API
+
+Context API cocok untuk state global sederhana tanpa library tambahan.
+
+## Kapan Menggunakan Apa?
+
+| Kebutuhan | Solusi |
+|---|---|
+| Khusus satu komponen | useState |
+| Data dari server | React Query/SWR |
+| Global sederhana | Context |
+| Global yang kompleks | Zustand/Redux |
+
+## Kesimpulan
+
+Mulailah dari pendekatan sederhana. Tambahkan kompleksitas hanya ketika benar-benar dibutuhkan.

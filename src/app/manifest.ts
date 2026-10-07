@@ -5,10 +5,10 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE_NAME} — Software & Data Engineer`,
+    name: `${SITE_NAME} — Technical Product Specialist`,
     short_name: SITE_NAME,
     description:
-      "Personal website of Zainal Abidin — Software & Data Engineer from Indonesia.",
+      "Personal website of Zainal Abidin — Technical Product Specialist at Indivara Group.",
     start_url: "/",
     display: "standalone",
     background_color: "#030712",

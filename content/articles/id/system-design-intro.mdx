@@ -1,0 +1,67 @@
+---
+title: "Pengantar Desain Sistem"
+description: "Pelajari konsep dasar dan pendekatan untuk merancang sistem terdistribusi skala besar."
+---
+
+# Pengantar Desain Sistem
+
+Desain sistem penting untuk membangun aplikasi yang dapat berkembang. Berikut konsep dasarnya.
+
+## Konsep Utama
+
+### Skalabilitas
+
+**Skala vertikal**: Tambahkan sumber daya ke mesin yang sudah ada.
+
+**Skala horizontal**: Tambahkan lebih banyak mesin.
+
+### Penyeimbangan Beban
+
+Bagikan lalu lintas ke beberapa server:
+
+{{SOURCE_CODE_1}}
+
+### Cache
+
+Simpan data yang sering diakses:
+
+- **CDN**: Aset statis.
+- **Redis/Memcached**: Data aplikasi.
+- **Cache browser**: Data sisi klien.
+
+### Database
+
+Pilih sesuai kebutuhan:
+
+| Kebutuhan | Database |
+|---|---|
+| Data relasional | PostgreSQL |
+| Skema fleksibel | MongoDB |
+| Cache | Redis |
+| Pencarian | Elasticsearch |
+| Analitik | ClickHouse |
+
+## Pola Desain
+
+### Microservices
+
+Pecah sistem menjadi layanan yang mandiri.
+
+### Arsitektur Berbasis Peristiwa
+
+Gunakan message queue untuk komunikasi asinkron.
+
+### CQRS
+
+Pisahkan operasi membaca dan menulis data.
+
+## Pertanyaan Wawancara yang Umum
+
+1. Rancang pemendek URL.
+2. Rancang feed Twitter.
+3. Rancang backend Uber.
+4. Rancang sistem chat.
+
+## Kesimpulan
+
+Latih kemampuan merancang sistem. Mulai dari kebutuhan, lalu pikirkan cara mengembangkannya.

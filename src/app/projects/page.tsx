@@ -1,30 +1,31 @@
 import { Footer, Navbar, Projects } from "@/components";
 import { Metadata } from "next";
+import { Locale, languageAlternates } from "@/i18n";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Data engineering pipelines and software products built by Zainal Abidin.",
-  alternates: { canonical: "/projects" },
+    "Selected enterprise product, data solutions and client implementation work by Zainal Abidin.",
+  alternates: { canonical: "/projects", languages: languageAlternates("/projects") },
   openGraph: {
     title: "Projects | Zainal Abidin",
     description:
-      "Data engineering pipelines and software products built by Zainal Abidin.",
+      "Selected enterprise product, data solutions and client implementation work by Zainal Abidin.",
     type: "website",
     url: "/projects",
   },
 };
 
-export default function ProjectsPage() {
+export default function ProjectsPage({ locale = "en" }: { locale?: Locale }) {
   return (
-    <div className="flex min-h-screen flex-col items-center px-4">
-      <div className="w-full max-w-screen-md">
-        <Navbar />
-      </div>
-      <main className="mt-16 flex w-full max-w-screen-md flex-col">
-        <Projects />
+    <div className="min-h-screen px-4 sm:px-6">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
+        <Navbar locale={locale} />
+      <main id="main-content" className="mt-10 flex-1 py-5 sm:mt-14 sm:py-8">
+        <Projects locale={locale} />
       </main>
-      <Footer />
+       <Footer locale={locale} />
+    </div>
     </div>
   );
 }

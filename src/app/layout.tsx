@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 // import { Dancing_Script, Josefin_Sans } from "next/font/google";
 import AIChatWidget from "@/components/AIChatWidget";
 import JsonLd from "@/components/JsonLd";
+import ScrollToTop from "@/components/ScrollToTop";
+import DocumentLanguage from "@/components/DocumentLanguage";
 import { AUTHOR, DEFAULT_OG_DESCRIPTION, SITE_NAME, SITE_URL } from "@/constants/site";
+import { languageAlternates } from "@/i18n";
 import "./globals.css";
 
 // const josefinSans = Josefin_Sans({
@@ -21,16 +24,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
+    default: "Zainal Abidin (zaiinhs) — Technical Product Specialist",
     template: "%s | Zainal Abidin",
   },
   description:
-    "Zainal Abidin (zaiinhs) — Software & Data Engineer from Indonesia. I build web products with React & Next.js and data pipelines with SQL, Python, dbt & Airflow.",
+    "Zainal Abidin (zaiinhs) is a Technical Product Specialist at Indivara Group, connecting product delivery, data solutions and enterprise implementation.",
   keywords: [
     "Zainal Abidin",
     "zaiinhs",
-    "Data Engineer",
-    "Software Engineer",
+    "Technical Product Specialist",
+    "Product delivery",
+    "Data solutions",
+    "Enterprise implementation",
     "SQL",
     "Python",
     "ETL",
@@ -42,9 +47,10 @@ export const metadata: Metadata = {
   creator: AUTHOR.name,
   alternates: {
     canonical: "/",
+    languages: languageAlternates("/"),
   },
   openGraph: {
-    title: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
+    title: "Zainal Abidin (zaiinhs) — Technical Product Specialist",
     description: DEFAULT_OG_DESCRIPTION,
     type: "website",
     url: SITE_URL,
@@ -53,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zainal Abidin (zaiinhs) — Software & Data Engineer",
+    title: "Zainal Abidin (zaiinhs) — Technical Product Specialist",
     description: DEFAULT_OG_DESCRIPTION,
     creator: "@zaiinhs",
   },
@@ -87,7 +93,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+            __html: `(function(){var p=location.pathname;document.documentElement.lang=p==='/id'||p.startsWith('/id/')?'id':p==='/jv'||p.startsWith('/jv/')?'jv':'en';try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
           }}
         />
       </head>
@@ -108,6 +114,10 @@ export default function RootLayout({
             },
             sameAs: AUTHOR.sameAs,
             knowsAbout: [
+              "Technical Product Management",
+              "Enterprise Product Delivery",
+              "Client Implementation",
+              "Data Solutions",
               "Data Engineering",
               "Software Engineering",
               "SQL",
@@ -127,6 +137,8 @@ export default function RootLayout({
           }}
         />
         {children}
+        <DocumentLanguage />
+        <ScrollToTop />
         <AIChatWidget />
       </body>
     </html>

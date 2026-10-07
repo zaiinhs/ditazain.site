@@ -1,0 +1,40 @@
+---
+title: "Praktik Terbaik CI/CD dengan GitHub Actions"
+description: "Pelajari cara menyiapkan pipeline CI/CD yang efisien dengan GitHub Actions."
+---
+
+# Praktik Terbaik CI/CD dengan GitHub Actions
+
+GitHub Actions memudahkan developer menerapkan CI/CD. Berikut praktik untuk pipeline yang efisien.
+
+## Struktur Workflow Dasar
+
+Contoh workflow ini menjalankan build saat ada push atau pull request ke branch utama:
+
+{{SOURCE_CODE_1}}
+
+## Praktik Terbaik
+
+### 1. Cache Dependensi
+
+Gunakan cache agar instalasi dependensi pada run berikutnya lebih cepat:
+
+{{SOURCE_CODE_2}}
+
+### 2. Jalankan Test secara Paralel
+
+Bagi test ke beberapa job agar umpan balik didapat lebih cepat.
+
+### 3. Gunakan Matrix Strategy
+
+Uji aplikasi pada beberapa versi runtime:
+
+{{SOURCE_CODE_3}}
+
+### 4. Hentikan Lebih Awal saat Gagal
+
+Atur matrix build agar berhenti setelah kegagalan pertama jika tidak perlu melanjutkan job lain.
+
+## Kesimpulan
+
+Mulailah dari workflow sederhana lalu tingkatkan secara bertahap. GitHub Actions menyediakan alat yang kuat untuk CI/CD profesional.

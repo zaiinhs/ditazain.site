@@ -1,0 +1,50 @@
+---
+title: "Praktik Terbaik Keamanan API"
+description: "Praktik dan teknik penting untuk melindungi API dari kerentanan serta serangan umum."
+---
+
+# Praktik Terbaik Keamanan API
+
+Keamanan harus menjadi prioritas dalam setiap API. Berikut praktik penting untuk melindungi endpoint.
+
+## Autentikasi
+
+### Praktik Terbaik JWT
+
+Tandatangani token dengan waktu kedaluwarsa dan verifikasi batas waktunya saat token digunakan:
+
+{{SOURCE_CODE_1}}
+
+### OAuth 2.0
+
+Untuk integrasi dengan pihak ketiga, gunakan OAuth 2.0.
+
+## Otorisasi
+
+### Kontrol Akses Berbasis Peran (RBAC)
+
+Batasi operasi sesuai peran pengguna. Contoh berikut menolak permintaan ketika perannya tidak diizinkan:
+
+{{SOURCE_CODE_2}}
+
+## Validasi Input
+
+Selalu validasi dan bersihkan input:
+
+{{SOURCE_CODE_3}}
+
+## Pembatasan Permintaan
+
+Cegah penyalahgunaan dengan membatasi jumlah permintaan:
+
+{{SOURCE_CODE_4}}
+
+## Header Keamanan
+
+Gunakan helmet.js untuk menambahkan header keamanan:
+
+{{SOURCE_CODE_5}}
+
+## Kesimpulan
+
+Keamanan adalah pekerjaan berkelanjutan. Ikuti perkembangan kerentanan terbaru dan terapkan patch yang diperlukan.

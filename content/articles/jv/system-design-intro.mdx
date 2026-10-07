@@ -1,0 +1,67 @@
+---
+title: "Pambuka Desain Sistem"
+description: "Sinau konsep dhasar lan cara ngrancang sistem terdistribusi skala gedhe."
+---
+
+# Pambuka Desain Sistem
+
+Desain sistem penting kanggo nggawe aplikasi sing bisa terus berkembang. Iki konsep dhasare.
+
+## Konsep Utama
+
+### Skalabilitas
+
+**Skala vertikal**: Tambah sumber daya ing mesin sing wis ana.
+
+**Skala horizontal**: Tambah jumlah mesin.
+
+### Mbagi Beban
+
+Bagi lalu lintas menyang sawetara server:
+
+{{SOURCE_CODE_1}}
+
+### Cache
+
+Simpen data sing kerep diakses:
+
+- **CDN**: Aset statis.
+- **Redis/Memcached**: Data aplikasi.
+- **Cache browser**: Data ing sisih klien.
+
+### Database
+
+Pilih miturut kabutuhan:
+
+| Kabutuhan | Database |
+|---|---|
+| Data relasional | PostgreSQL |
+| Skema fleksibel | MongoDB |
+| Cache | Redis |
+| Panelusuran | Elasticsearch |
+| Analitik | ClickHouse |
+
+## Pola Desain
+
+### Microservices
+
+Pecah sistem dadi layanan sing mandiri.
+
+### Arsitektur Adhedhasar Kedadeyan
+
+Gunakake message queue kanggo komunikasi asinkron.
+
+### CQRS
+
+Pisahake operasi maca lan nulis data.
+
+## Pitakon Wawancara sing Umum
+
+1. Rancang pemendek URL.
+2. Rancang feed Twitter.
+3. Rancang backend Uber.
+4. Rancang sistem chat.
+
+## Kesimpulan
+
+Latihen ngrancang sistem. Miwiti saka kabutuhan, banjur pikirake cara ngembangake.

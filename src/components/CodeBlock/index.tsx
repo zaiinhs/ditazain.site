@@ -2,14 +2,22 @@
 
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
+import type { Locale } from "@/i18n";
 
 interface CodeBlockProps {
   code: string;
   language?: string;
   filename?: string;
+  locale?: Locale;
 }
 
-export default function CodeBlock({ code, language, filename }: CodeBlockProps) {
+const labels: Record<Locale, { copy: string; copied: string }> = {
+  en: { copy: "Copy code", copied: "Copied" },
+  id: { copy: "Salin kode", copied: "Berhasil disalin" },
+  jv: { copy: "Salin kode", copied: "Wis disalin" },
+};
+
+export default function CodeBlock({ code, language, filename, locale = "en" }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -35,18 +43,18 @@ export default function CodeBlock({ code, language, filename }: CodeBlockProps) 
         </div>
         <button
           onClick={handleCopy}
-          aria-label="Copy code"
+          aria-label={labels[locale].copy}
           className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-gray-400 transition hover:bg-gray-800 hover:text-gray-200"
         >
           {copied ? (
             <>
               <Check className="h-3.5 w-3.5 text-green-400" />
-              Copied
+              {labels[locale].copied}
             </>
           ) : (
             <>
               <Copy className="h-3.5 w-3.5" />
-              Copy
+              {labels[locale].copy}
             </>
           )}
         </button>

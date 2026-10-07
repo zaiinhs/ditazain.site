@@ -1,11 +1,11 @@
-export const SITE_URL = "https://zainal-abidin.my.id";
+export const SITE_URL = "https://zainalabidin.my.id";
 
 export const SITE_NAME = "Zainal Abidin";
 
 export const AUTHOR = {
   name: "Zainal Abidin",
-  jobTitle: "Software & Data Engineer",
-  email: "zaiinhs@gmail.com",
+  jobTitle: "Technical Product Specialist",
+  email: "zainalabidinhsc@gmail.com",
   // Profiles used for the Person JSON-LD `sameAs` (helps Google's entity graph)
   sameAs: [
     "https://github.com/zaiinhs",
@@ -16,4 +16,4 @@ export const AUTHOR = {
 };
 
 export const DEFAULT_OG_DESCRIPTION =
-  "Zainal Abidin (zaiinhs) — Software & Data Engineer from Indonesia. Web products with React & Next.js and data pipelines with SQL, Python, dbt & Airflow.";
+  "Zainal Abidin (zaiinhs) — Technical Product Specialist at Indivara Group. Product delivery, data solutions and enterprise implementation with Python, SQL, APIs and React.";

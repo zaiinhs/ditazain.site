@@ -2,9 +2,12 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Bot, MessageCircle, Send, Sparkles, UserRound, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Locale } from "@/i18n";
+import { chatSuggestions } from "@/i18n/chat";
+import { getMessages } from "@/i18n/messages";
 import {
   getStaticAIReply,
-  STATIC_CHAT_SUGGESTIONS,
 } from "@/utils/static-ai-chat";
 
 type ChatMessage = {
@@ -18,20 +21,20 @@ const createMessageId = () =>
     ? crypto.randomUUID()
     : `${Date.now()}-${Math.random()}`;
 
-const initialMessages: ChatMessage[] = [
-  {
-    id: "welcome-message",
-    role: "assistant",
-    content:
-      "Halo! Aku Zainal AI versi statis. Tanyakan tentang fokus Data Engineering, profil, pengalaman kerja, skill, project, CV, komunitas, atau kontak Zainal.",
-  },
-];
-
 const TYPING_REPLY_DELAY_MS = 1200;
 
 export default function AIChatWidget() {
+  const pathname = usePathname();
+  const locale: Locale = pathname.startsWith("/id/") || pathname === "/id" ? "id" : pathname.startsWith("/jv/") || pathname === "/jv" ? "jv" : "en";
+  return <ChatPanel key={locale} locale={locale} />;
+}
+
+function ChatPanel({ locale }: { locale: Locale }) {
+  const text = getMessages(locale).ui;
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { id: "welcome-message", role: "assistant", content: text.chatWelcome },
+  ]);
   const [inputValue, setInputValue] = useState("");
   const [isAssistantTyping, setIsAssistantTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -67,7 +70,7 @@ export default function AIChatWidget() {
     const assistantMessage: ChatMessage = {
       id: createMessageId(),
       role: "assistant",
-      content: getStaticAIReply(trimmedQuestion),
+    content: getStaticAIReply(trimmedQuestion, locale),
     };
 
     setMessages((currentMessages) => [...currentMessages, userMessage]);
@@ -90,26 +93,26 @@ export default function AIChatWidget() {
     <div className="fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3">
       {isOpen && (
         <section className="w-[calc(100vw-2rem)] overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-900 sm:w-[420px]">
-          <header className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-5 text-white">
+          <header className="bg-gray-950 p-5 text-white dark:bg-gray-800">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-3">
                 <div className="rounded-2xl bg-white/20 p-2 backdrop-blur">
                   <Bot className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="flex items-center gap-2 text-sm font-medium text-blue-100">
+                  <p className="flex items-center gap-2 text-sm font-medium text-blue-200">
                     <Sparkles className="h-4 w-4" />
                     Static AI Assistant
                   </p>
-                  <h2 className="text-xl font-semibold">Ask about Zainal</h2>
-                  <p className="mt-1 text-sm text-blue-100">
-                    Jawaban cepat berdasarkan data profil di website ini.
+                   <h2 className="text-xl font-semibold">{text.chatTitle}</h2>
+                  <p className="mt-1 text-sm text-gray-300">
+                     {text.chatIntro}
                   </p>
                 </div>
               </div>
 
               <button
-                aria-label="Tutup chat AI"
+                 aria-label={text.chatClose}
                 onClick={() => setIsOpen(false)}
                 className="rounded-full p-2 text-white/80 transition hover:bg-white/15 hover:text-white"
               >
@@ -158,7 +161,7 @@ export default function AIChatWidget() {
                   <Bot className="h-5 w-5" />
                 </div>
                 <div className="max-w-[82%] rounded-2xl rounded-tl-sm border border-gray-200 bg-white px-4 py-3 text-sm leading-relaxed text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200">
-                  <span className="sr-only">Zainal AI sedang mengetik jawaban</span>
+                   <span className="sr-only">{text.chatTyping}</span>
                   <span className="flex items-center gap-1" aria-hidden="true">
                     <span className="h-2 w-2 animate-bounce rounded-full bg-blue-500 [animation-delay:-0.3s]" />
                     <span className="h-2 w-2 animate-bounce rounded-full bg-blue-500 [animation-delay:-0.15s]" />
@@ -173,7 +176,7 @@ export default function AIChatWidget() {
 
           <div className="border-t border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
             <div className="mb-3 flex gap-2 overflow-x-auto pb-1">
-              {STATIC_CHAT_SUGGESTIONS.slice(0, 4).map((suggestion) => (
+               {chatSuggestions[locale].map((suggestion) => (
                 <button
                   key={suggestion}
                   onClick={() => sendQuestion(suggestion)}
@@ -187,13 +190,13 @@ export default function AIChatWidget() {
 
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
               <input
-                aria-label="Tulis pertanyaan tentang Zainal"
+                 aria-label={text.chatInput}
                 value={inputValue}
                 onChange={(event) => setInputValue(event.target.value)}
                 placeholder={
                   isAssistantTyping
-                    ? "Zainal AI sedang mengetik..."
-                    : "Tanya tentang Zainal..."
+                     ? text.chatTyping
+                     : text.chatPlaceholder
                 }
                 disabled={isAssistantTyping}
                 className="min-w-0 flex-1 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-70 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:focus:border-blue-500 dark:focus:ring-blue-950"
@@ -202,14 +205,14 @@ export default function AIChatWidget() {
                 type="submit"
                 disabled={!inputValue.trim() || isAssistantTyping}
                 className="rounded-2xl bg-blue-600 p-3 text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-700"
-                aria-label="Kirim pertanyaan"
+                 aria-label={text.chatSend}
               >
                 <Send className="h-5 w-5" />
               </button>
             </form>
 
             <p className="mt-3 text-center text-xs text-gray-400">
-              Mode statis: belum memakai API AI, aman untuk static export.
+               {text.chatStatus}
             </p>
           </div>
         </section>
@@ -218,15 +221,15 @@ export default function AIChatWidget() {
       <button
         onClick={() => setIsOpen((currentState) => !currentState)}
         className="group flex items-center gap-3 rounded-full bg-gray-950 px-5 py-4 text-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-blue-600 dark:bg-white dark:text-gray-950 dark:hover:bg-blue-500 dark:hover:text-white"
-        aria-label="Buka chat AI tentang Zainal"
+         aria-label={text.chatOpen}
       >
         <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/10 dark:bg-gray-950/10">
           <MessageCircle className="h-5 w-5" />
           <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-gray-950 bg-green-400 dark:border-white" />
         </span>
         <span className="hidden text-left sm:block">
-          <span className="block text-sm font-semibold">Ask Zainal AI</span>
-          <span className="block text-xs opacity-70">Chat profil statis</span>
+           <span className="block text-sm font-semibold">{text.chatButton}</span>
+           <span className="block text-xs opacity-70">{text.chatSubtitle}</span>
         </span>
       </button>
     </div>

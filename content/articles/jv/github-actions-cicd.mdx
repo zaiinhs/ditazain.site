@@ -1,0 +1,40 @@
+---
+title: "Praktik Apik CI/CD nganggo GitHub Actions"
+description: "Sinau nyiyapake pipeline CI/CD sing efisien nganggo GitHub Actions."
+---
+
+# Praktik Apik CI/CD nganggo GitHub Actions
+
+GitHub Actions nggampangake developer nggunakake CI/CD. Iki sawetara praktik kanggo pipeline sing efisien.
+
+## Struktur Workflow Dhasar
+
+Tuladha workflow iki mbukak build nalika ana push utawa pull request menyang branch utama:
+
+{{SOURCE_CODE_1}}
+
+## Praktik Apik
+
+### 1. Cache Dependensi
+
+Gunakake cache supaya instalasi dependensi ing run sabanjure luwih cepet:
+
+{{SOURCE_CODE_2}}
+
+### 2. Jalanake Test Bebarengan
+
+Bagi test dadi sawetara job supaya asil bisa dingerteni luwih cepet.
+
+### 3. Gunakake Matrix Strategy
+
+Tes aplikasi ing sawetara versi runtime:
+
+{{SOURCE_CODE_3}}
+
+### 4. Mandheg Yen Ana Gagal
+
+Atur matrix build supaya mandheg sawisé kegagalan pisanan yen job liyane ora perlu diterusake.
+
+## Kesimpulan
+
+Miwitio saka workflow sing prasaja banjur dikembangake sethithik-sethithik. GitHub Actions nduwe piranti sing migunani kanggo CI/CD profesional.

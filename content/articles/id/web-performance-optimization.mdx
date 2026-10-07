@@ -1,0 +1,56 @@
+---
+title: "Optimasi Performa Aplikasi Web"
+description: "Teknik praktis untuk meningkatkan performa aplikasi web."
+---
+
+# Optimasi Performa Aplikasi Web
+
+Performa penting untuk pengalaman pengguna. Mari bahas teknik optimasi yang praktis.
+
+## Core Web Vitals
+
+- **LCP** (Largest Contentful Paint): kurang dari 2,5 detik.
+- **FID** (First Input Delay): kurang dari 100 milidetik.
+- **CLS** (Cumulative Layout Shift): kurang dari 0,1.
+
+## Optimasi Frontend
+
+### Pemisahan Kode
+
+Muat bagian aplikasi hanya saat diperlukan:
+
+{{SOURCE_CODE_1}}
+
+### Optimasi Gambar
+
+Gunakan komponen gambar dengan ukuran serta pemuatan yang sesuai:
+
+{{SOURCE_CODE_2}}
+
+### Memoization
+
+Hindari perhitungan ulang yang tidak perlu:
+
+{{SOURCE_CODE_3}}
+
+## Optimasi Backend
+
+### Cache
+
+Simpan hasil yang sering dibaca agar tidak perlu mengambilnya berulang kali:
+
+{{SOURCE_CODE_4}}
+
+### Indeks Database
+
+Tambahkan indeks untuk mempercepat pencarian yang sering dilakukan:
+
+{{SOURCE_CODE_5}}
+
+## Pemantauan
+
+Gunakan alat seperti Lighthouse, WebPageTest, New Relic, dan Sentry.
+
+## Kesimpulan
+
+Ukur performa terlebih dahulu, lalu prioritaskan perbaikan yang dampaknya paling besar.

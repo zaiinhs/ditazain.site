@@ -1,13 +1,14 @@
 import { Footer, Navbar } from "@/components";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import { getAllArticles } from "@/utils/articles";
 import { Metadata } from "next";
+import ArticlesFilter from "@/components/Articles/ArticlesFilter";
+import { Locale, languageAlternates } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 export const metadata: Metadata = {
   title: "Articles",
   description: "Thoughts on software development, programming, and technology.",
-  alternates: { canonical: "/articles" },
+  alternates: { canonical: "/articles", languages: languageAlternates("/articles") },
   openGraph: {
     title: "Articles | Zainal Abidin",
     description: "Thoughts on software development, programming, and technology.",
@@ -16,59 +17,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ArticlesPage() {
-  const allArticles = getAllArticles();
+export default async function ArticlesPage({ locale = "en" }: { locale?: Locale }) {
+  const allArticles = getAllArticles(locale);
+  const text = getMessages(locale).articles;
 
   return (
     <div className="flex min-h-screen flex-col items-center px-4">
       <div className="w-full max-w-screen-md">
-        <Navbar />
+          <Navbar locale={locale} />
       </div>
       <main className="mt-16 flex w-full max-w-screen-md flex-col">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4 dark:text-white">Articles</h1>
+            <h1 className="text-4xl font-bold mb-4 dark:text-white">{text.title}</h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Thoughts on software development, programming, and technology.
+              {text.intro}
           </p>
         </div>
-        {allArticles.map((article) => (
-          <Link href={`/articles/${article.slug}`} key={article.slug}>
-            <article className="group rounded-lg p-4 transition-all duration-200 hover:bg-gray-50 sm:p-6 dark:hover:bg-gray-800">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0 flex-1 space-y-3">
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {article.date}
-                    </span>
-                    <span className="text-gray-300">•</span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {article.readTime}
-                    </span>
-                  </div>
-                  <h2 className="text-lg font-semibold text-black group-hover:text-blue-600 sm:text-xl dark:text-white dark:group-hover:text-blue-400">
-                    {article.title}
-                  </h2>
-                  <p className="line-clamp-2 text-gray-600 dark:text-gray-400">
-                    {article.description}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={`${article.slug}-${tag}`}
-                        className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-600 dark:text-white"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowUpRight className="h-5 w-5 shrink-0 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
-              </div>
-            </article>
-          </Link>
-        ))}
+          <ArticlesFilter articles={allArticles} locale={locale} />
       </main>
-      <Footer />
+        <Footer locale={locale} />
     </div>
   );
 }

@@ -1,0 +1,56 @@
+---
+title: "Ngapikake Performa Aplikasi Web"
+description: "Teknik praktis kanggo ngapikake performa aplikasi web."
+---
+
+# Ngapikake Performa Aplikasi Web
+
+Performa penting kanggo pengalaman pangguna. Ayo deleng teknik optimasi sing praktis.
+
+## Core Web Vitals
+
+- **LCP** (Largest Contentful Paint): kurang saka 2,5 detik.
+- **FID** (First Input Delay): kurang saka 100 milidetik.
+- **CLS** (Cumulative Layout Shift): kurang saka 0,1.
+
+## Optimasi Frontend
+
+### Misahake Kode
+
+Muat bagean aplikasi mung nalika dibutuhake:
+
+{{SOURCE_CODE_1}}
+
+### Optimasi Gambar
+
+Gunakake komponen gambar kanthi ukuran lan cara muat sing pas:
+
+{{SOURCE_CODE_2}}
+
+### Memoization
+
+Ngindhari ngitung maneh yen ora perlu:
+
+{{SOURCE_CODE_3}}
+
+## Optimasi Backend
+
+### Cache
+
+Simpen asil sing kerep diwaca supaya ora kudu njupuk bola-bali:
+
+{{SOURCE_CODE_4}}
+
+### Indeks Database
+
+Tambah indeks supaya panelusuran sing kerep dilakoni dadi luwih cepet:
+
+{{SOURCE_CODE_5}}
+
+## Monitoring
+
+Gunakake piranti kaya Lighthouse, WebPageTest, New Relic, lan Sentry.
+
+## Kesimpulan
+
+Ukur performa dhisik, banjur utamakake perbaikan sing paling gedhe pengaruhe.

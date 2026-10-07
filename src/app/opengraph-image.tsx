@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/constants/site";
 
 export const dynamic = "force-static";
-export const alt = "Zainal Abidin — Software & Data Engineer";
+export const alt = "Zainal Abidin — Technical Product Specialist";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,22 +17,22 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "linear-gradient(135deg, #030712 0%, #1e3a8a 100%)",
+          background: "#111c2b",
           color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ fontSize: 34, color: "#93c5fd", marginBottom: 16 }}>
-          zainal-abidin.my.id · @zaiinhs
+          {`${new URL(SITE_URL).hostname} · @zaiinhs`}
         </div>
         <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.1 }}>
           Zainal Abidin
         </div>
         <div style={{ fontSize: 44, color: "#cbd5e1", marginTop: 12 }}>
-          Software &amp; Data Engineer
+          Technical Product Specialist
         </div>
         <div style={{ fontSize: 28, color: "#94a3b8", marginTop: 28 }}>
-          SQL · Python · Data Pipelines · React · Next.js
+          Product Delivery · Data Solutions · Client Implementation
         </div>
       </div>
     ),

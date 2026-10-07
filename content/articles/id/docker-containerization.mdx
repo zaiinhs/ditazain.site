@@ -1,0 +1,45 @@
+---
+title: "Memulai dengan Docker dan Kontainerisasi"
+description: "Panduan pemula tentang container, image, dan konsep dasar Docker dalam pengembangan modern."
+---
+
+# Memulai dengan Docker dan Kontainerisasi
+
+Docker mengubah cara kita men-deploy software. Panduan ini menjelaskan dasar-dasar kontainerisasi.
+
+## Apa itu Docker?
+
+Docker adalah platform untuk mengembangkan, mengirimkan, dan menjalankan aplikasi di dalam container.
+
+## Konsep Utama
+
+### Image
+
+Image adalah template hanya-baca untuk membuat container.
+
+{{SOURCE_CODE_1}}
+
+### Container
+
+Container adalah instance berjalan dari sebuah image.
+
+### Dockerfile
+
+Dockerfile menjelaskan langkah-langkah untuk membuat image.
+
+## Perintah Dasar
+
+Contoh berikut menunjukkan cara membuat image, menjalankan container, melihat container aktif, lalu menghentikannya:
+
+{{SOURCE_CODE_2}}
+
+## Manfaat
+
+- **Konsistensi**: Lingkungan pengembangan dan produksi tetap serupa.
+- **Isolasi**: Dependensi tidak saling bertabrakan.
+- **Efisiensi**: Lebih ringan dibandingkan VM.
+- **Portabilitas**: Berjalan di perangkat yang memasang Docker.
+
+## Kesimpulan
+
+Docker penting dalam pengembangan modern. Mulailah dari hal kecil sebelum mempelajari pola yang lebih lanjut.

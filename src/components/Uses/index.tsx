@@ -1,4 +1,6 @@
 import { Laptop, Monitor, Mouse, Speaker } from "lucide-react";
+import { Locale } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 const setupCategories = [
   {
@@ -75,13 +77,14 @@ const setupCategories = [
   },
 ];
 
-export default function Uses() {
+export default function Uses({ locale = "en" }: { locale?: Locale }) {
+  const text = getMessages(locale).uses;
   return (
     <section className="w-full">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4 dark:text-white">Uses</h1>
+         <h1 className="text-4xl font-bold mb-4 dark:text-white">{text.title}</h1>
         <p className="text-gray-600 dark:text-gray-400">
-          A detailed look at the hardware and tools I use for development.
+           {text.intro}
         </p>
       </div>
 
@@ -93,7 +96,7 @@ export default function Uses() {
                 {category.icon}
               </div>
               <h2 className="text-2xl font-semibold dark:text-white">
-                {category.title}
+                 {text.categories[index]}
               </h2>
             </div>
 
@@ -114,8 +117,8 @@ export default function Uses() {
                       <h3 className="mb-1 font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                         {item.name}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {item.description}
+                       <p className="text-sm text-gray-600 dark:text-gray-400">
+                         {text.descriptions[setupCategories.slice(0, index).reduce((count, entry) => count + entry.items.length, 0) + itemIndex]}
                       </p>
                     </div>
                   </article>

@@ -1,5 +1,7 @@
 import { ArrowUpRight, BookOpen, Clock, Star } from "lucide-react";
 import Link from "next/link";
+import { Locale } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 const readingList = [
   {
@@ -52,7 +54,8 @@ const readingList = [
   },
 ];
 
-export default function Readlist() {
+export default function Readlist({ locale = "en" }: { locale?: Locale }) {
+  const text = getMessages(locale).readlist;
   const renderRatingStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -84,11 +87,10 @@ export default function Readlist() {
     <section className="w-full">
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4 dark:text-white">
-          Reading List
+           {text.title}
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          A curated collection of books and articles that have shaped my
-          knowledge and perspective.
+           {text.intro}
         </p>
       </div>
 
@@ -111,17 +113,17 @@ export default function Readlist() {
                     <div className="flex items-start justify-between mb-2">
                       <div>
                         <h2 className="text-xl font-semibold text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-1">
-                          {book.title}
+                         {book.title}
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
-                          by {book.author}
+                           {text.by} {book.author}
                         </p>
                       </div>
                       <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                     </div>
 
                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                      {book.description}
+                       {text.descriptions[index]}
                     </p>
 
                     <div className="flex flex-wrap items-center gap-4 mb-4">
@@ -134,7 +136,7 @@ export default function Readlist() {
                       </div>
                       <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
                         <BookOpen className="w-4 h-4" />
-                        <span className="text-sm">{book.category}</span>
+                         <span className="text-sm">{text.categories[index]}</span>
                       </div>
                     </div>
 
@@ -148,7 +150,7 @@ export default function Readlist() {
                             : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
                         }`}
                       >
-                        {book.status}
+                         {text.statuses[book.status === "Currently Reading" ? 0 : book.status === "Completed" ? 1 : 2]}
                       </span>
                     </div>
                   </div>

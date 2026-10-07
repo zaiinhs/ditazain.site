@@ -7,8 +7,11 @@ import { notFound } from "next/navigation";
 import { Mermaid } from "@/components/Mermaid";
 import remarkGfm from "remark-gfm";
 import JsonLd from "@/components/JsonLd";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { AUTHOR, SITE_NAME, SITE_URL } from "@/constants/site";
 import type { Metadata } from "next";
+import { Locale, languageAlternates, localizedPath } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -23,7 +26,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  return getArticleMetadata(slug, "en");
+}
+
+export function getArticleMetadata(slug: string, locale: Locale): Metadata {
+  const article = getArticleBySlug(slug, locale);
 
   if (!article) {
     return {
@@ -31,7 +38,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const url = `${SITE_URL}/articles/${slug}`;
+  const path = `/articles/${slug}`;
+  const url = `${SITE_URL}${localizedPath(locale, path)}`;
 
   return {
     title: article.title,
@@ -39,7 +47,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: article.tags,
     authors: [{ name: AUTHOR.name, url: SITE_URL }],
     alternates: {
-      canonical: `/articles/${slug}`,
+      canonical: localizedPath(locale, path),
+      languages: languageAlternates(path),
     },
     openGraph: {
       title: article.title,
@@ -50,6 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: article.date || undefined,
       authors: [AUTHOR.name],
       tags: article.tags,
+      locale: locale === "id" ? "id_ID" : locale === "jv" ? "jv_ID" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
@@ -62,16 +72,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArticleDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  return <LocalizedArticleDetail slug={slug} locale="en" />;
+}
+
+export function LocalizedArticleDetail({ slug, locale }: { slug: string; locale: Locale }) {
+  const article = getArticleBySlug(slug, locale);
 
   if (!article) {
     return notFound();
   }
 
-  const articleUrl = `${SITE_URL}/articles/${slug}`;
+  const articleUrl = `${SITE_URL}${localizedPath(locale, `/articles/${slug}`)}`;
+  const text = getMessages(locale).articles;
 
   return (
-    <div className="flex min-h-screen flex-col items-center px-4">
+    <>
+      <ReadingProgressBar locale={locale} />
+      <div className="flex min-h-screen flex-col items-center px-4">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -80,7 +97,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           description: article.description,
           datePublished: article.date || undefined,
           dateModified: article.date || undefined,
-          image: `${SITE_URL}/articles/${slug}/opengraph-image`,
+          image: `${articleUrl}/opengraph-image`,
+          inLanguage: locale,
           keywords: article.tags?.join(", "),
           mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
           author: {
@@ -103,14 +121,14 @@ export default async function ArticleDetailPage({ params }: PageProps) {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
-              item: SITE_URL,
+               name: locale === "en" ? "Home" : locale === "id" ? "Beranda" : "Ngarep",
+               item: `${SITE_URL}${localizedPath(locale, "/")}`,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "Articles",
-              item: `${SITE_URL}/articles`,
+               name: text.title,
+               item: `${SITE_URL}${localizedPath(locale, "/articles")}`,
             },
             {
               "@type": "ListItem",
@@ -122,15 +140,15 @@ export default async function ArticleDetailPage({ params }: PageProps) {
         }}
       />
       <div className="w-full max-w-screen-md">
-        <Navbar />
+         <Navbar locale={locale} />
       </div>
       <main className="mt-16 flex w-full max-w-screen-md flex-col">
         <Link
-          href="/articles"
+           href={localizedPath(locale, "/articles")}
           className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2 mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Articles
+           {text.back}
         </Link>
 
         <article className="prose prose-sm sm:prose-lg dark:prose-invert max-w-none break-words prose-headings:dark:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-pre:bg-gray-800 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-table:my-6 prose-thead:bg-gray-50 dark:prose-thead:bg-gray-800 prose-tr:border prose-tr:border-gray-200 dark:prose-tr:border-gray-700">
@@ -240,7 +258,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           </div>
         </article>
       </main>
-      <Footer />
-    </div>
+       <Footer locale={locale} />
+      </div>
+    </>
   );
 }

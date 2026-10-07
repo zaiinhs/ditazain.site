@@ -6,21 +6,22 @@ import {
   Boxes,
   Database,
   GitBranch,
-  Sparkles,
   Workflow,
 } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { Locale, languageAlternates, localizedPath } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 export const metadata: Metadata = {
-  title: "Data Engineering",
+  title: "Data solutions",
   description:
-    "How I work as a Data Engineer — SQL, Python, ETL/ELT pipelines, and data transformation. Sample queries, a Python pipeline, and architecture diagrams.",
-  alternates: { canonical: "/data" },
+    "How I work across data solutions: cleaning and standardization with Python and SQL, API delivery, and analytics dashboards.",
+  alternates: { canonical: "/data", languages: languageAlternates("/data") },
   openGraph: {
-    title: "Data Engineering | Zainal Abidin",
+    title: "Data solutions | Zainal Abidin",
     description:
-      "How I work as a Data Engineer — SQL, Python, ETL/ELT pipelines, and data transformation.",
+      "Data cleaning, standardization, SQL transformations and API/dashboard delivery.",
     type: "website",
     url: "/data",
   },
@@ -29,15 +30,15 @@ export const metadata: Metadata = {
 const capabilities = [
   {
     icon: <Database className="h-5 w-5" />,
-    title: "Ingest",
+    title: "Understand",
     description:
-      "Pull data from APIs, files, and databases into a warehouse — incrementally and reliably.",
+      "Trace source data and business rules before deciding how a product or report should use them.",
   },
   {
     icon: <Workflow className="h-5 w-5" />,
     title: "Transform",
     description:
-      "Turn raw, messy data into clean, modeled fact & dimension tables with SQL and Python.",
+      "Clean and standardize source records with Python and SQL, keeping transformation rules clear.",
   },
   {
     icon: <Boxes className="h-5 w-5" />,
@@ -48,10 +49,10 @@ const capabilities = [
 ];
 
 const stack = [
-  { group: "Languages", items: ["SQL", "Python"] },
-  { group: "Transformation", items: ["dbt", "Pandas", "Window Functions"] },
-  { group: "Orchestration", items: ["Airflow", "Cron", "CI/CD"] },
-  { group: "Storage", items: ["PostgreSQL", "BigQuery", "Parquet"] },
+  { group: "Core", items: ["SQL", "Python", "TypeScript"] },
+  { group: "Data work", items: ["Cleaning", "Standardization", "Transformation"] },
+  { group: "Delivery", items: ["REST APIs", "Dashboards", "PostgreSQL"] },
+  { group: "Deployment", items: ["Docker", "Linux / VM", "Git"] },
 ];
 
 const sqlSample = `-- Daily revenue per customer, deduplicated and cleaned
@@ -113,78 +114,70 @@ if __name__ == "__main__":
 
 const pipelineChart = `flowchart LR
   A[Sources<br/>APIs · CSV · DB] --> B[Ingestion<br/>Python / Extract]
-  B --> C[(Raw / Staging<br/>Warehouse)]
-  C --> D[Transform<br/>SQL · dbt]
-  D --> E[(Marts<br/>Fact + Dim)]
-  E --> F[BI Dashboards]
-  E --> G[Product Features / ML]
-  D -.->|tests| H{Data Quality<br/>Checks}`;
+  B --> C[(Raw / Staging<br/>Data)]
+  C --> D[Transform<br/>Python · SQL]
+  D --> E[(Analytics-ready data)]
+  E --> F[Dashboard APIs]
+  E --> G[Product Features]
+  D -.->|validation| H{Data Quality<br/>Checks}`;
 
-export default function DataPage() {
+export default function DataPage({ locale = "en" }: { locale?: Locale }) {
+  const text = getMessages(locale).data;
   return (
-    <div className="flex min-h-screen flex-col items-center px-4">
-      <div className="w-full max-w-screen-md">
-        <Navbar />
-      </div>
+    <div className="min-h-screen px-4 sm:px-6">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
+        <Navbar locale={locale} />
 
-      <main className="mt-16 flex w-full max-w-screen-md flex-col">
+      <main id="main-content" className="mt-10 flex w-full flex-1 flex-col sm:mt-14">
         {/* Hero */}
         <section className="relative">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-20 right-0 -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-400 opacity-25 blur-3xl dark:opacity-15"
-          />
-          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:border-blue-900 dark:bg-blue-950/50 dark:text-blue-300">
-            <Sparkles className="h-3.5 w-3.5" />
-            Data Engineering Focus
-          </span>
-          <h1 className="mt-4 text-4xl font-bold leading-tight dark:text-white sm:text-5xl">
-            Building reliable data pipelines
+          <p className="text-sm font-semibold tracking-wide text-blue-700 dark:text-blue-300">
+            {text.label}
+          </p>
+          <h1 className="mt-3 max-w-3xl text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.045em] text-gray-950 sm:text-5xl dark:text-white">
+            {text.title}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-            My current focus is Data Engineering: ingesting raw data,
-            transforming it with SQL and Python, and delivering clean datasets
-            that products and teams can trust. Here&apos;s how I work — with real
-            samples.
+          <p className="mt-4 max-w-[65ch] text-base leading-7 text-gray-600 sm:text-lg sm:leading-8 dark:text-gray-400">
+            {text.intro}
           </p>
         </section>
 
         {/* Capabilities */}
-        <section className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {capabilities.map((cap) => (
-            <div
+        <section className="mt-12 grid grid-cols-1 gap-0 border-y border-gray-200 sm:grid-cols-3 sm:divide-x sm:divide-gray-200 dark:border-gray-800 dark:sm:divide-gray-800">
+          {capabilities.map((cap, index) => (
+            <article
               key={cap.title}
-              className="rounded-2xl border border-gray-200 p-5 dark:border-gray-700"
+              className="border-b border-gray-200 py-5 last:border-b-0 sm:border-b-0 sm:px-5 sm:first:pl-0 sm:last:pr-0 dark:border-gray-800"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
                 {cap.icon}
               </span>
-              <h3 className="mt-3 font-semibold dark:text-white">{cap.title}</h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                {cap.description}
+              <h3 className="mt-3 font-semibold text-gray-950 dark:text-white">{text.capabilities[index][0]}</h3>
+              <p className="mt-1 max-w-[34ch] text-sm leading-6 text-gray-600 dark:text-gray-400">
+                {text.capabilities[index][1]}
               </p>
-            </div>
+            </article>
           ))}
         </section>
 
         {/* Stack */}
         <section className="mt-12">
-          <h2 className="mb-5 text-2xl font-semibold dark:text-white">
-            Data Stack
+          <h2 className="mb-5 text-2xl font-semibold text-gray-950 dark:text-white">
+            {text.tools}
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {stack.map((col) => (
+            {stack.map((col, index) => (
               <div key={col.group}>
-                <p className="mb-2 text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  {col.group}
+                <p className="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
+                  {text.stackGroups[index]}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {col.items.map((item) => (
+                  {col.items.map((item, itemIndex) => (
                     <span
                       key={item}
                       className="rounded-lg bg-gray-100 px-2.5 py-1 font-mono text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                     >
-                      {item}
+                      {index === 1 ? text.stackItems[itemIndex] : index === 2 && itemIndex === 1 ? text.stackItems[3] : item}
                     </span>
                   ))}
                 </div>
@@ -193,39 +186,64 @@ export default function DataPage() {
           </div>
         </section>
 
+        <section className="mt-12 border-y border-gray-200 py-7 dark:border-gray-800" aria-labelledby="bersama-case-heading">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+              Project Bersama
+            </p>
+            <h2 id="bersama-case-heading" className="mt-2 text-2xl font-semibold tracking-tight text-gray-950 dark:text-white">
+              {text.caseTitle}
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+              {text.caseIntro}
+            </p>
+          </div>
+          <div className="mt-6 grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-gray-800">
+            <div className="py-3 sm:py-0 sm:pr-5">
+              <p className="font-mono text-2xl font-semibold tabular-nums text-gray-950 dark:text-white">1.7M+</p>
+              <p className="mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400">{text.metrics[0]}</p>
+            </div>
+            <div className="py-3 sm:px-5 sm:py-0">
+              <p className="font-mono text-2xl font-semibold tabular-nums text-gray-950 dark:text-white">6.4M+</p>
+              <p className="mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400">{text.metrics[1]}</p>
+            </div>
+            <div className="py-3 sm:pl-5 sm:py-0">
+              <p className="font-mono text-2xl font-semibold tabular-nums text-gray-950 dark:text-white">{text.upTo}</p>
+              <p className="mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400">{text.metrics[2]}</p>
+            </div>
+          </div>
+        </section>
+
         {/* SQL sample */}
         <section className="mt-12">
           <h2 className="mb-2 text-2xl font-semibold dark:text-white">
-            Transforming with SQL
+            {text.sqlTitle}
           </h2>
           <p className="mb-5 text-gray-600 dark:text-gray-400">
-            Deduplicating raw orders and aggregating daily revenue per customer
-            using window functions.
+            {text.sqlIntro}
           </p>
-          <CodeBlock code={sqlSample} language="sql" filename="daily_revenue.sql" />
+          <CodeBlock code={sqlSample} language="sql" filename="daily_revenue.sql" locale={locale} />
         </section>
 
         {/* Python sample */}
         <section className="mt-12">
           <h2 className="mb-2 text-2xl font-semibold dark:text-white">
-            ETL with Python
+            {text.pythonTitle}
           </h2>
           <p className="mb-5 text-gray-600 dark:text-gray-400">
-            A small, readable extract → transform → load job with cleaning,
-            deduplication, and feature derivation.
+            {text.pythonIntro}
           </p>
-          <CodeBlock code={pythonSample} language="python" filename="transform_orders.py" />
+          <CodeBlock code={pythonSample} language="python" filename="transform_orders.py" locale={locale} />
         </section>
 
         {/* Pipeline diagram */}
         <section className="mt-12">
           <h2 className="mb-2 flex items-center gap-2 text-2xl font-semibold dark:text-white">
             <GitBranch className="h-5 w-5 text-blue-500" />
-            Pipeline Architecture
+            {text.workflowTitle}
           </h2>
           <p className="mb-5 text-gray-600 dark:text-gray-400">
-            A typical ELT flow I build — from sources to analytics-ready marts,
-            with data-quality checks along the way.
+            {text.workflowIntro}
           </p>
           <div className="rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
             <Mermaid chart={pipelineChart} />
@@ -234,17 +252,16 @@ export default function DataPage() {
 
         {/* Case study */}
         <section className="mt-12">
-          <h2 className="mb-2 text-2xl font-semibold dark:text-white">
-            Transform in Action
+          <h2 className="mb-2 text-2xl font-semibold text-gray-950 dark:text-white">
+            {text.exampleTitle}
           </h2>
           <p className="mb-5 text-gray-600 dark:text-gray-400">
-            Raw data is rarely clean. Here&apos;s a before/after of a typical
-            transform step.
+            {text.exampleIntro}
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700">
               <div className="bg-red-50 px-4 py-2 text-sm font-medium text-red-700 dark:bg-red-950/40 dark:text-red-300">
-                Raw — messy
+                {text.raw}
               </div>
               <div className="overflow-x-auto p-4">
                 <table className="w-full text-left text-sm">
@@ -278,7 +295,7 @@ export default function DataPage() {
 
             <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700">
               <div className="bg-green-50 px-4 py-2 text-sm font-medium text-green-700 dark:bg-green-950/40 dark:text-green-300">
-                Clean — modeled
+                {text.clean}
               </div>
               <div className="overflow-x-auto p-4">
                 <table className="w-full text-left text-sm">
@@ -303,7 +320,7 @@ export default function DataPage() {
                   </tbody>
                 </table>
                 <p className="mt-3 text-xs text-gray-400">
-                  Duplicates merged, dates normalized, invalid rows dropped.
+                  {text.tableNote}
                 </p>
               </div>
             </div>
@@ -311,34 +328,34 @@ export default function DataPage() {
         </section>
 
         {/* CTA */}
-        <section className="my-14 rounded-2xl border border-gray-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 text-center dark:border-gray-700 dark:from-blue-950/30 dark:to-indigo-950/30">
-          <h2 className="text-2xl font-semibold dark:text-white">
-            Looking for a Data Engineer?
+        <section className="my-14 border-y border-gray-200 py-9 dark:border-gray-800">
+          <h2 className="text-2xl font-semibold tracking-tight text-gray-950 dark:text-white">
+            {text.ctaTitle}
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-gray-600 dark:text-gray-400">
-            I love turning messy data into clean, reliable pipelines. Let&apos;s
-            talk about your data challenges.
+          <p className="mt-2 max-w-xl text-gray-600 dark:text-gray-400">
+            {text.ctaIntro}
           </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <div className="mt-5 flex flex-wrap gap-3">
             <a
               href="https://linkedin.com/in/zaiinhs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-600 dark:bg-white dark:text-gray-900 dark:hover:bg-blue-500 dark:hover:text-white"
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-gray-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:bg-white dark:text-gray-950 dark:hover:bg-blue-100"
             >
-              Connect on LinkedIn
+               {locale === "en" ? "Connect on LinkedIn" : locale === "id" ? "Hubungi lewat LinkedIn" : "Hubungi liwat LinkedIn"}
               <ArrowRight className="h-4 w-4" />
             </a>
             <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 text-sm font-medium text-gray-800 transition hover:border-blue-400 hover:text-blue-600 dark:border-gray-600 dark:text-gray-100 dark:hover:border-blue-500 dark:hover:text-blue-300"
+               href={localizedPath(locale, "/projects")}
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-800 transition hover:border-blue-500 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:border-gray-700 dark:text-gray-100 dark:hover:border-blue-500 dark:hover:text-blue-300"
             >
-              See projects
+               {locale === "en" ? "See projects" : locale === "id" ? "Lihat proyek" : "Deleng proyek"}
             </Link>
           </div>
         </section>
       </main>
-      <Footer />
+       <Footer locale={locale} />
+    </div>
     </div>
   );
 }

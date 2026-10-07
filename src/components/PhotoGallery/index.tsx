@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { Locale } from "@/i18n";
+import { getMessages } from "@/i18n/messages";
 
 const photos = [
   "/images/photo-1.webp",
@@ -12,18 +14,22 @@ const photos = [
   "/images/photo-5.webp",
 ];
 
-export default function PhotoGallery() {
+export default function PhotoGallery({ locale = "en" }: { locale?: Locale }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const text = getMessages(locale).ui;
 
   return (
     <>
-      <div className="mt-20 w-full max-w-screen-md">
-        <h2 className="mb-5 text-sm font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
-          Moments
+      <section className="w-full py-10 sm:py-12" aria-labelledby="moments-heading">
+        <h2
+          id="moments-heading"
+          className="mb-5 text-lg font-semibold tracking-tight text-gray-950 dark:text-white"
+        >
+           {text.moments}
         </h2>
         {/* Horizontal scroll strip on every screen size (keeps the page from
             overflowing on desktop while staying touch-friendly on mobile). */}
-        <div className="flex gap-4 overflow-x-auto pb-4 md:gap-8">
+        <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-4 md:gap-5">
           {photos.map((src, index) => {
             const rotation =
               index % 2 === 0 ? "md:-rotate-3" : "md:rotate-3";
@@ -31,21 +37,21 @@ export default function PhotoGallery() {
               <button
                 key={src}
                 onClick={() => setSelectedImage(src)}
-                className={`group relative shrink-0 ${rotation} transition-transform duration-300 hover:rotate-0 hover:scale-105`}
-                aria-label={`Open photo ${index + 1}`}
+                className={`group relative shrink-0 snap-start ${rotation} transition-transform duration-300 hover:rotate-0 hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600`}
+                 aria-label={`${text.openPhoto} ${index + 1}`}
               >
                 <Image
                   src={src}
-                  alt={`Photo ${index + 1}`}
+                   alt={`${text.openPhoto} ${index + 1}`}
                   width={220}
                   height={220}
-                  className="h-40 w-40 rounded-2xl border-2 border-white object-cover shadow-md md:h-56 md:w-56 dark:border-gray-800"
+                  className="h-36 w-48 rounded-xl border border-gray-200 object-cover shadow-sm sm:h-44 sm:w-60 md:h-52 md:w-72 dark:border-gray-700"
                 />
               </button>
             );
           })}
         </div>
-      </div>
+      </section>
 
       {selectedImage && (
         <div
@@ -54,14 +60,14 @@ export default function PhotoGallery() {
         >
           <button
             onClick={() => setSelectedImage(null)}
-            aria-label="Close photo"
+             aria-label={text.closePhoto}
             className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
           >
             <X className="h-6 w-6" />
           </button>
           <Image
             src={selectedImage}
-            alt="Full screen"
+             alt={text.fullScreen}
             width={1000}
             height={750}
             className="max-h-[90vh] w-auto rounded-lg object-contain"
