@@ -18,6 +18,7 @@ const PAGES = [
   { path: "/about", heading: /Technical depth, product perspective/i },
   { path: "/data", heading: /Making operational data useful to products/i },
   { path: "/projects", heading: /Product work, from data to deployment/i },
+  { path: "/talks", heading: /Talks/i },
   { path: "/articles", heading: /Articles/i },
   { path: "/readlist", heading: /Reading List/i },
   { path: "/uses", heading: /Uses/i },
@@ -63,7 +64,7 @@ test("homepage shows current role, socials, and latest articles", async ({
   await page.goto("/");
   await expect(page.getByText(/Indivara Group/i)).toBeVisible();
   await expect(page.getByText(/Technical Product Specialist/i).first()).toBeVisible();
-  await expect(page.getByLabel("GitHub")).toBeVisible();
+  await expect(page.getByLabel("GitHub").first()).toBeVisible();
   // Latest Articles section is populated (static-export bug regression guard)
   await expect(page.getByRole("heading", { name: /Latest Articles/i })).toBeVisible();
   await expect(

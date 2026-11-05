@@ -30,7 +30,7 @@ export function localizedMetadata(
   };
 }
 
-export function pageMetadata(locale: Locale, page: "home" | "about" | "data" | "projects" | "articles" | "readlist" | "uses") {
+export function pageMetadata(locale: Locale, page: "home" | "about" | "data" | "projects" | "articles" | "readlist" | "uses" | "talks") {
   const text = getMessages(locale);
   const titles = {
     home: "Zainal Abidin (zaiinhs) — Technical Product Specialist",
@@ -39,9 +39,10 @@ export function pageMetadata(locale: Locale, page: "home" | "about" | "data" | "
     projects: text.projects.label,
     articles: text.articles.title,
     readlist: text.readlist.title,
+    talks: text.talks.title,
     uses: text.uses.title,
   };
-  const paths = { home: "/", about: "/about", data: "/data", projects: "/projects", articles: "/articles", readlist: "/readlist", uses: "/uses" };
+  const paths = { home: "/", about: "/about", data: "/data", projects: "/projects", articles: "/articles", readlist: "/readlist", talks: "/talks", uses: "/uses" };
   const intros = {
     home: text.home.description,
     about: text.about.intro,
@@ -49,6 +50,7 @@ export function pageMetadata(locale: Locale, page: "home" | "about" | "data" | "
     projects: text.projects.intro,
     articles: text.articles.intro,
     readlist: text.readlist.intro,
+    talks: text.talks.intro,
     uses: text.uses.intro,
   };
   const metadata = localizedMetadata(locale, paths[page], titles[page], intros[page]);

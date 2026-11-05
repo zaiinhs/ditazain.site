@@ -1,0 +1,48 @@
+{
+  "talks": [
+    {
+      "id": "indovscode-static-export",
+      "event": "IndoVSCode",
+      "title": {
+        "en": "Ship a personal site with Next.js static export",
+        "id": "Menerbitkan situs pribadi dengan static export Next.js",
+        "jv": "Nerbitake situs pribadi nganggo static export Next.js"
+      },
+      "description": {
+        "en": "How this website is built and shipped: MDX content in three languages, static export without a server, and zero-cost hosting on Cloudflare Pages.",
+        "id": "Bagaimana situs ini dibangun dan diterbitkan: konten MDX dalam tiga bahasa, static export tanpa server, dan hosting tanpa biaya di Cloudflare Pages.",
+        "jv": "Kepriye situs iki digawakake lan diterbitake: konten MDX ing telung basa, static export tanpa server, lan hosting tanpa biaya ing Cloudflare Pages."
+      },
+      "date": "2025",
+      "location": {
+        "en": "Online · IndoVSCode community",
+        "id": "Daring · komunitas IndoVSCode",
+        "jv": "Daring · komunitas IndoVSCode"
+      },
+      "slides": null,
+      "recording": null
+    },
+    {
+      "id": "cloudflare-bogor-static-first",
+      "event": "Cloudflare Community Bogor",
+      "title": {
+        "en": "Static first: personal websites on Cloudflare Pages",
+        "id": "Static first: situs pribadi di Cloudflare Pages",
+        "jv": "Static first: situs pribadi ing Cloudflare Pages"
+      },
+      "description": {
+        "en": "A community session on static-first architecture: choosing rendering per route, i18n without a server, and deploying an exported Next.js site to the edge.",
+        "id": "Sesi komunitas tentang arsitektur static-first: memilih rendering per route, i18n tanpa server, dan mem-deploy situs Next.js hasil export ke edge.",
+        "jv": "Sesi komunitas babagan arsitektur static-first: milih rendering saben route, i18n tanpa server, lan ng-deploy situs Next.js asil export menyang edge."
+      },
+      "date": "2025",
+      "location": {
+        "en": "Bogor, Indonesia",
+        "id": "Bogor, Indonesia",
+        "jv": "Bogor, Indonesia"
+      },
+      "slides": null,
+      "recording": null
+    }
+  ]
+}

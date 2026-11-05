@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects",
     "/data",
     "/readlist",
+    "/talks",
     "/uses",
   ].flatMap((route) => LOCALES.map((locale) => ({
     url: `${SITE_URL}${localizedPath(locale, route || "/")}`,

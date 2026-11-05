@@ -15,6 +15,7 @@ const MENU_ITEMS = [
   { key: "About", path: "/about" },
   { key: "Data", path: "/data" },
   { key: "Projects", path: "/projects" },
+  { key: "Talks", path: "/talks" },
   { key: "Articles", path: "/articles" },
   { key: "ReadingList", path: "/readlist" },
   { key: "Uses", path: "/uses" },
